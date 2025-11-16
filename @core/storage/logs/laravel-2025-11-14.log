@@ -1,0 +1,1035 @@
+[2025-11-14 16:57:39] production.ERROR: SQLSTATE[HY000]: General error: 1005 Can't create table `qixer`.`orders` (errno: 150 "Foreign key constraint is incorrectly formed") (SQL: alter table `orders` add constraint `orders_region_id_foreign` foreign key (`region_id`) references `regions` (`id`) on delete set null) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1005 Can't create table `qixer`.`orders` (errno: 150 \"Foreign key constraint is incorrectly formed\") (SQL: alter table `orders` add constraint `orders_region_id_foreign` foreign key (`region_id`) references `regions` (`id`) on delete set null) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('alter table `or...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('alter table `or...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `or...')
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(439): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(269): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Database\\Schema\\Builder->table('orders', Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\migrations\\2024_01_01_000001_add_maintenance_fields_to_orders_table.php(17): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(488): AddMaintenanceFieldsToOrdersTable->up()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(406): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(415): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(37): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(751): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(181): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\xampp\\\\htdocs...', 166, false)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(124): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(628): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(81): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 {main}
+
+[previous exception] [object] (PDOException(code: HY000): SQLSTATE[HY000]: General error: 1005 Can't create table `qixer`.`orders` (errno: 150 \"Foreign key constraint is incorrectly formed\") at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:545)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(545): PDOStatement->execute()
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('alter table `or...', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('alter table `or...', Array, Object(Closure))
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('alter table `or...', Array, Object(Closure))
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `or...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(439): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(269): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Database\\Schema\\Builder->table('orders', Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\migrations\\2024_01_01_000001_add_maintenance_fields_to_orders_table.php(17): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(488): AddMaintenanceFieldsToOrdersTable->up()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(406): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(415): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(37): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(751): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(181): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\xampp\\\\htdocs...', 166, false)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(124): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(628): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(81): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 {main}
+"} 
+[2025-11-14 17:00:26] production.ERROR: SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'tracking_code' (SQL: alter table `orders` add `tracking_code` varchar(191) null after `invoice`, add `warranty_code` varchar(191) null after `tracking_code`, add `warranty_days` int not null default '30' after `warranty_code`, add `has_warranty` tinyint(1) not null default '1' after `warranty_days`, add `assigned_by` int null comment 'ID of admin/support who assigned' after `seller_id`, add `region_id` bigint unsigned null after `area`, add `notes` text null after `order_note`, add `urgency_level` varchar(191) not null default 'normal' comment 'normal, urgent, emergency' after `status`, add `assigned_at` timestamp null after `urgency_level`, add `accepted_at` timestamp null after `assigned_at`, add `en_route_at` timestamp null after `accepted_at`, add `arrived_at` timestamp null after `en_route_at`, add `started_at` timestamp null after `arrived_at`, add `completed_at` timestamp null after `started_at`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'tracking_code' (SQL: alter table `orders` add `tracking_code` varchar(191) null after `invoice`, add `warranty_code` varchar(191) null after `tracking_code`, add `warranty_days` int not null default '30' after `warranty_code`, add `has_warranty` tinyint(1) not null default '1' after `warranty_days`, add `assigned_by` int null comment 'ID of admin/support who assigned' after `seller_id`, add `region_id` bigint unsigned null after `area`, add `notes` text null after `order_note`, add `urgency_level` varchar(191) not null default 'normal' comment 'normal, urgent, emergency' after `status`, add `assigned_at` timestamp null after `urgency_level`, add `accepted_at` timestamp null after `assigned_at`, add `en_route_at` timestamp null after `accepted_at`, add `arrived_at` timestamp null after `en_route_at`, add `started_at` timestamp null after `arrived_at`, add `completed_at` timestamp null after `started_at`) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('alter table `or...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('alter table `or...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `or...')
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(439): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(269): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Database\\Schema\\Builder->table('orders', Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\migrations\\2024_01_01_000007_add_maintenance_fields_to_orders_table.php(17): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(488): AddMaintenanceFieldsToOrdersTable->up()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(406): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(415): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(37): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(751): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(181): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\xampp\\\\htdocs...', 166, false)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(124): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(628): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(81): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 {main}
+
+[previous exception] [object] (PDOException(code: 42S21): SQLSTATE[42S21]: Column already exists: 1060 Duplicate column name 'tracking_code' at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:545)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(545): PDOStatement->execute()
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('alter table `or...', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('alter table `or...', Array, Object(Closure))
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('alter table `or...', Array, Object(Closure))
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Blueprint.php(109): Illuminate\\Database\\Connection->statement('alter table `or...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(439): Illuminate\\Database\\Schema\\Blueprint->build(Object(Illuminate\\Database\\MySqlConnection), Object(Illuminate\\Database\\Schema\\Grammars\\MySqlGrammar))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Schema\\Builder.php(269): Illuminate\\Database\\Schema\\Builder->build(Object(Illuminate\\Database\\Schema\\Blueprint))
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Facades\\Facade.php(338): Illuminate\\Database\\Schema\\Builder->table('orders', Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\migrations\\2024_01_01_000007_add_maintenance_fields_to_orders_table.php(17): Illuminate\\Support\\Facades\\Facade::__callStatic('table', Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(488): AddMaintenanceFieldsToOrdersTable->up()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(406): Illuminate\\Database\\Migrations\\Migrator->runMethod(Object(Illuminate\\Database\\MySqlConnection), Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(415): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->runMigration(Object(AddMaintenanceFieldsToOrdersTable), 'up')
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\View\\Components\\Task.php(37): Illuminate\\Database\\Migrations\\Migrator->Illuminate\\Database\\Migrations\\{closure}()
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(751): Illuminate\\Console\\View\\Components\\Task->render('2024_01_01_0000...', Object(Closure))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(216): Illuminate\\Database\\Migrations\\Migrator->write('Illuminate\\\\Cons...', '2024_01_01_0000...', Object(Closure))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(181): Illuminate\\Database\\Migrations\\Migrator->runUp('C:\\\\xampp\\\\htdocs...', 166, false)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(124): Illuminate\\Database\\Migrations\\Migrator->runPending(Array, Array)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(88): Illuminate\\Database\\Migrations\\Migrator->run(Array, Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Migrations\\Migrator.php(628): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->Illuminate\\Database\\Console\\Migrations\\{closure}()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Migrations\\MigrateCommand.php(81): Illuminate\\Database\\Migrations\\Migrator->usingConnection(NULL, Object(Closure))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateCommand->handle()
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Migrations\\MigrateCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 {main}
+"} 
+[2025-11-14 20:56:46] production.ERROR: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `languages`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `languages`) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(673): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Providers\\AppServiceProvider.php(28): Illuminate\\Database\\Eloquent\\Model::all()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Providers\\AppServiceProvider->boot()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(929): Illuminate\\Container\\Container->call(Array)
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(910): Illuminate\\Foundation\\Application->bootProvider(Object(App\\Providers\\AppServiceProvider))
+#17 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(App\\Providers\\AppServiceProvider), 44)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(909): array_walk(Array, Object(Closure))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(242): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(160): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#24 C:\\xampp\\htdocs\\SyanTeck\\index.php(71): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#25 {main}
+
+[previous exception] [object] (PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:70)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(70): PDO->__construct('mysql:host=127....', 'forge', Object(SensitiveParameterValue), Array)
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(45): Illuminate\\Database\\Connectors\\Connector->createPdoConnection('mysql:host=127....', 'forge', '', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\ConnectionFactory.php(184): Illuminate\\Database\\Connectors\\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1181): call_user_func(Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1217): Illuminate\\Database\\Connection->getPdo()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(486): Illuminate\\Database\\Connection->getReadPdo()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(414): Illuminate\\Database\\Connection->getPdoForSelect(true)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from `...', Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(673): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Providers\\AppServiceProvider.php(28): Illuminate\\Database\\Eloquent\\Model::all()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): App\\Providers\\AppServiceProvider->boot()
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(929): Illuminate\\Container\\Container->call(Array)
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(910): Illuminate\\Foundation\\Application->bootProvider(Object(App\\Providers\\AppServiceProvider))
+#27 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(App\\Providers\\AppServiceProvider), 44)
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(909): array_walk(Array, Object(Closure))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(242): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(176): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(160): Illuminate\\Foundation\\Http\\Kernel->bootstrap()
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(134): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))
+#34 C:\\xampp\\htdocs\\SyanTeck\\index.php(71): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#35 {main}
+"} 
+[2025-11-14 20:56:47] production.ERROR: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) {"view":{"view":"C:\\xampp\\htdocs\\SyanTeck\\@core\\resources\\views\\errors\\500.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-609598382 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#525</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
+</samp>}
+</pre><script>Sfdump(\"sf-dump-609598382\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+","exception":"<pre class=sf-dump id=sf-dump-1558873037 data-indent-pad=\"  \"><span class=sf-dump-note>Symfony\\Component\\HttpKernel\\Exception\\HttpException</span> {<a class=sf-dump-ref>#531</a><samp data-depth=1 class=sf-dump-expanded>
+  #<span class=sf-dump-protected title=\"Protected property\">message</span>: \"<span class=sf-dump-str title=\"119 characters\">SQLSTATE[HY000] [1045] Access denied for user &#039;forge&#039;@&#039;127.0.0.1&#039; (using password: NO) (SQL: select * from `languages`)</span>\"
+  #<span class=sf-dump-protected title=\"Protected property\">code</span>: <span class=sf-dump-num>0</span>
+  #<span class=sf-dump-protected title=\"Protected property\">file</span>: \"<span class=sf-dump-str title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php
+104 characters\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Exceptions\\Handler.php</span>\"
+  #<span class=sf-dump-protected title=\"Protected property\">line</span>: <span class=sf-dump-num>550</span>
+  -<span class=sf-dump-private title=\"Private property defined in class:&#10;`Exception`\">previous</span>: <span class=sf-dump-note title=\"Illuminate\\Database\\QueryException
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Database</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>QueryException</span> {<a class=sf-dump-ref href=#sf-dump-1558873037-ref2495 title=\"6 occurrences\">#495</a><samp data-depth=2 id=sf-dump-1558873037-ref2495 class=sf-dump-compact>
+    #<span class=sf-dump-protected title=\"Protected property\">message</span>: \"<span class=sf-dump-str title=\"119 characters\">SQLSTATE[HY000] [1045] Access denied for user &#039;forge&#039;@&#039;127.0.0.1&#039; (using password: NO) (SQL: select * from `languages`)</span>\"
+    #<span class=sf-dump-protected title=\"Protected property\">code</span>: <span class=sf-dump-num>1045</span>
+    #<span class=sf-dump-protected title=\"Protected property\">file</span>: \"<span class=sf-dump-str title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php
+94 characters\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Connection.php</span>\"
+    #<span class=sf-dump-protected title=\"Protected property\">line</span>: <span class=sf-dump-num>760</span>
+    -<span class=sf-dump-private title=\"Private property defined in class:&#10;`Exception`\">previous</span>: <span class=sf-dump-note>PDOException</span> {<a class=sf-dump-ref>#497</a><samp data-depth=3 class=sf-dump-compact>
+      #<span class=sf-dump-protected title=\"Protected property\">message</span>: \"<span class=sf-dump-str title=\"86 characters\">SQLSTATE[HY000] [1045] Access denied for user &#039;forge&#039;@&#039;127.0.0.1&#039; (using password: NO)</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">code</span>: <span class=sf-dump-num>1045</span>
+      #<span class=sf-dump-protected title=\"Protected property\">file</span>: \"<span class=sf-dump-str title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php
+104 characters\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Connectors\\Connector.php</span>\"
+      #<span class=sf-dump-protected title=\"Protected property\">line</span>: <span class=sf-dump-num>70</span>
+      +<span class=sf-dump-public title=\"Public property\">errorInfo</span>: <span class=sf-dump-note>array:3</span> [ &#8230;3]
+      <span class=sf-dump-meta>trace</span>: { &#8230;35}
+    </samp>}
+    +<span class=sf-dump-public title=\"Public property\">errorInfo</span>: <span class=sf-dump-note>array:3</span> [<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-index>0</span> => \"<span class=sf-dump-str title=\"5 characters\">HY000</span>\"
+      <span class=sf-dump-index>1</span> => <span class=sf-dump-num>1045</span>
+      <span class=sf-dump-index>2</span> => \"<span class=sf-dump-str title=\"63 characters\">Access denied for user &#039;forge&#039;@&#039;127.0.0.1&#039; (using password: NO)</span>\"
+    </samp>]
+    #<span class=sf-dump-protected title=\"Protected property\">sql</span>: \"<span class=sf-dump-str title=\"25 characters\">select * from `languages`</span>\"
+    #<span class=sf-dump-protected title=\"Protected property\">bindings</span>: []
+    <span class=sf-dump-meta>trace</span>: {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760
+Stack level 26.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Connection.php:760</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:720
+Stack level 25.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Connection.php:720</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:405
+Stack level 24.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Connection.php:405</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php:2705
+Stack level 23.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Query\\Builder.php:2705</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php:2694
+Stack level 22.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Query\\Builder.php:2694</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php:3230
+Stack level 21.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Query\\Builder.php:3230</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php:2693
+Stack level 20.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Query\\Builder.php:2693</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php:710
+Stack level 19.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Eloquent\\Builder.php:710</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php:694
+Stack level 18.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Eloquent\\Builder.php:694</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php:673
+Stack level 17.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Database\\Eloquent\\Model.php:673</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Providers\\AppServiceProvider.php:28
+Stack level 16.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\</span>app\\Providers\\AppServiceProvider.php:28</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php:36
+Stack level 15.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Container\\BoundMethod.php:36</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php:41
+Stack level 14.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Container\\Util.php:41</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php:93
+Stack level 13.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Container\\BoundMethod.php:93</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php:35
+Stack level 12.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Container\\BoundMethod.php:35</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:661
+Stack level 11.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Container\\Container.php:661</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:929
+Stack level 10.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Application.php:929</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:910
+Stack level 9.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Application.php:910</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"Illuminate\\Foundation\\Application-&gt;Illuminate\\Foundation\\{closure}()
+Stack level 8.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-class\">Illuminate\\Foundation\\Application-&gt;Illuminate\\Foundation</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-class\">\\</span>{closure}()</span> {}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:909
+Stack level 7.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Application.php:909</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php:17
+Stack level 6.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Bootstrap\\BootProviders.php:17</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php:242
+Stack level 5.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Application.php:242</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php:176
+Stack level 4.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Http\\Kernel.php:176</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php:160
+Stack level 3.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Http\\Kernel.php:160</span> { &#8230;4}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php:134
+Stack level 2.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Http\\Kernel.php:134</span> { &#8230;5}
+      <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\index.php:71
+Stack level 1.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\</span>SyanTeck\\index.php:71</span> { &#8230;4}
+    </samp>}
+  </samp>}
+  -<span class=sf-dump-private title=\"Private property defined in class:&#10;`Symfony\\Component\\HttpKernel\\Exception\\HttpException`\">statusCode</span>: <span class=sf-dump-num>500</span>
+  -<span class=sf-dump-private title=\"Private property defined in class:&#10;`Symfony\\Component\\HttpKernel\\Exception\\HttpException`\">headers</span>: []
+  <span class=sf-dump-meta>trace</span>: {<samp data-depth=2 class=sf-dump-compact>
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php:550
+Stack level 7.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Exceptions\\Handler.php:550</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"Illuminate\\Foundation\\Exceptions\\Handler-&gt;prepareResponse($request, Throwable $e)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Foundation\\Exceptions</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Handler-&gt;prepareResponse($request, Throwable $e)</span> &#8230;
+      &#8250; <code class=\"php\"><span class=sf-dump-default>if (! $this-&gt;isHttpException($e)) {</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in Illuminate\\Foundation\\Exceptions\\Handler-&gt;prepareResponse($request, Throwable $e)\">    $e = new HttpException(500, $e-&gt;getMessage(), $e);</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>}</span></code>
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php:460
+Stack level 6.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Exceptions\\Handler.php:460</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"Illuminate\\Foundation\\Exceptions\\Handler-&gt;renderExceptionResponse($request, Throwable $e)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Foundation\\Exceptions</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Handler-&gt;renderExceptionResponse($request, Throwable $e)</span> &#8230;
+      &#8250; <code class=\"php\"><span class=sf-dump-default>                ? $this-&gt;prepareJsonResponse($request, $e)</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in Illuminate\\Foundation\\Exceptions\\Handler-&gt;renderExceptionResponse($request, Throwable $e)\">                : $this-&gt;prepareResponse($request, $e);</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>}</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;2}
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php:377
+Stack level 5.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Exceptions\\Handler.php:377</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"Illuminate\\Foundation\\Exceptions\\Handler-&gt;render($request, Throwable $e)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Foundation\\Exceptions</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Handler-&gt;render($request, Throwable $e)</span> &#8230;
+      &#8250; <code class=\"php\"><span class=sf-dump-default>    $e instanceof ValidationException =&gt; $this-&gt;convertValidationExceptionToResponse($e, $request),</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in Illuminate\\Foundation\\Exceptions\\Handler-&gt;render($request, Throwable $e)\">    default =&gt; $this-&gt;renderExceptionResponse($request, $e),</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>};</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;2}
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php:72
+Stack level 4.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\</span>app\\Exceptions\\Handler.php:72</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"App\\Exceptions\\Handler-&gt;render($request, Throwable $exception)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">App\\Exceptions</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Handler-&gt;render($request, Throwable $exception)</span> &#8230;
+      &#8250; 
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in App\\Exceptions\\Handler-&gt;render($request, Throwable $exception)\">    return parent::render($request, $exception);</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>}</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;2}
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php:493
+Stack level 3.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Http\\Kernel.php:493</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"Illuminate\\Foundation\\Http\\Kernel-&gt;renderException($request, Throwable $e)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Foundation\\Http</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Kernel-&gt;renderException($request, Throwable $e)</span> &#8230;
+      &#8250; <code class=\"php\"><span class=sf-dump-default>{</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in Illuminate\\Foundation\\Http\\Kernel-&gt;renderException($request, Throwable $e)\">    return $this-&gt;app[ExceptionHandler::class]-&gt;render($request, $e);</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>}</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;2}
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php:138
+Stack level 2.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\laravel\\framework\\</span>src\\Illuminate\\Foundation\\Http\\Kernel.php:138</span> {<samp data-depth=3 class=sf-dump-compact>
+      <span class=sf-dump-note title=\"Illuminate\\Foundation\\Http\\Kernel-&gt;handle($request)
+\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">Illuminate\\Foundation\\Http</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-note\">\\</span>Kernel-&gt;handle($request)</span> &#8230;
+      &#8250; 
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"in Illuminate\\Foundation\\Http\\Kernel-&gt;handle($request)\">    $response = $this-&gt;renderException($request, $e);</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>}</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;2}
+    </samp>}
+    <span class=sf-dump-meta title=\"C:\\xampp\\htdocs\\SyanTeck\\index.php:71
+Stack level 1.\"><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">C:\\xampp\\htdocs</span><span class=\"sf-dump-ellipsis sf-dump-ellipsis-path\">\\</span>SyanTeck\\index.php:71</span> {<samp data-depth=3 class=sf-dump-compact>
+      &#8250; 
+      &#8250; <code class=\"php\"><span class=sf-dump-const title=\"\">$response = $kernel-&gt;handle(</span></code>
+      &#8250; <code class=\"php\"><span class=sf-dump-default>    $request = Illuminate\\Http\\Request::capture()</span></code>
+      <span class=sf-dump-meta>arguments</span>: { &#8230;1}
+    </samp>}
+  </samp>}
+</samp>}
+</pre><script>Sfdump(\"sf-dump-1558873037\", {\"maxDepth\":3,\"maxStringLength\":160})</script>
+"}},"exception":"[object] (Spatie\\LaravelIgnition\\Exceptions\\ViewException(code: 0): SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php(296): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(442): Illuminate\\Database\\Eloquent\\Builder->first(Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->find('902')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'find', Array)
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('find', Array)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(270): Illuminate\\Database\\Eloquent\\Model::__callStatic('find', Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\storage\\framework\\views\\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\xampp\\\\htdocs...')
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\xampp\\\\htdocs...', Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(493): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#35 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(138): Illuminate\\Foundation\\Http\\Kernel->renderException(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#36 C:\\xampp\\htdocs\\SyanTeck\\index.php(71): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#37 {main}
+
+[previous exception] [object] (Illuminate\\Database\\QueryException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php(296): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(442): Illuminate\\Database\\Eloquent\\Builder->first(Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->find('902')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'find', Array)
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('find', Array)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(270): Illuminate\\Database\\Eloquent\\Model::__callStatic('find', Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\storage\\framework\\views\\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\xampp\\\\htdocs...')
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\xampp\\\\htdocs...', Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(493): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#35 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(138): Illuminate\\Foundation\\Http\\Kernel->renderException(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#36 C:\\xampp\\htdocs\\SyanTeck\\index.php(71): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#37 {main}
+
+[previous exception] [object] (PDOException(code: 1045): SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:70)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(70): PDO->__construct('mysql:host=127....', 'forge', Object(SensitiveParameterValue), Array)
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(45): Illuminate\\Database\\Connectors\\Connector->createPdoConnection('mysql:host=127....', 'forge', '', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\ConnectionFactory.php(184): Illuminate\\Database\\Connectors\\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1181): call_user_func(Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1217): Illuminate\\Database\\Connection->getPdo()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(486): Illuminate\\Database\\Connection->getReadPdo()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(414): Illuminate\\Database\\Connection->getPdoForSelect(true)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from `...', Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php(296): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(442): Illuminate\\Database\\Eloquent\\Builder->first(Array)
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->find('902')
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'find', Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('find', Array)
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(270): Illuminate\\Database\\Eloquent\\Model::__callStatic('find', Array)
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\storage\\framework\\views\\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\xampp\\\\htdocs...')
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\xampp\\\\htdocs...', Array)
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#35 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#36 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#37 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#38 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#39 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#40 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#41 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#42 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#43 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#44 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(493): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#45 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(138): Illuminate\\Foundation\\Http\\Kernel->renderException(Object(Illuminate\\Http\\Request), Object(Illuminate\\Database\\QueryException))
+#46 C:\\xampp\\htdocs\\SyanTeck\\index.php(71): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
+#47 {main}
+"} 
+[2025-11-14 20:56:47] production.ERROR: Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) in C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:70
+Stack trace:
+#0 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(70): PDO->__construct('mysql:host=127....', 'forge', Object(SensitiveParameterValue), Array)
+#1 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php(45): Illuminate\Database\Connectors\Connector->createPdoConnection('mysql:host=127....', 'forge', '', Array)
+#2 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connectors\MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connectors\ConnectionFactory.php(184): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#5 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(1181): call_user_func(Object(Closure))
+#6 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(1217): Illuminate\Database\Connection->getPdo()
+#7 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(486): Illuminate\Database\Connection->getReadPdo()
+#8 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(414): Illuminate\Database\Connection->getPdoForSelect(true)
+#9 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(753): Illuminate\Database\Connection->Illuminate\Database\{closure}('select * from `...', Array)
+#10 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(720): Illuminate\Database\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#11 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(405): Illuminate\Database\Connection->run('select * from `...', Array, Object(Closure))
+#12 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2705): Illuminate\Database\Connection->select('select * from `...', Array, true)
+#13 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2694): Illuminate\Database\Query\Builder->runSelect()
+#14 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(3230): Illuminate\Database\Query\Builder->Illuminate\Database\Query\{closure}()
+#15 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2693): Illuminate\Database\Query\Builder->onceWithColumns(Array, Object(Closure))
+#16 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(710): Illuminate\Database\Query\Builder->get(Array)
+#17 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(694): Illuminate\Database\Eloquent\Builder->getModels(Array)
+#18 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Concerns\BuildsQueries.php(296): Illuminate\Database\Eloquent\Builder->get(Array)
+#19 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(442): Illuminate\Database\Eloquent\Builder->first(Array)
+#20 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php(23): Illuminate\Database\Eloquent\Builder->find('902')
+#21 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(2330): Illuminate\Database\Eloquent\Model->forwardCallTo(Object(Illuminate\Database\Eloquent\Builder), 'find', Array)
+#22 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(2342): Illuminate\Database\Eloquent\Model->__call('find', Array)
+#23 C:\xampp\htdocs\SyanTeck\@core\app\Helpers\helpers.php(270): Illuminate\Database\Eloquent\Model::__callStatic('find', Array)
+#24 C:\xampp\htdocs\SyanTeck\@core\app\Helpers\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#25 C:\xampp\htdocs\SyanTeck\@core\storage\framework\views\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#26 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php(109): require('C:\\xampp\\htdocs...')
+#27 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php(110): Illuminate\Filesystem\Filesystem::Illuminate\Filesystem\{closure}()
+#28 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire('C:\\xampp\\htdocs...', Array)
+#29 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(69): Illuminate\View\Engines\PhpEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#30 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php(70): Livewire\LivewireViewCompilerEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#31 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(35): Illuminate\View\Engines\CompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#32 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(195): Livewire\LivewireViewCompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#33 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(178): Illuminate\View\View->getContents()
+#34 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(147): Illuminate\View\View->renderContents()
+#35 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(69): Illuminate\View\View->render()
+#36 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(35): Illuminate\Http\Response->setContent(Object(Illuminate\View\View))
+#37 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(57): Illuminate\Http\Response->__construct(Object(Illuminate\View\View), 500, Array)
+#38 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(87): Illuminate\Routing\ResponseFactory->make(Object(Illuminate\View\View), 500, Array)
+#39 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(626): Illuminate\Routing\ResponseFactory->view('errors::500', Array, 500, Array)
+#40 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(554): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#41 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(460): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#42 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(377): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#43 C:\xampp\htdocs\SyanTeck\@core\app\Exceptions\Handler.php(72): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#44 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(233): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\View\ViewException))
+#45 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(210): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\View\ViewException))
+#46 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(270): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\View\ViewException))
+#47 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\View\ViewException))
+#48 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) in C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php:760
+Stack trace:
+#0 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(720): Illuminate\Database\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php(405): Illuminate\Database\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2705): Illuminate\Database\Connection->select('select * from `...', Array, true)
+#3 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2694): Illuminate\Database\Query\Builder->runSelect()
+#4 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(3230): Illuminate\Database\Query\Builder->Illuminate\Database\Query\{closure}()
+#5 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(2693): Illuminate\Database\Query\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(710): Illuminate\Database\Query\Builder->get(Array)
+#7 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(694): Illuminate\Database\Eloquent\Builder->getModels(Array)
+#8 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Concerns\BuildsQueries.php(296): Illuminate\Database\Eloquent\Builder->get(Array)
+#9 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(442): Illuminate\Database\Eloquent\Builder->first(Array)
+#10 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Support\Traits\ForwardsCalls.php(23): Illuminate\Database\Eloquent\Builder->find('902')
+#11 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(2330): Illuminate\Database\Eloquent\Model->forwardCallTo(Object(Illuminate\Database\Eloquent\Builder), 'find', Array)
+#12 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(2342): Illuminate\Database\Eloquent\Model->__call('find', Array)
+#13 C:\xampp\htdocs\SyanTeck\@core\app\Helpers\helpers.php(270): Illuminate\Database\Eloquent\Model::__callStatic('find', Array)
+#14 C:\xampp\htdocs\SyanTeck\@core\app\Helpers\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#15 C:\xampp\htdocs\SyanTeck\@core\storage\framework\views\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#16 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php(109): require('C:\\xampp\\htdocs...')
+#17 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Filesystem\Filesystem.php(110): Illuminate\Filesystem\Filesystem::Illuminate\Filesystem\{closure}()
+#18 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\PhpEngine.php(58): Illuminate\Filesystem\Filesystem->getRequire('C:\\xampp\\htdocs...', Array)
+#19 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(69): Illuminate\View\Engines\PhpEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#20 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php(70): Livewire\LivewireViewCompilerEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#21 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(35): Illuminate\View\Engines\CompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#22 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(195): Livewire\LivewireViewCompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#23 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(178): Illuminate\View\View->getContents()
+#24 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(147): Illuminate\View\View->renderContents()
+#25 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(69): Illuminate\View\View->render()
+#26 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(35): Illuminate\Http\Response->setContent(Object(Illuminate\View\View))
+#27 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(57): Illuminate\Http\Response->__construct(Object(Illuminate\View\View), 500, Array)
+#28 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(87): Illuminate\Routing\ResponseFactory->make(Object(Illuminate\View\View), 500, Array)
+#29 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(626): Illuminate\Routing\ResponseFactory->view('errors::500', Array, 500, Array)
+#30 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(554): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#31 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(460): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#32 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(377): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#33 C:\xampp\htdocs\SyanTeck\@core\app\Exceptions\Handler.php(72): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#34 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(233): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\View\ViewException))
+#35 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(210): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\View\ViewException))
+#36 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(270): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\View\ViewException))
+#37 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\View\ViewException))
+#38 {main}
+
+Next Illuminate\View\ViewException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) (View: C:\xampp\htdocs\SyanTeck\@core\resources\views\errors\500.blade.php) in C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Database\Connection.php:760
+Stack trace:
+#0 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(106): Illuminate\View\Engines\CompilerEngine->handleViewException(Object(Illuminate\Database\QueryException), 2)
+#1 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\PhpEngine.php(60): Livewire\LivewireViewCompilerEngine->handleViewException(Object(Illuminate\Database\QueryException), 2)
+#2 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(69): Illuminate\View\Engines\PhpEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#3 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php(70): Livewire\LivewireViewCompilerEngine->evaluatePath('C:\\xampp\\htdocs...', Array)
+#4 C:\xampp\htdocs\SyanTeck\@core\vendor\livewire\livewire\src\ComponentConcerns\RendersLivewireComponents.php(35): Illuminate\View\Engines\CompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#5 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(195): Livewire\LivewireViewCompilerEngine->get('C:\\xampp\\htdocs...', Array)
+#6 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(178): Illuminate\View\View->getContents()
+#7 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\View\View.php(147): Illuminate\View\View->renderContents()
+#8 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(69): Illuminate\View\View->render()
+#9 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Http\Response.php(35): Illuminate\Http\Response->setContent(Object(Illuminate\View\View))
+#10 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(57): Illuminate\Http\Response->__construct(Object(Illuminate\View\View), 500, Array)
+#11 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Routing\ResponseFactory.php(87): Illuminate\Routing\ResponseFactory->make(Object(Illuminate\View\View), 500, Array)
+#12 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(626): Illuminate\Routing\ResponseFactory->view('errors::500', Array, 500, Array)
+#13 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(554): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#14 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(460): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#15 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Exceptions\Handler.php(377): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#16 C:\xampp\htdocs\SyanTeck\@core\app\Exceptions\Handler.php(72): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Spatie\LaravelIgnition\Exceptions\ViewException))
+#17 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(233): App\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(Illuminate\View\ViewException))
+#18 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(210): Illuminate\Foundation\Bootstrap\HandleExceptions->renderHttpResponse(Object(Illuminate\View\ViewException))
+#19 C:\xampp\htdocs\SyanTeck\@core\vendor\laravel\framework\src\Illuminate\Foundation\Bootstrap\HandleExceptions.php(270): Illuminate\Foundation\Bootstrap\HandleExceptions->handleException(Object(Illuminate\View\ViewException))
+#20 [internal function]: Illuminate\Foundation\Bootstrap\HandleExceptions->Illuminate\Foundation\Bootstrap\{closure}(Object(Illuminate\View\ViewException))
+#21 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught PDOException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) in C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php:70
+Stack trace:
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(70): PDO->__construct('mysql:host=127....', 'forge', Object(SensitiveParameterValue), Array)
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\Connector.php(45): Illuminate\\Database\\Connectors\\Connector->createPdoConnection('mysql:host=127....', 'forge', '', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\MySqlConnector.php(24): Illuminate\\Database\\Connectors\\Connector->createConnection('mysql:host=127....', Array, Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connectors\\ConnectionFactory.php(184): Illuminate\\Database\\Connectors\\MySqlConnector->connect(Array)
+#4 [internal function]: Illuminate\\Database\\Connectors\\ConnectionFactory->Illuminate\\Database\\Connectors\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1181): call_user_func(Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(1217): Illuminate\\Database\\Connection->getPdo()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(486): Illuminate\\Database\\Connection->getReadPdo()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(414): Illuminate\\Database\\Connection->getPdoForSelect(true)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('select * from `...', Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php(296): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(442): Illuminate\\Database\\Eloquent\\Builder->first(Array)
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->find('902')
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'find', Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('find', Array)
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(270): Illuminate\\Database\\Eloquent\\Model::__callStatic('find', Array)
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\storage\\framework\\views\\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\xampp\\\\htdocs...')
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\xampp\\\\htdocs...', Array)
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#35 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#36 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#37 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#38 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#39 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#40 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#41 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#42 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#43 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#44 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(233): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\ViewException))
+#45 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(210): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->renderHttpResponse(Object(Illuminate\\View\\ViewException))
+#46 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException(Object(Illuminate\\View\\ViewException))
+#47 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(Object(Illuminate\\View\\ViewException))
+#48 {main}
+
+Next Illuminate\\Database\\QueryException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) in C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760
+Stack trace:
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(405): Illuminate\\Database\\Connection->run('select * from `...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2705): Illuminate\\Database\\Connection->select('select * from `...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2694): Illuminate\\Database\\Query\\Builder->runSelect()
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3230): Illuminate\\Database\\Query\\Builder->Illuminate\\Database\\Query\\{closure}()
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(2693): Illuminate\\Database\\Query\\Builder->onceWithColumns(Array, Object(Closure))
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(710): Illuminate\\Database\\Query\\Builder->get(Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(694): Illuminate\\Database\\Eloquent\\Builder->getModels(Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Concerns\\BuildsQueries.php(296): Illuminate\\Database\\Eloquent\\Builder->get(Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(442): Illuminate\\Database\\Eloquent\\Builder->first(Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->find('902')
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'find', Array)
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('find', Array)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(270): Illuminate\\Database\\Eloquent\\Model::__callStatic('find', Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Helpers\\helpers.php(261): get_attachment_image_by_id('902', 'full', false)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\storage\\framework\\views\\1895f1d45931b90bf852afc63987cbf880f3647c.php(14): render_favicon_by_id('902')
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(109): require('C:\\\\xampp\\\\htdocs...')
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(110): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(58): Illuminate\\Filesystem\\Filesystem->getRequire('C:\\\\xampp\\\\htdocs...', Array)
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(233): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\ViewException))
+#35 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(210): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->renderHttpResponse(Object(Illuminate\\View\\ViewException))
+#36 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException(Object(Illuminate\\View\\ViewException))
+#37 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(Object(Illuminate\\View\\ViewException))
+#38 {main}
+
+Next Illuminate\\View\\ViewException: SQLSTATE[HY000] [1045] Access denied for user 'forge'@'127.0.0.1' (using password: NO) (SQL: select * from `media_uploads` where `media_uploads`.`id` = 902 limit 1) (View: C:\\xampp\\htdocs\\SyanTeck\\@core\\resources\\views\\errors\\500.blade.php) in C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760
+Stack trace:
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(106): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(Illuminate\\Database\\QueryException), 2)
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(60): Livewire\\LivewireViewCompilerEngine->handleViewException(Object(Illuminate\\Database\\QueryException), 2)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(69): Illuminate\\View\\Engines\\PhpEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\CompilerEngine.php(70): Livewire\\LivewireViewCompilerEngine->evaluatePath('C:\\\\xampp\\\\htdocs...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\livewire\\livewire\\src\\ComponentConcerns\\RendersLivewireComponents.php(35): Illuminate\\View\\Engines\\CompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(195): Livewire\\LivewireViewCompilerEngine->get('C:\\\\xampp\\\\htdocs...', Array)
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(178): Illuminate\\View\\View->getContents()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\View\\View.php(147): Illuminate\\View\\View->renderContents()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(69): Illuminate\\View\\View->render()
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Http\\Response.php(35): Illuminate\\Http\\Response->setContent(Object(Illuminate\\View\\View))
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(57): Illuminate\\Http\\Response->__construct(Object(Illuminate\\View\\View), 500, Array)
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Routing\\ResponseFactory.php(87): Illuminate\\Routing\\ResponseFactory->make(Object(Illuminate\\View\\View), 500, Array)
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(626): Illuminate\\Routing\\ResponseFactory->view('errors::500', Array, 500, Array)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(554): Illuminate\\Foundation\\Exceptions\\Handler->renderHttpException(Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(460): Illuminate\\Foundation\\Exceptions\\Handler->prepareResponse(Object(Illuminate\\Http\\Request), Object(Symfony\\Component\\HttpKernel\\Exception\\HttpException))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Exceptions\\Handler.php(377): Illuminate\\Foundation\\Exceptions\\Handler->renderExceptionResponse(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\app\\Exceptions\\Handler.php(72): Illuminate\\Foundation\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Spatie\\LaravelIgnition\\Exceptions\\ViewException))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(233): App\\Exceptions\\Handler->render(Object(Illuminate\\Http\\Request), Object(Illuminate\\View\\ViewException))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(210): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->renderHttpResponse(Object(Illuminate\\View\\ViewException))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(270): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleException(Object(Illuminate\\View\\ViewException))
+#20 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(Object(Illuminate\\View\\ViewException))
+#21 {main}
+  thrown at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 {main}
+"} 
+[2025-11-14 21:07:55] production.ERROR: Target class [Database\Seeders\UpdatePageBuilderContentSeeder] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Database\\Seeders\\UpdatePageBuilderContentSeeder] does not exist. at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:891)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"Database\\Seeders\\UpdatePageBuilderContentSeeder\" does not exist at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:889)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(889): ReflectionClass->__construct('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2025-11-14 21:08:06] production.ERROR: Target class [Database\Seeders\UpdatePageBuilderContentSeeder] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Database\\Seeders\\UpdatePageBuilderContentSeeder] does not exist. at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:891)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"Database\\Seeders\\UpdatePageBuilderContentSeeder\" does not exist at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:889)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(889): ReflectionClass->__construct('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2025-11-14 21:09:18] production.ERROR: Target class [Database\Seeders\UpdatePageBuilderContentSeeder] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Database\\Seeders\\UpdatePageBuilderContentSeeder] does not exist. at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:891)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"Database\\Seeders\\UpdatePageBuilderContentSeeder\" does not exist at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:889)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(889): ReflectionClass->__construct('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2025-11-14 21:09:26] production.ERROR: Target class [Database\Seeders\UpdatePagesContentSeeder] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [Database\\Seeders\\UpdatePagesContentSeeder] does not exist. at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:891)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 {main}
+
+[previous exception] [object] (ReflectionException(code: -1): Class \"Database\\Seeders\\UpdatePagesContentSeeder\" does not exist at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php:889)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(889): ReflectionClass->__construct('Database\\\\Seeder...')
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(770): Illuminate\\Container\\Container->build('Database\\\\Seeder...')
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(856): Illuminate\\Container\\Container->resolve('Database\\\\Seeder...', Array, true)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(706): Illuminate\\Foundation\\Application->resolve('Database\\\\Seeder...', Array)
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(841): Illuminate\\Container\\Container->make('Database\\\\Seeder...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(109): Illuminate\\Foundation\\Application->make('Database\\\\Seeder...')
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Console\\Seeds\\SeedCommand->getSeeder()
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 {main}
+"} 
+[2025-11-14 21:22:44] production.ERROR: SQLSTATE[42000]: Syntax error or access violation: 1701 Cannot truncate a table referenced in a foreign key constraint (`qixer`.`pricing_rules`, CONSTRAINT `pricing_rules_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `qixer`.`services` (`id`)) (SQL: truncate table `services`) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42000): SQLSTATE[42000]: Syntax error or access violation: 1701 Cannot truncate a table referenced in a foreign key constraint (`qixer`.`pricing_rules`, CONSTRAINT `pricing_rules_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `qixer`.`services` (`id`)) (SQL: truncate table `services`) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:760)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('truncate table ...', Array, Object(Closure))
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('truncate table ...', Array, Object(Closure))
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3567): Illuminate\\Database\\Connection->statement('truncate table ...', Array)
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Query\\Builder->truncate()
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1872): Illuminate\\Database\\Eloquent\\Builder->forwardCallTo(Object(Illuminate\\Database\\Query\\Builder), 'truncate', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->__call('truncate', Array)
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'truncate', Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('truncate', Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\seeds\\UpdateServicesAndServiceListPageSeeder.php(104): Illuminate\\Database\\Eloquent\\Model::__callStatic('truncate', Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Database\\Seeds\\UpdateServicesAndServiceListPageSeeder->run()
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Seeder.php(184): Illuminate\\Container\\Container->call(Array, Array)
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Seeder.php(193): Illuminate\\Database\\Seeder->Illuminate\\Database\\{closure}()
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Seeder->__invoke()
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 {main}
+
+[previous exception] [object] (PDOException(code: 42000): SQLSTATE[42000]: Syntax error or access violation: 1701 Cannot truncate a table referenced in a foreign key constraint (`qixer`.`pricing_rules`, CONSTRAINT `pricing_rules_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `qixer`.`services` (`id`)) at C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:545)
+[stacktrace]
+#0 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(545): PDOStatement->execute()
+#1 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(753): Illuminate\\Database\\Connection->Illuminate\\Database\\{closure}('truncate table ...', Array)
+#2 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(720): Illuminate\\Database\\Connection->runQueryCallback('truncate table ...', Array, Object(Closure))
+#3 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(534): Illuminate\\Database\\Connection->run('truncate table ...', Array, Object(Closure))
+#4 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Query\\Builder.php(3567): Illuminate\\Database\\Connection->statement('truncate table ...', Array)
+#5 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Query\\Builder->truncate()
+#6 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Builder.php(1872): Illuminate\\Database\\Eloquent\\Builder->forwardCallTo(Object(Illuminate\\Database\\Query\\Builder), 'truncate', Array)
+#7 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(23): Illuminate\\Database\\Eloquent\\Builder->__call('truncate', Array)
+#8 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2330): Illuminate\\Database\\Eloquent\\Model->forwardCallTo(Object(Illuminate\\Database\\Eloquent\\Builder), 'truncate', Array)
+#9 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Model.php(2342): Illuminate\\Database\\Eloquent\\Model->__call('truncate', Array)
+#10 C:\\xampp\\htdocs\\SyanTeck\\@core\\database\\seeds\\UpdateServicesAndServiceListPageSeeder.php(104): Illuminate\\Database\\Eloquent\\Model::__callStatic('truncate', Array)
+#11 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Database\\Seeds\\UpdateServicesAndServiceListPageSeeder->run()
+#12 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#13 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#14 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#15 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#16 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Seeder.php(184): Illuminate\\Container\\Container->call(Array, Array)
+#17 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Seeder.php(193): Illuminate\\Database\\Seeder->Illuminate\\Database\\{closure}()
+#18 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(81): Illuminate\\Database\\Seeder->__invoke()
+#19 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Eloquent\\Concerns\\GuardsAttributes.php(155): Illuminate\\Database\\Console\\Seeds\\SeedCommand->Illuminate\\Database\\Console\\Seeds\\{closure}()
+#20 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Console\\Seeds\\SeedCommand.php(80): Illuminate\\Database\\Eloquent\\Model::unguarded(Object(Closure))
+#21 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(36): Illuminate\\Database\\Console\\Seeds\\SeedCommand->handle()
+#22 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#23 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#24 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(35): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#25 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(661): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#26 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#27 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Command\\Command.php(291): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#28 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#29 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#30 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Database\\Console\\Seeds\\SeedCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#31 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#32 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#33 C:\\xampp\\htdocs\\SyanTeck\\@core\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#34 C:\\xampp\\htdocs\\SyanTeck\\@core\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#35 {main}
+"} 
