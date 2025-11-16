@@ -1,6 +1,6 @@
 <!-- Banner area Starts -->
 <div class="new_banner_area new-section-bg padding-top-100 padding-bottom-100 hero-section-enhanced" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}"
-     style="background-color: {{$header_background_color}}; position: relative; overflow: hidden; padding-top: 120px !important; padding-bottom: 80px !important;">
+     style="background-color: {{$header_background_color}}; position: relative; overflow: hidden; padding-top: 180px !important; padding-bottom: 80px !important;">
     <!-- Background Pattern -->
     <div class="hero-bg-pattern" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.03; z-index: 0; background-image: radial-gradient(circle, #000 1px, transparent 1px); background-size: 30px 30px;"></div>
     
@@ -65,7 +65,7 @@
 
                     <div class="btn-wrapper btn_flex mt-4" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                         @if(!empty($button_one_show_hide))
-                            <a href="{{ url('/qr') }}" class="cmn-btn btn-outline-2 radius-5" style="padding: 1rem 2.5rem; border: 2px solid #667eea; color: #667eea; font-weight: 600; border-radius: 12px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem;">
+                            <a href="{{ url('/qr') }}" class="cmn-btn btn-outline-2 radius-5" style="padding: 1rem 2.5rem; border: 2px solid #dc3545; color: #dc3545; font-weight: 600; border-radius: 12px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 0.5rem;">
                                 <i class="fa-solid fa-qrcode"></i>{{ $button_one_title ?: __('Request Service') }}
                             </a>
                         @endif
@@ -132,6 +132,13 @@
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
 }
 
+.hero-section-enhanced .btn-outline-2:hover {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    border-color: #dc3545 !important;
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4) !important;
+}
+
 .hero-section-enhanced .btn-service-request:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(251, 191, 36, 0.5) !important;
@@ -139,12 +146,18 @@
 }
 
 @media (max-width: 1200px) {
+    .hero-section-enhanced {
+        padding-top: 170px !important;
+    }
     .hero-section-enhanced .new_banner__contents__title {
         font-size: 2.4rem !important;
     }
 }
 
 @media (max-width: 768px) {
+    .hero-section-enhanced {
+        padding-top: 160px !important;
+    }
     .hero-section-enhanced .new_banner__contents__title {
         font-size: 2rem !important;
         line-height: 1.2 !important;
@@ -168,7 +181,7 @@
 
 @media (max-width: 576px) {
     .hero-section-enhanced {
-        padding-top: 100px !important;
+        padding-top: 140px !important;
         padding-bottom: 60px !important;
     }
     .hero-section-enhanced .new_banner__contents__title {
