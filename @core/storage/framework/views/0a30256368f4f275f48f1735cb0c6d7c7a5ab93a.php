@@ -1,6 +1,6 @@
 <div class="sidebar-menu">
     <button class="sidebar-close-btn" aria-label="<?php echo e(__('Close sidebar')); ?>">
-        <i class="ti-close"></i>
+        <i class="las la-times"></i>
     </button>
     <div class="sidebar-header">
         <div class="logo">
@@ -440,22 +440,18 @@
                     <?php endif; ?>
 
                     
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['blog-list', 'blog-tag-list', 'blog-create', 'blog-trashed-list',
+                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['blog-list', 'blog-create', 'blog-trashed-list',
                         'blog-details'])): ?>
                         <li
                             class=" <?php echo e(active_menu('admin-home/blog')); ?>
 
-                            <?php if(request()->is(['admin-home/blog/*', 'admin-home/blog-category', 'admin-home/blog-tags'])): ?> active <?php endif; ?>">
+                            <?php if(request()->is(['admin-home/blog/*', 'admin-home/blog-category'])): ?> active <?php endif; ?>">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-comment-alt"></i>
                                 <span><?php echo e(__('Blogs')); ?></span></a>
                             <ul class="collapse">
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('blog-list')): ?>
                                     <li class="<?php echo e(active_menu('admin-home/blog')); ?> <?php if(request()->is('admin-home/blog-edit/*')): ?> active <?php endif; ?>"><a
                                             href="<?php echo e(route('admin.blog')); ?>"><?php echo e(__('All Blogs')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('blog-tag-list')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/blog-tags')); ?>"><a
-                                            href="<?php echo e(route('admin.blog.tags')); ?>"><?php echo e(__('Tags')); ?></a></li>
                                 <?php endif; ?>
                                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('blog-create')): ?>
                                     <li class="<?php echo e(active_menu('admin-home/blog/new')); ?>">

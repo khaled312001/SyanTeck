@@ -45,7 +45,8 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/common/css/toastr.min.css')); ?>">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <?php echo $__env->yieldContent('style'); ?>
     <?php if(get_static_option('site_admin_dark_mode') == 'on'): ?>
     <link rel="stylesheet" href="<?php echo e(asset('assets/backend/css/dark-mode.css')); ?>">
@@ -55,6 +56,49 @@
     <?php endif; ?>
     
     <style>
+        /* تطبيق خط Manrope على النصوص - مع استثناء الأيقونات */
+        html,
+        body {
+            font-family: 'Manrope', sans-serif !important;
+        }
+        
+        /* استثناء الأيقونات من قاعدة الخط - يجب أن يكون بعد قاعدة body */
+        [class*="ti-"],
+        i[class*="ti-"],
+        .ti {
+            font-family: 'themify' !important;
+        }
+        
+        [class*="fa-"],
+        i[class*="fa-"],
+        .fa,
+        .fas,
+        .far,
+        .fab,
+        .fal {
+            font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands', 'FontAwesome' !important;
+        }
+        
+        [class*="las"],
+        [class*="la-"],
+        i[class*="las"],
+        i[class*="la-"],
+        .las,
+        .la {
+            font-family: 'Line Awesome Free', 'Line Awesome Brands' !important;
+        }
+        
+        [class*="flaticon"],
+        i[class*="flaticon"] {
+            font-family: 'Flaticon' !important;
+        }
+        
+        /* العناوين */
+        h1, h2, h3, h4, h5, h6,
+        .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+        
         /* Enhanced Header Styles - Modern & Beautiful */
         .header-area {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -332,39 +376,113 @@
             margin-right: 8px !important;
         }
         
+        /* إصلاح أيقونة شريط القائمة - فقط في الموبايل */
         .nav-btn {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            padding: 10px;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none !important; /* مخفي افتراضياً (في الكمبيوتر) */
         }
         
-        .nav-btn:hover {
-            background: rgba(255,255,255,0.25);
-            transform: scale(1.05);
-        }
-        
-        .nav-btn span {
-            width: 22px;
-            height: 2.5px;
-            background: #fff;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            display: block;
-        }
-        
-        .nav-btn:hover span {
-            background: rgba(255,255,255,0.9);
+        /* إظهار الأيقونة فقط في الموبايل */
+        @media (max-width: 767px) {
+            .nav-btn,
+            .nav-btn.pull-left,
+            div.nav-btn,
+            div.nav-btn.pull-left,
+            .col-md-9 .nav-btn,
+            .col-sm-9 .nav-btn {
+                width: 44px !important;
+                height: 44px !important;
+                min-width: 44px !important;
+                min-height: 44px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: center !important;
+                cursor: pointer !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                gap: 5px !important;
+                padding: 10px !important;
+                margin: 10px 15px 0 0 !important;
+                background: rgba(255,255,255,0.25) !important;
+                backdrop-filter: blur(10px) !important;
+                border-radius: 10px !important;
+                border: 1px solid rgba(255,255,255,0.4) !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                position: relative !important;
+                z-index: 1000 !important;
+                float: left !important;
+            }
+            
+            .nav-btn:hover,
+            .nav-btn.pull-left:hover,
+            div.nav-btn:hover,
+            div.nav-btn.pull-left:hover {
+                background: rgba(255,255,255,0.35) !important;
+                transform: scale(1.05) !important;
+                border-color: rgba(255,255,255,0.6) !important;
+            }
+            
+            .nav-btn span,
+            .nav-btn.pull-left span,
+            div.nav-btn span,
+            div.nav-btn.pull-left span {
+                width: 24px !important;
+                height: 3px !important;
+                min-width: 24px !important;
+                min-height: 3px !important;
+                background: #fff !important;
+                border-radius: 2px !important;
+                transition: all 0.3s ease !important;
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                margin: 3px 0 !important;
+                position: relative !important;
+                transform: none !important;
+                -webkit-transform: none !important;
+                -moz-transform: none !important;
+                -ms-transform: none !important;
+                -o-transform: none !important;
+            }
+            
+            .nav-btn span:first-child,
+            .nav-btn.pull-left span:first-child,
+            div.nav-btn span:first-child {
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
+            
+            .nav-btn span:nth-child(2),
+            .nav-btn.pull-left span:nth-child(2),
+            div.nav-btn span:nth-child(2) {
+                opacity: 1 !important;
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
+            
+            .nav-btn span:last-child,
+            .nav-btn.pull-left span:last-child,
+            div.nav-btn span:last-child {
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
+            
+            .nav-btn:hover span,
+            .nav-btn.pull-left:hover span,
+            div.nav-btn:hover span {
+                background: rgba(255,255,255,1) !important;
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
+            
+            /* التأكد من عدم تحويل الأيقونة إلى سهم */
+            .sbar_collapsed .nav-btn span,
+            body.sbar_collapsed .nav-btn span,
+            .sbar_collapsed .nav-btn.pull-left span,
+            body.sbar_collapsed .nav-btn.pull-left span {
+                transform: none !important;
+                -webkit-transform: none !important;
+            }
         }
         
         /* Enhanced Page Title Area */
@@ -635,28 +753,40 @@
             }
             /* Close button in sidebar */
             .sidebar-close-btn {
-                display: block;
-                position: absolute;
-                top: 15px;
-                left: 15px;
-                right: auto;
-                width: 35px;
-                height: 35px;
-                background: rgba(255, 255, 255, 0.1);
-                border: none;
-                border-radius: 50%;
-                color: #fff;
-                font-size: 20px;
-                cursor: pointer;
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
+                display: flex !important;
+                position: absolute !important;
+                top: 15px !important;
+                left: 15px !important;
+                right: auto !important;
+                width: 42px !important;
+                height: 42px !important;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+                border: none !important;
+                border-radius: 50% !important;
+                color: #fff !important;
+                font-size: 24px !important;
+                font-weight: 600 !important;
+                cursor: pointer !important;
+                z-index: 10000 !important;
+                align-items: center !important;
+                justify-content: center !important;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
             }
             .sidebar-close-btn:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: rotate(90deg);
+                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+                color: #fff !important;
+                transform: rotate(90deg) scale(1.15) !important;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6) !important;
+            }
+            .sidebar-close-btn:active {
+                transform: rotate(90deg) scale(1.05) !important;
+            }
+            .sidebar-close-btn i {
+                color: inherit !important;
+                font-size: inherit !important;
+                font-weight: inherit !important;
+                line-height: 1 !important;
             }
         }
         
@@ -685,14 +815,13 @@
         <div class="header-area">
             <div class="row align-items-center">
 
-                <div class="col-md-3 col-sm-3 clearfix">
-                    <div class="nav-btn pull-left">
+                
+                <div class="col-md-9 col-sm-9 clearfix">
+                <div class="nav-btn pull-left">
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
-                </div>
-                <div class="col-md-9 col-sm-9 clearfix">
                     <ul class="notification-area pull-right">
                     <?php
                         $unread_count = 0;

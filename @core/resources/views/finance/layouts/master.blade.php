@@ -597,13 +597,14 @@
         <div class="header-area">
             <div class="row align-items-center">
                 <div class="col-md-3 col-sm-3 clearfix">
-                    <div class="nav-btn pull-left">
+                   
+                </div>
+                <div class="col-md-9 col-sm-9 clearfix">
+                <div class="nav-btn pull-left">
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
-                </div>
-                <div class="col-md-9 col-sm-9 clearfix">
                     <ul class="notification-area pull-right">
                         <li><a class="btn btn-primary" target="_blank" href="{{url('/')}}"><i class="fas fa-external-link-alt mr-1"></i> {{__('View Site')}}</a></li>
                     </ul>

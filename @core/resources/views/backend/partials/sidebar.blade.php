@@ -1,6 +1,6 @@
 <div class="sidebar-menu">
     <button class="sidebar-close-btn" aria-label="{{ __('Close sidebar') }}">
-        <i class="ti-close"></i>
+        <i class="las la-times"></i>
     </button>
     <div class="sidebar-header">
         <div class="logo">
