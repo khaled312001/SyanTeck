@@ -109,7 +109,7 @@ class QRController extends Controller
             'urgency_level' => 'required|in:normal,urgent,emergency',
             'order_note' => 'nullable|string|max:1000',
             'preferred_date' => 'nullable|date|after_or_equal:today',
-            'issue_image' => 'nullable|file|max:512000', // Max 500MB (512000 KB)
+            'issue_image' => 'nullable|file|mimes:jpeg,jpg,png,gif,mp4,avi,mov,webm,mp3,wav,ogg,m4a|max:512000', // Max 500MB (512000 KB)
         ]);
         
         $service = Service::findOrFail($request->service_id);

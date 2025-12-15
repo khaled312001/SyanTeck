@@ -47,7 +47,8 @@ class PageBuilderSetup
             PageBuilder\Addons\CustomerReview\CustomerReviewOne::class,
             PageBuilder\Addons\Banner\BannerOne::class,
             PageBuilder\Addons\MainSections\MainSections::class,
-            PageBuilder\Addons\Vision2030\Vision2030::class
+            PageBuilder\Addons\Vision2030\Vision2030::class,
+            PageBuilder\Addons\MainDepartments\MainDepartments::class
         ];
         if (moduleExists("Subscription")){
             $addons = array_merge($addons,\Modules\Subscription\PageBuilder\PageBuilderSetup::register_widgets());

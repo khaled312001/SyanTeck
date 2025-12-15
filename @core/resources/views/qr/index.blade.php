@@ -144,40 +144,97 @@
                                             <input type="hidden" name="request_type" id="request_type" required>
                                         </div>
                                         
-                                        <!-- Issue Image Upload (only for maintenance) -->
+                                        <!-- Issue Media Upload (only for maintenance) -->
                                         <div class="issue-image-upload-section margin-top-25" id="issue-image-section" style="display: none;">
                                             <label class="form-label">
                                                 <i class="las la-camera"></i>
-                                                {{__('Upload Issue Image')}} <small class="text-muted">({{__('Optional')}})</small>
+                                                {{__('رفع صورة أو فيديو أو تسجيل صوتي للمشكلة')}} <small class="text-muted">({{__('Optional')}})</small>
                                             </label>
-                                            <p class="form-text text-muted margin-bottom-15">{{__('Upload a photo of the issue to help the technician understand the problem better')}}</p>
+                                            <p class="form-text text-muted margin-bottom-15">{{__('ارفع صورة أو فيديو أو سجل مقطع صوتي للمشكلة لمساعدة الفني على فهم المشكلة بشكل أفضل')}}</p>
                                             
-                                            <!-- Camera Icon Upload -->
-                                            <div class="camera-upload-wrapper">
-                                                <input type="file" name="issue_image" id="issue_image" class="camera-upload-input" accept="image/*,video/*" onchange="previewFile(this)">
-                                                <label for="issue_image" class="camera-upload-label" id="camera-upload-label">
-                                                    <div class="camera-icon-container">
-                                                        <i class="las la-camera"></i>
-                                                        <span class="camera-upload-text">{{__('Click to Upload')}}</span>
-                                                        <span class="camera-upload-hint">{{__('or drag & drop')}}</span>
+                                            <!-- Upload Options Tabs -->
+                                            <div class="upload-options-tabs margin-bottom-20">
+                                                <button type="button" class="upload-tab-btn active" data-tab="upload" onclick="switchUploadTab('upload')">
+                                                    <i class="las la-upload"></i> {{__('رفع ملف')}}
+                                                </button>
+                                                <button type="button" class="upload-tab-btn" data-tab="record" onclick="switchUploadTab('record')">
+                                                    <i class="las la-microphone"></i> {{__('تسجيل صوتي')}}
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- Upload Tab -->
+                                            <div class="upload-tab-content active" id="upload-tab">
+                                                <div class="camera-upload-wrapper">
+                                                    <input type="file" name="issue_image" id="issue_image" class="camera-upload-input" accept="image/*,video/*,audio/*" onchange="previewFile(this)">
+                                                    <label for="issue_image" class="camera-upload-label" id="camera-upload-label">
+                                                        <div class="camera-icon-container">
+                                                            <i class="las la-camera"></i>
+                                                            <span class="camera-upload-text">{{__('انقر للرفع')}}</span>
+                                                            <span class="camera-upload-hint">{{__('أو اسحب وأفلت')}}</span>
+                                                        </div>
+                                                    </label>
+                                                    
+                                                    <!-- Preview Container -->
+                                                    <div id="file-preview-step1" class="file-preview-container" style="display: none;">
+                                                        <div class="preview-header">
+                                                            <span class="preview-title">{{__('Uploaded File')}}</span>
+                                                            <button type="button" class="preview-remove-btn" onclick="removeFileStep1()" title="{{__('Remove')}}">
+                                                                <i class="las la-times"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div id="preview-content-step1" class="preview-content"></div>
                                                     </div>
-                                                </label>
-                                                
-                                                <!-- Preview Container -->
-                                                <div id="file-preview-step1" class="file-preview-container" style="display: none;">
-                                                    <div class="preview-header">
-                                                        <span class="preview-title">{{__('Uploaded File')}}</span>
-                                                        <button type="button" class="preview-remove-btn" onclick="removeFileStep1()" title="{{__('Remove')}}">
-                                                            <i class="las la-times"></i>
-                                                        </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Record Tab -->
+                                            <div class="upload-tab-content" id="record-tab" style="display: none;">
+                                                <div class="audio-recorder-wrapper">
+                                                    <div class="audio-recorder-container">
+                                                        <div class="recorder-status" id="recorder-status">
+                                                            <i class="las la-microphone"></i>
+                                                            <span id="recorder-status-text">{{__('جاهز للتسجيل')}}</span>
+                                                        </div>
+                                                        <div class="recorder-controls">
+                                                            <button type="button" class="btn-record" id="btn-start-record" onclick="startRecording()">
+                                                                <i class="las la-play"></i>
+                                                                <span>{{__('بدء التسجيل')}}</span>
+                                                            </button>
+                                                            <button type="button" class="btn-record btn-stop" id="btn-stop-record" onclick="stopRecording()" style="display: none;">
+                                                                <i class="las la-stop"></i>
+                                                                <span>{{__('إيقاف التسجيل')}}</span>
+                                                            </button>
+                                                            <button type="button" class="btn-record btn-save" id="btn-save-record" onclick="saveRecording()" style="display: none;">
+                                                                <i class="las la-save"></i>
+                                                                <span>{{__('حفظ التسجيل')}}</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="recorder-timer" id="recorder-timer" style="display: none;">
+                                                            <span id="timer-display">00:00</span>
+                                                        </div>
+                                                        <div class="recorder-waveform" id="recorder-waveform" style="display: none;">
+                                                            <canvas id="waveform-canvas"></canvas>
+                                                        </div>
                                                     </div>
-                                                    <div id="preview-content-step1" class="preview-content"></div>
+                                                    
+                                                    <!-- Audio Preview -->
+                                                    <div id="audio-preview-container" class="file-preview-container" style="display: none; margin-top: 20px;">
+                                                        <div class="preview-header">
+                                                            <span class="preview-title">{{__('التسجيل الصوتي')}}</span>
+                                                            <button type="button" class="preview-remove-btn" onclick="removeAudioRecording()" title="{{__('Remove')}}">
+                                                                <i class="las la-times"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div id="audio-preview-content" class="preview-content">
+                                                            <audio id="audio-preview-player" controls style="width: 100%; margin-top: 15px;"></audio>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             
                                             <small class="form-text text-muted upload-hint-text">
                                                 <i class="las la-info-circle"></i>
-                                                {{__('Max: 500MB | Formats: JPG, PNG, MP4, etc.')}}
+                                                {{__('الحد الأقصى: 500 ميجابايت | الصيغ: JPG, PNG, MP4, MP3, WAV, إلخ')}}
                                             </small>
                                         </div>
                                     </div>
@@ -1318,7 +1375,8 @@ select.form-control {
 }
 
 .preview-content img,
-.preview-content video {
+.preview-content video,
+.preview-content audio {
     max-width: 100%;
     max-height: 400px;
     border-radius: 10px;
@@ -1568,7 +1626,8 @@ select.form-control {
     }
     
     .preview-content img,
-    .preview-content video {
+    .preview-content video,
+    .preview-content audio {
         max-height: 250px;
     }
 }
@@ -1866,6 +1925,223 @@ footer.footer-area .widget-title::after {
     
     .request-type-description {
         font-size: 13px;
+    }
+}
+
+/* Upload Options Tabs */
+.upload-options-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.upload-tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #666;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-tab-btn:hover {
+    color: #000;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.upload-tab-btn.active {
+    color: #000;
+    border-bottom-color: #FFD700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.upload-tab-btn i {
+    font-size: 18px;
+}
+
+.upload-tab-content {
+    display: none;
+}
+
+.upload-tab-content.active {
+    display: block;
+}
+
+/* Audio Recorder Styles */
+.audio-recorder-wrapper {
+    width: 100%;
+}
+
+.audio-recorder-container {
+    background: #FFFFFF;
+    border: 3px dashed rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.audio-recorder-container.recording {
+    border-color: #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+    animation: pulseRecording 2s ease-in-out infinite;
+}
+
+@keyframes pulseRecording {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+    }
+}
+
+.recorder-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.recorder-status.recording {
+    color: #dc3545;
+}
+
+.recorder-status.recording i {
+    animation: pulseMic 1s ease-in-out infinite;
+}
+
+@keyframes pulseMic {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.recorder-status i {
+    font-size: 32px;
+    color: #FFD700;
+}
+
+.recorder-status.recording i {
+    color: #dc3545;
+}
+
+.recorder-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.btn-record {
+    padding: 14px 28px;
+    background: #FFD700;
+    color: #000000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-record:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: #FFA500;
+}
+
+.btn-record:active {
+    transform: translateY(0);
+}
+
+.btn-record.btn-stop {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-record.btn-stop:hover {
+    background: #c82333;
+}
+
+.btn-record.btn-save {
+    background: #28a745;
+    color: #fff;
+}
+
+.btn-record.btn-save:hover {
+    background: #218838;
+}
+
+.btn-record i {
+    font-size: 20px;
+}
+
+.recorder-timer {
+    font-size: 32px;
+    font-weight: 700;
+    color: #dc3545;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+}
+
+.recorder-waveform {
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#waveform-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .upload-options-tabs {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .upload-tab-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+    
+    .recorder-controls {
+        flex-direction: column;
+    }
+    
+    .btn-record {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .audio-recorder-container {
+        padding: 30px 20px;
     }
 }
 </style>
@@ -2186,6 +2462,255 @@ function previewFile(input) {
     }
 }
 
+// Switch between upload and record tabs
+function switchUploadTab(tab) {
+    const uploadTab = document.getElementById('upload-tab');
+    const recordTab = document.getElementById('record-tab');
+    const uploadBtn = document.querySelector('.upload-tab-btn[data-tab="upload"]');
+    const recordBtn = document.querySelector('.upload-tab-btn[data-tab="record"]');
+    
+    if (tab === 'upload') {
+        uploadTab.classList.add('active');
+        recordTab.classList.remove('active');
+        uploadBtn.classList.add('active');
+        recordBtn.classList.remove('active');
+    } else {
+        uploadTab.classList.remove('active');
+        recordTab.classList.add('active');
+        uploadBtn.classList.remove('active');
+        recordBtn.classList.add('active');
+    }
+}
+
+// Audio Recording Variables
+let mediaRecorder = null;
+let audioChunks = [];
+let recordingStartTime = null;
+let timerInterval = null;
+let audioStream = null;
+let audioContext = null;
+let analyser = null;
+let dataArray = null;
+let canvasContext = null;
+
+// Start audio recording
+async function startRecording() {
+    try {
+        // Request microphone access
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        
+        // Create MediaRecorder
+        mediaRecorder = new MediaRecorder(audioStream);
+        audioChunks = [];
+        
+        // Setup audio visualization
+        setupAudioVisualization(audioStream);
+        
+        // Start recording
+        mediaRecorder.start();
+        recordingStartTime = Date.now();
+        
+        // Update UI
+        document.getElementById('btn-start-record').style.display = 'none';
+        document.getElementById('btn-stop-record').style.display = 'inline-flex';
+        document.getElementById('recorder-status').classList.add('recording');
+        document.getElementById('recorder-status-text').textContent = '{{__("جاري التسجيل...")}}';
+        document.getElementById('recorder-timer').style.display = 'block';
+        document.getElementById('recorder-waveform').style.display = 'block';
+        document.querySelector('.audio-recorder-container').classList.add('recording');
+        
+        // Start timer
+        startTimer();
+        
+        // Handle data available
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                audioChunks.push(event.data);
+            }
+        };
+        
+        // Handle stop
+        mediaRecorder.onstop = () => {
+            stopAudioVisualization();
+        };
+        
+    } catch (error) {
+        console.error('Error starting recording:', error);
+        alert('{{__("خطأ في الوصول للميكروفون. يرجى التأكد من السماح بالوصول للميكروفون.")}}');
+    }
+}
+
+// Stop audio recording
+function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+        stopTimer();
+        
+        // Stop all tracks
+        if (audioStream) {
+            audioStream.getTracks().forEach(track => track.stop());
+        }
+        
+        // Update UI
+        document.getElementById('btn-stop-record').style.display = 'none';
+        document.getElementById('btn-save-record').style.display = 'inline-flex';
+        document.getElementById('recorder-status').classList.remove('recording');
+        document.getElementById('recorder-status-text').textContent = '{{__("تم إيقاف التسجيل")}}';
+        document.querySelector('.audio-recorder-container').classList.remove('recording');
+    }
+}
+
+// Save audio recording
+function saveRecording() {
+    if (audioChunks.length === 0) {
+        alert('{{__("لا يوجد تسجيل لحفظه")}}');
+        return;
+    }
+    
+    // Create blob from chunks
+    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+    
+    // Create file from blob
+    const audioFile = new File([audioBlob], 'recording_' + Date.now() + '.webm', { type: 'audio/webm' });
+    
+    // Create a FileList-like object and assign to input
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(audioFile);
+    const issueImageInput = document.getElementById('issue_image');
+    issueImageInput.files = dataTransfer.files;
+    
+    // Preview audio
+    const audioUrl = URL.createObjectURL(audioBlob);
+    const audioPreviewContainer = document.getElementById('audio-preview-container');
+    const audioPreviewPlayer = document.getElementById('audio-preview-player');
+    
+    audioPreviewPlayer.src = audioUrl;
+    audioPreviewContainer.style.display = 'block';
+    
+    // Update UI
+    document.getElementById('btn-save-record').style.display = 'none';
+    document.getElementById('btn-start-record').style.display = 'inline-flex';
+    document.getElementById('recorder-status-text').textContent = '{{__("تم حفظ التسجيل")}}';
+    document.getElementById('recorder-timer').style.display = 'none';
+    document.getElementById('recorder-waveform').style.display = 'none';
+    
+    // Switch to upload tab to show preview
+    switchUploadTab('upload');
+    
+    // Trigger preview
+    previewFile(issueImageInput);
+}
+
+// Remove audio recording
+function removeAudioRecording() {
+    audioChunks = [];
+    mediaRecorder = null;
+    
+    const issueImageInput = document.getElementById('issue_image');
+    issueImageInput.value = '';
+    
+    const audioPreviewContainer = document.getElementById('audio-preview-container');
+    const audioPreviewPlayer = document.getElementById('audio-preview-player');
+    
+    if (audioPreviewPlayer.src) {
+        URL.revokeObjectURL(audioPreviewPlayer.src);
+        audioPreviewPlayer.src = '';
+    }
+    
+    audioPreviewContainer.style.display = 'none';
+    
+    // Reset UI
+    document.getElementById('btn-start-record').style.display = 'inline-flex';
+    document.getElementById('btn-stop-record').style.display = 'none';
+    document.getElementById('btn-save-record').style.display = 'none';
+    document.getElementById('recorder-status').classList.remove('recording');
+    document.getElementById('recorder-status-text').textContent = '{{__("جاهز للتسجيل")}}';
+    document.getElementById('recorder-timer').style.display = 'none';
+    document.getElementById('recorder-waveform').style.display = 'none';
+    document.querySelector('.audio-recorder-container').classList.remove('recording');
+    
+    removeFileStep1();
+}
+
+// Start timer
+function startTimer() {
+    recordingStartTime = Date.now();
+    timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        document.getElementById('timer-display').textContent = 
+            String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    }, 1000);
+}
+
+// Stop timer
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+// Setup audio visualization
+function setupAudioVisualization(stream) {
+    try {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioContext.createAnalyser();
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        
+        analyser.fftSize = 256;
+        const bufferLength = analyser.frequencyBinCount;
+        dataArray = new Uint8Array(bufferLength);
+        
+        const canvas = document.getElementById('waveform-canvas');
+        canvasContext = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        
+        drawWaveform();
+    } catch (error) {
+        console.error('Error setting up visualization:', error);
+    }
+}
+
+// Draw waveform
+function drawWaveform() {
+    if (!analyser || !canvasContext) return;
+    
+    requestAnimationFrame(drawWaveform);
+    
+    analyser.getByteFrequencyData(dataArray);
+    
+    canvasContext.fillStyle = 'rgba(255, 255, 255, 1)';
+    canvasContext.fillRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height);
+    
+    const barWidth = (canvasContext.canvas.width / dataArray.length) * 2.5;
+    let barHeight;
+    let x = 0;
+    
+    for (let i = 0; i < dataArray.length; i++) {
+        barHeight = (dataArray[i] / 255) * canvasContext.canvas.height;
+        
+        canvasContext.fillStyle = `rgb(${255 - dataArray[i]}, ${dataArray[i]}, 50)`;
+        canvasContext.fillRect(x, canvasContext.canvas.height - barHeight, barWidth, barHeight);
+        
+        x += barWidth + 1;
+    }
+}
+
+// Stop audio visualization
+function stopAudioVisualization() {
+    if (audioContext) {
+        audioContext.close();
+        audioContext = null;
+    }
+    analyser = null;
+    dataArray = null;
+    canvasContext = null;
+}
+
 function handleFilePreview(file, maxSize, previewContainer, previewContent, input) {
     if (file.size > maxSize) {
         alert('{{__("File size must be less than 500MB")}}');
@@ -2232,6 +2757,23 @@ function handleFilePreview(file, maxSize, previewContainer, previewContent, inpu
                     {{__('Your browser does not support the video tag.')}}
                 </video>
                 <p style="margin-top: 15px; margin-bottom: 0; font-size: 14px; color: #4a5568;"><strong>${fileName}</strong> (${fileSize})</p>
+            `;
+            previewContainer.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    } else if (fileType.startsWith('audio/')) {
+        // Audio preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewContent.innerHTML = `
+                <div style="padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 10px; border: 2px solid #e0e0e0; text-align: center;">
+                    <i class="las la-volume-up" style="font-size: 64px; color: #FFD700; margin-bottom: 15px;"></i>
+                    <audio controls style="width: 100%; margin-top: 15px;">
+                        <source src="${e.target.result}" type="${fileType}">
+                        {{__('Your browser does not support the audio tag.')}}
+                    </audio>
+                    <p style="margin-top: 15px; margin-bottom: 0; font-size: 14px; color: #4a5568;"><strong>${fileName}</strong> (${fileSize})</p>
+                </div>
             `;
             previewContainer.style.display = 'block';
         };
