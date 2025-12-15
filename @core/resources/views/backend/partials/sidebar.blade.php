@@ -242,8 +242,8 @@
                         </li>
                     @endcanany
 
-                    {{-- 9. Categories --}}
-                    @canany(['category-list', 'category-create'])
+                    {{-- 9. Categories -- Hidden --}}
+                    {{-- @canany(['category-list', 'category-create'])
                         <li class="{{ active_menu('admin-home/category') }}
                     @if (request()->is('admin-home/category/*')) active @endif">
                             <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list"></i>
@@ -259,10 +259,10 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcan
+                    @endcan --}}
 
-                    {{-- 10. Sub Category --}}
-                    @canany(['subcategory-list', 'subcategory-create'])
+                    {{-- 10. Sub Category -- Hidden --}}
+                    {{-- @canany(['subcategory-list', 'subcategory-create'])
                         <li
                             class="{{ active_menu('admin-home/subcategory') }}
                     @if (request()->is('admin-home/subcategory/*')) active @endif">
@@ -280,10 +280,10 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcan
+                    @endcan --}}
 
-                    {{-- 11. Child Categories --}}
-                    @canany(['child-category-list', 'child-category-create'])
+                    {{-- 11. Child Categories -- Hidden --}}
+                    {{-- @canany(['child-category-list', 'child-category-create'])
                         <li
                             class="{{ active_menu('admin-home/child-category') }}
                     @if (request()->is('admin-home/child-category/*')) active @endif">
@@ -301,7 +301,7 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcan
+                    @endcan --}}
 
                     {{-- 12. Brands --}}
                     @canany(['brand-list', 'brand-create'])

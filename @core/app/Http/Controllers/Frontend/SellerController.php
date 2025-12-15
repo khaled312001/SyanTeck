@@ -2889,6 +2889,12 @@ class SellerController extends Controller
             ->where('seller_id', Auth::guard('web')->user()->id)
             ->firstOrFail();
 
+        // منع التعديل بعد تأكيد الأدمن - حوكمة البيانات
+        if ($order->technician_report_confirmed_at) {
+            toastr_error(__('لا يمكن تعديل التقرير بعد تأكيده من قبل الأدمن. التقرير محمي ضمن خطة الحوكمة.'));
+            return redirect()->back();
+        }
+
         $request->validate([
             'technician_report' => 'required|string',
             'technician_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB max per image
@@ -2922,7 +2928,7 @@ class SellerController extends Controller
             }
         }
 
-        // دمج الصور القديمة مع الجديدة
+        // دمج الصور القديمة مع الجديدة (فقط إذا لم يتم التأكيد)
         $existingImages = $order->technician_images ?? [];
         $existingVideos = $order->technician_videos ?? [];
         

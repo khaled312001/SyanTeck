@@ -60,16 +60,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:191'],
             'captcha_token' => ['nullable'],
-            'username' => ['required', 'string', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],[
             'captcha_token.required' => __('google captcha is required'),
             'name.required' => __('name is required'),
             'name.max' => __('name is must be between 191 character'),
-            'username.required' => __('username is required'),
-            'username.max' => __('username is must be between 191 character'),
-            'username.unique' => __('username is already taken'),
             'email.unique' => __('email is already taken'),
             'email.required' => __('email is required'),
             'password.required' => __('password is required'),
@@ -117,14 +113,42 @@ class RegisterController extends Controller
                         }
                     }
 
-                    $request->validate([
+                    // Check if Google data exists
+                    $googleData = session('google_register_data', []);
+                    $passwordRules = empty($googleData) ? 'required|max:191' : 'nullable|max:191';
+                    
+                    // Generate unique username from email
+                    $baseUsername = explode('@', $request->email)[0];
+                    $username = $baseUsername;
+                    $counter = 1;
+                    while (User::where('username', $username)->exists()) {
+                        $username = $baseUsername . '_' . $counter;
+                        $counter++;
+                    }
+                    
+                    $validationRules = [
                         'name' => 'required|max:191',
                         'email' => 'required|email|unique:users|max:191',
-                        'username' => 'required|unique:users|max:191',
                         'phone' => 'required|unique:users|max:191',
-                        'password' => 'required|max:191',
+                        'national_id' => 'required|string|size:10|regex:/^[0-9]{10}$/|unique:users,national_id',
+                        'password' => $passwordRules,
                         'service_city' => 'required',
                         'country' => 'required',
+                        'department' => 'required|exists:categories,id',
+                    ];
+                    
+                    // Add job application fields validation only for seller/technician
+                    if($request->get_user_type == 0) {
+                        $validationRules['job_type'] = 'required|string|max:191';
+                        $validationRules['experience'] = 'required|string';
+                        $validationRules['resume_file'] = 'required|file|mimes:pdf,doc,docx|max:5120'; // 5MB max
+                    }
+                    
+                    $request->validate($validationRules, [
+                        'national_id.required' => 'رقم الهوية الوطنية مطلوب',
+                        'national_id.size' => 'رقم الهوية الوطنية يجب أن يكون 10 أرقام',
+                        'national_id.regex' => 'رقم الهوية الوطنية يجب أن يحتوي على أرقام فقط',
+                        'national_id.unique' => 'رقم الهوية الوطنية مستخدم بالفعل. يمكنك التسجيل بحساب واحد فقط لكل رقم هوية',
                     ]);
                 }
             }else{
@@ -138,15 +162,33 @@ class RegisterController extends Controller
                     }
                 }
 
+                // Check if Google data exists
+                $googleData = session('google_register_data', []);
+                $passwordRules = empty($googleData) ? 'required|max:191' : 'nullable|max:191';
+                
+                // Generate unique username from email
+                $baseUsername = explode('@', $request->email)[0];
+                $username = $baseUsername;
+                $counter = 1;
+                while (User::where('username', $username)->exists()) {
+                    $username = $baseUsername . '_' . $counter;
+                    $counter++;
+                }
+                
                 $request->validate([
                     'name' => 'required|max:191',
                     'email' => 'required|email|unique:users|max:191',
-                    'username' => 'required|unique:users|max:191',
                     'phone' => 'required|unique:users|max:191',
-                    'password' => 'required|max:191',
+                    'national_id' => 'required|string|size:10|regex:/^[0-9]{10}$/|unique:users,national_id',
+                    'password' => $passwordRules,
                     'service_city' => 'required',
                     'service_area' => 'required',
                     'country' => 'required',
+                ], [
+                    'national_id.required' => 'رقم الهوية الوطنية مطلوب',
+                    'national_id.size' => 'رقم الهوية الوطنية يجب أن يكون 10 أرقام',
+                    'national_id.regex' => 'رقم الهوية الوطنية يجب أن يحتوي على أرقام فقط',
+                    'national_id.unique' => 'رقم الهوية الوطنية مستخدم بالفعل. يمكنك التسجيل بحساب واحد فقط لكل رقم هوية',
                 ]);
             }
 
@@ -159,19 +201,84 @@ class RegisterController extends Controller
                 $user_number = $request->phone;
             }
 
-            $user = User::create([
+            // Prepare specializations for seller/technician
+            $specializations = null;
+            if($user_type == 0 && $request->has('department') && !empty($request->department)) {
+                $specializations = json_encode([(int)$request->department]);
+            }
+            
+            // Handle resume file upload for seller/technician
+            $resumeFilePath = null;
+            if($user_type == 0 && $request->hasFile('resume_file')) {
+                $resumeFile = $request->file('resume_file');
+                $resumeDirectory = public_path('assets/uploads/resumes/');
+                
+                // Create directory if it doesn't exist
+                if (!file_exists($resumeDirectory)) {
+                    mkdir($resumeDirectory, 0755, true);
+                }
+                
+                $resumeFileName = time() . '_' . uniqid() . '.' . $resumeFile->getClientOriginalExtension();
+                $resumeFile->move($resumeDirectory, $resumeFileName);
+                $resumeFilePath = 'assets/uploads/resumes/' . $resumeFileName;
+            }
+            
+            // Get Google data from session if exists
+            $googleData = session('google_register_data', []);
+            
+            // Generate unique username from email if not provided
+            if (empty($request->username)) {
+                $baseUsername = explode('@', $request->email)[0];
+                $username = $baseUsername;
+                $counter = 1;
+                while (User::where('username', $username)->exists()) {
+                    $username = $baseUsername . '_' . $counter;
+                    $counter++;
+                }
+            } else {
+                $username = $request->username;
+            }
+            
+            $userData = [
                 'name' => $request->name,
                 'email' => $request->email,
-                'username' => $request->username,
+                'username' => $username,
                 'phone' => $user_number,
-                'password' => Hash::make($request->password),
+                'national_id' => $request->national_id,
+                'password' => !empty($request->password) ? Hash::make($request->password) : Hash::make(\Illuminate\Support\Str::random(16)),
                 'service_city' => $request->service_city,
                 'service_area' => $request->service_area,
                 'country_id' => $request->country,
                 'user_type' => $user_type,
                 'terms_conditions' =>1,
                 'email_verify_token'=> $email_verify_tokn,
-            ]);
+                'specializations' => $specializations,
+            ];
+            
+            // Verify by national ID if national_id is provided
+            if(!empty($request->national_id)) {
+                $userData['verified_by_national_id'] = 1;
+            }
+            
+            // Add job application fields for seller/technician
+            if($user_type == 0) {
+                $userData['job_type'] = $request->job_type;
+                $userData['experience'] = $request->experience;
+                $userData['resume_file'] = $resumeFilePath;
+            }
+            
+            // Add Google ID if exists
+            if (!empty($googleData['google_id'])) {
+                $userData['google_id'] = $googleData['google_id'];
+                $userData['email_verified'] = 1; // Mark email as verified for Google users
+            }
+            
+            $user = User::create($userData);
+            
+            // Clear Google data from session after successful registration
+            if (!empty($googleData)) {
+                session()->forget('google_register_data');
+            }
 
             if(empty(get_static_option('disable_user_email_verify'))){
                 if($user){
@@ -195,6 +302,28 @@ class RegisterController extends Controller
                             'subject' => get_static_option('user_register_subject') ?? __('New User Registration'),
                             'message' => $message
                         ]));
+                        
+                        // Send detailed email to admin for seller/technician registration
+                        if($user_type == 0) {
+                            $adminMessage = "
+                                <h2>طلب انضمام جديد لفريق العمل</h2>
+                                <p><strong>الاسم:</strong> {$user->name}</p>
+                                <p><strong>البريد الإلكتروني:</strong> {$user->email}</p>
+                                <p><strong>رقم الهاتف:</strong> {$user->phone}</p>
+                                <p><strong>نوع الوظيفة:</strong> {$user->job_type}</p>
+                                <p><strong>القسم:</strong> " . ($user->specializations ? json_decode($user->specializations)[0] : 'غير محدد') . "</p>
+                                <p><strong>الخبرة والمهارات:</strong></p>
+                                <p>{$user->experience}</p>
+                                <p><strong>السيرة الذاتية:</strong> " . ($user->resume_file ? '<a href="' . asset($user->resume_file) . '">تحميل الملف</a>' : 'غير مرفوع') . "</p>
+                                <p><strong>البلد:</strong> " . ($user->country ? $user->country->country : 'غير محدد') . "</p>
+                                <p><strong>المدينة:</strong> " . ($user->city ? $user->city->service_city : 'غير محدد') . "</p>
+                            ";
+                            
+                            Mail::to(get_static_option('site_global_email'))->send(new BasicMail([
+                                'subject' => 'طلب انضمام جديد لفريق العمل - ' . $user->name,
+                                'message' => $adminMessage
+                            ]));
+                        }
                     } catch (\Exception $e) {
 
                     }
@@ -223,7 +352,16 @@ class RegisterController extends Controller
                 ]);
             }
 
-            if (Auth::guard('web')->attempt(['username' => $request->username, 'password' => $request->password], $request->get('remember'))) {
+            // For Google users, password might be auto-generated, so login directly
+            $googleData = session('google_register_data', []);
+            if (!empty($googleData['google_id'])) {
+                Auth::login($user);
+                if($user->user_type==0){
+                    return redirect()->route('seller.dashboard');
+                }else{
+                    return redirect()->route('buyer.dashboard');
+                }
+            } elseif (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
                 if(Auth::user()->user_type==0){
                     return redirect()->route('seller.dashboard');
                 }else{
@@ -241,7 +379,152 @@ class RegisterController extends Controller
         $countries = Country::where('status', 1)->get();
         // country codes and convert to JSON format
         $restricted_countries = $countries->pluck('country_code')->toJson();
-        return view('frontend.user.register',compact('cities','countries', 'restricted_countries'));
+        
+        // Get only 3 categories: Electricity, Plumbing, Air Conditioning
+        // First, try to find exact matches in Arabic
+        $electricityCategory = \App\Category::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%كهرباء%')
+                      ->orWhere('name', 'like', '%electrical%')
+                      ->orWhere('name', 'like', '%electricity%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%كهرباء%' THEN 1
+                    WHEN name LIKE '%electrical%' OR name LIKE '%electricity%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
+        $plumbingCategory = \App\Category::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%سباكة%')
+                      ->orWhere('name', 'like', '%plumbing%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%سباكة%' THEN 1
+                    WHEN name LIKE '%plumbing%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
+        $acCategory = \App\Category::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%تكييف%')
+                      ->orWhere('name', 'like', '%air conditioning%')
+                      ->orWhere('name', 'like', '%ac%')
+                      ->orWhere('name', 'like', '%hvac%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%تكييف%' THEN 1
+                    WHEN name LIKE '%air conditioning%' OR name LIKE '%ac%' OR name LIKE '%hvac%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
+        // Build categories collection with only the 3 required categories
+        $categories = collect();
+        if ($electricityCategory) {
+            $categories->push($electricityCategory);
+        }
+        if ($plumbingCategory) {
+            $categories->push($plumbingCategory);
+        }
+        if ($acCategory) {
+            $categories->push($acCategory);
+        }
+        
+        // If we don't have all 3, try to get any matching categories as fallback
+        if ($categories->count() < 3) {
+            $allMatching = \App\Category::where('status', 1)
+                ->where(function($query) {
+                    $query->where('name', 'like', '%كهرباء%')
+                          ->orWhere('name', 'like', '%سباكة%')
+                          ->orWhere('name', 'like', '%تكييف%')
+                          ->orWhere('name', 'like', '%electrical%')
+                          ->orWhere('name', 'like', '%plumbing%')
+                          ->orWhere('name', 'like', '%air conditioning%')
+                          ->orWhere('name', 'like', '%ac%');
+                })
+                ->get();
+            
+            // Group by type and take one from each type
+            if (!$electricityCategory) {
+                $electricityCategory = $allMatching->filter(function($cat) {
+                    return stripos($cat->name, 'كهرباء') !== false || 
+                           stripos($cat->name, 'electrical') !== false || 
+                           stripos($cat->name, 'electricity') !== false;
+                })->first();
+                if ($electricityCategory && !$categories->contains('id', $electricityCategory->id)) {
+                    $categories->push($electricityCategory);
+                }
+            }
+            
+            if (!$plumbingCategory) {
+                $plumbingCategory = $allMatching->filter(function($cat) {
+                    return stripos($cat->name, 'سباكة') !== false || 
+                           stripos($cat->name, 'plumbing') !== false;
+                })->first();
+                if ($plumbingCategory && !$categories->contains('id', $plumbingCategory->id)) {
+                    $categories->push($plumbingCategory);
+                }
+            }
+            
+            if (!$acCategory) {
+                $acCategory = $allMatching->filter(function($cat) {
+                    return stripos($cat->name, 'تكييف') !== false || 
+                           stripos($cat->name, 'air conditioning') !== false || 
+                           stripos($cat->name, 'ac') !== false ||
+                           stripos($cat->name, 'hvac') !== false;
+                })->first();
+                if ($acCategory && !$categories->contains('id', $acCategory->id)) {
+                    $categories->push($acCategory);
+                }
+            }
+        }
+        
+        // Re-order to ensure correct order: Electricity (1), Plumbing (2), AC (3)
+        $orderedCategories = collect();
+        
+        // Add electricity first
+        $electricity = $categories->filter(function($cat) {
+            return stripos($cat->name, 'كهرباء') !== false || 
+                   stripos($cat->name, 'electrical') !== false || 
+                   stripos($cat->name, 'electricity') !== false;
+        })->first();
+        if ($electricity) {
+            $orderedCategories->push($electricity);
+        }
+        
+        // Add plumbing second
+        $plumbing = $categories->filter(function($cat) {
+            return stripos($cat->name, 'سباكة') !== false || 
+                   stripos($cat->name, 'plumbing') !== false;
+        })->first();
+        if ($plumbing) {
+            $orderedCategories->push($plumbing);
+        }
+        
+        // Add AC third
+        $ac = $categories->filter(function($cat) {
+            return stripos($cat->name, 'تكييف') !== false || 
+                   stripos($cat->name, 'air conditioning') !== false || 
+                   stripos($cat->name, 'ac') !== false ||
+                   stripos($cat->name, 'hvac') !== false;
+        })->first();
+        if ($ac) {
+            $orderedCategories->push($ac);
+        }
+        
+        // Final result: maximum 3 categories, one for each type
+        $categories = $orderedCategories->unique('id')->values();
+        
+        return view('frontend.user.register',compact('cities','countries', 'restricted_countries', 'categories'));
     }
 
 

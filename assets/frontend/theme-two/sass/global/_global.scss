@@ -1,47 +1,45 @@
 /*--------------------------------------------------------------
-    google fonts
+    google fonts - خط عربي مميز Tajawal
 --------------------------------------------------------------*/
 
-// Plus Jakarta Sans fonts
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-// Manrope fonts
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+// Tajawal - خط عربي عريض وبريميوم وحديث
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
 
 :root {
-    --new-main-color-one: #FF6B2C;
-    --new-main-color-one-rgb: 255, 107, 44;
-    --new-main-color-two: #4D77FF;
-    --new-main-color-two-rgb: 77, 119, 255;
-    --new-main-color-three: #FF6B2C;
+    --new-main-color-one: #FFD700;
+    --new-main-color-one-rgb: 255, 215, 0;
+    --new-main-color-two: #FFD700;
+    --new-main-color-two-rgb: 255, 215, 0;
+    --new-main-color-three: #FFD700;
     --white: #ffffff;
-    --black: #111111;
-    --success-color: #65c18c;
-    --success-color-rgb: 101, 193, 140;
-    --delete-color: #ee0000;
-    --delete-color-rgb: 238, 0, 0;
-    --review-color: #F49D1A;
-    --review-color-rgb: 244, 157, 26;
-    --new-heading-color: #333333;
+    --black: #000000;
+    --success-color: #FFD700;
+    --success-color-rgb: 255, 215, 0;
+    --delete-color: #000000;
+    --delete-color-rgb: 0, 0, 0;
+    --review-color: #FFD700;
+    --review-color-rgb: 255, 215, 0;
+    --new-heading-color: #000000;
     --new-light-color: #666666;
     --new-paragraph-color: #666666;
     --new-body-color: #999999;
-    --new-nav-bg: #e8eeff;
-    --new-section-bg: #F5F7FF;
-    --new-section-bg-2: #F9FAFB;
+    --new-nav-bg: #ffffff;
+    --new-section-bg: #fafafa;
+    --new-section-bg-2: #f5f5f5;
     --new-border-color: #cccccc;
-    --new-heading-font: 'Plus Jakarta Sans', sans-serif;
-    --new-body-font: 'Manrope', sans-serif;
+    --new-heading-font: 'Tajawal', sans-serif;
+    --new-body-font: 'Tajawal', sans-serif;
 }
 
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     overflow-x: hidden;
-    font-family: var(--new-body-font);
+    font-family: 'Tajawal', var(--new-body-font), sans-serif;
 }
 
 * {
@@ -58,8 +56,9 @@ body {
     margin: 0;
     color: var(--extra-light-color);
     overflow-x: hidden;
-    font-family: var(--new-body-font);
+    font-family: 'Tajawal', var(--new-body-font), sans-serif;
     font-size: 14px;
+    font-weight: 400;
 }
 
 h1 {
@@ -376,19 +375,19 @@ code {
 }
 
 .gradient-bg-1 {
-    background: -webkit-gradient(linear, left top, right top, from(#fdf7f0), color-stop(50%, #ffe9f7), to(#efdff4));
-    background: -o-linear-gradient(left, #fdf7f0 0%, #ffe9f7 50%, #efdff4 100%);
-    background: linear-gradient(90deg, #fdf7f0 0%, #ffe9f7 50%, #efdff4 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#fafafa), color-stop(50%, #f5f5f5), to(#f0f0f0));
+    background: -o-linear-gradient(left, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%);
+    background: linear-gradient(90deg, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%);
 }
 
 .gradient-bg-2 {
-    background: -o-radial-gradient(circle, #fcf4fe 0%, #ebfcfe 100%);
-    background: radial-gradient(circle, #fcf4fe 0%, #ebfcfe 100%);
+    background: -o-radial-gradient(circle, #fafafa 0%, #f5f5f5 100%);
+    background: radial-gradient(circle, #fafafa 0%, #f5f5f5 100%);
 }
 
 .gradient-footer {
-    background: -o-linear-gradient(315deg, #fefaf4 0%, #e3dbee 100%);
-    background: linear-gradient(135deg, #fefaf4 0%, #e3dbee 100%);
+    background: -o-linear-gradient(315deg, #fafafa 0%, #f0f0f0 100%);
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
 }
 
 .bg-image {

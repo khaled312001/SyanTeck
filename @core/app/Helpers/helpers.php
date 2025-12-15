@@ -280,17 +280,24 @@ function get_attachment_image_by_id($id, $size = null, $default = false)
             case "large":
                 if (file_exists('assets/uploads/media-uploader/large-' . $image_details->path)) {
                     $image_url = asset('assets/uploads/media-uploader/large-' . $image_details->path);
+                } else {
+                    // Fallback to original if resized version doesn't exist
+                    $image_url = asset('assets/uploads/media-uploader/' . $image_details->path);
                 }
                 break;
             case "grid":
                 if (file_exists('assets/uploads/media-uploader/grid-' . $image_details->path)) {
                     $image_url = asset('assets/uploads/media-uploader/grid-' . $image_details->path);
+                } else {
+                    $image_url = asset('assets/uploads/media-uploader/' . $image_details->path);
                 }
                 break;
 
             case "semi-large":
                 if (file_exists('assets/uploads/media-uploader/semi-large-' . $image_details->path)) {
                     $image_url = asset('assets/uploads/media-uploader/semi-large-' . $image_details->path);
+                } else {
+                    $image_url = asset('assets/uploads/media-uploader/' . $image_details->path);
                 }
                 break;
             case "thumb":
@@ -303,7 +310,8 @@ function get_attachment_image_by_id($id, $size = null, $default = false)
                 }
                 break;
             default:
-                if (file_exists('assets/uploads/media-uploader/' . $image_details->path)) {
+                // Always return URL even if file_exists fails (file might exist but path check fails)
+                if (empty($image_url) && !empty($image_details->path)) {
                     $image_url = asset('assets/uploads/media-uploader/' . $image_details->path);
                 }
                 break;
@@ -2722,6 +2730,50 @@ function sellerProfileLocation($seller){
         $seller_city_and_country = $seller_city_name . ', ' . $seller_country_name ?? '';
         return $seller_city_and_country;
     }
+}
+
+/**
+ * تحديد الأيقونة واللون المناسبين للخدمة حسب نوعها
+ * 
+ * @param string $serviceTitle عنوان الخدمة
+ * @return array ['icon' => string, 'color' => string]
+ */
+function get_service_icon($serviceTitle) {
+    $serviceTitle = strtolower($serviceTitle);
+    $serviceIcon = 'las la-tools'; // أيقونة افتراضية
+    $iconColor = '#000000'; // لون موحد: أسود
+    
+    // كهرباء
+    if (strpos($serviceTitle, 'كهرباء') !== false || 
+        strpos($serviceTitle, 'كهربائي') !== false || 
+        strpos($serviceTitle, 'electrical') !== false || 
+        strpos($serviceTitle, 'electricity') !== false ||
+        strpos($serviceTitle, 'electric') !== false) {
+        $serviceIcon = 'las la-bolt';
+        $iconColor = '#000000'; // أسود موحد
+    }
+    // سباكة
+    elseif (strpos($serviceTitle, 'سباكة') !== false || 
+             strpos($serviceTitle, 'سباك') !== false || 
+             strpos($serviceTitle, 'plumbing') !== false || 
+             strpos($serviceTitle, 'plumber') !== false) {
+        $serviceIcon = 'las la-tint';
+        $iconColor = '#000000'; // أسود موحد
+    }
+    // تكييف
+    elseif (strpos($serviceTitle, 'تكييف') !== false || 
+             strpos($serviceTitle, 'مكيف') !== false || 
+             strpos($serviceTitle, 'air conditioning') !== false || 
+             strpos($serviceTitle, 'ac') !== false ||
+             strpos($serviceTitle, 'cooling') !== false) {
+        $serviceIcon = 'las la-snowflake';
+        $iconColor = '#000000'; // أسود موحد
+    }
+    
+    return [
+        'icon' => $serviceIcon,
+        'color' => $iconColor
+    ];
 }
 
 

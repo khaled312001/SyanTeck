@@ -153,20 +153,48 @@ class PopularService extends \App\PageBuilder\PageBuilderBase
         //static text helpers
         $static_text = static_text();
 
+        // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $serviceKeywords = [
+            'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+            'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+            'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+        ];
+        
         $services = Service::select('id','title','image','description','price','slug','seller_id','featured','service_city_id','is_service_online')
         ->where(['status'=>1,'is_service_on'=>1])
+        ->where(function($query) use ($serviceKeywords) {
+            foreach ($serviceKeywords as $index => $keyword) {
+                if ($index === 0) {
+                    $query->where('title', 'like', '%' . $keyword . '%');
+                } else {
+                    $query->orWhere('title', 'like', '%' . $keyword . '%');
+                }
+            }
+        })
+        ->orderByRaw("
+            CASE 
+                WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                ELSE 4
+            END
+        ")
+        ->orderBy('title', 'asc')
         ->when(subscriptionModuleExistsAndEnable('Subscription'),function($q){
             $q->whereHas('seller_subscription');
         })
-        ->orderBy('view','DESC')
         ->take($items)
-        ->inRandomOrder()
         ->get();
 
         $service_markup = '';
         foreach ($services as $service){
-
-            $image =  render_background_image_markup_by_attachment_id($service->image,'','','thumb');
+            
+            // استخدام helper function لتحديد الأيقونة
+            $serviceIconData = get_service_icon($service->title);
+            $serviceIcon = $serviceIconData['icon'];
+            $iconColor = $serviceIconData['color'];
+            
+            // لا نستخدم الصورة، فقط الأيقونة
             $title =  $service->title;    
             $route = route('service.list.details',$service->slug);   
             $book_now = route('service.list.book',$service->slug);   
@@ -198,10 +226,13 @@ class PopularService extends \App\PageBuilder\PageBuilderBase
 
             <div class="col-xl-4 col-md-6 margin-top-30">
                     <div class="single-service service-two wow fadeInUp {$hover_color}" data-wow-delay=".2s">
-                        <a href="{$route}" class="service-thumb service-bg-thumb-format" {$image}>
-                            {$featured}
-                            <div class="country_city_location">
-                            <span class="single_location"> <i class="las la-map-marker-alt"></i> {$seller_service_location} </span>
+                        <a href="{$route}" class="service-icon-thumb" style="position: relative; display: flex; align-items: center; justify-content: center; height: 220px; background: #FFFFFF; transition: all 0.3s ease;">
+                            <i class="{$serviceIcon}" style="color: #000000; font-size: 80px; transition: all 0.3s ease;"></i>
+                            
+                            <div class="country_city_location" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); padding: 15px;">
+                                <span class="single_location" style="color: #fff; font-size: 13px; display: flex; align-items: center; gap: 5px;"> 
+                                    <i class="las la-map-marker-alt"></i> {$seller_service_location}
+                                </span>
                             </div>
                         </a>
                         <div class="services-contents">
@@ -264,6 +295,17 @@ return <<<HTML
         </div>
     </section>
     <!-- Popular Service area end -->
+    <style>
+    .services-area .cmn-btn.btn-bg-1 {
+        background: #10b981 !important;
+        color: #fff !important;
+        border: none !important;
+    }
+    .services-area .cmn-btn.btn-bg-1:hover {
+        background: #059669 !important;
+        color: #fff !important;
+    }
+    </style>
     
 HTML;
 

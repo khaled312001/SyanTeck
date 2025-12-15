@@ -230,7 +230,50 @@ class MenuBuilderFrontendRender
     }
     private function get_anchor_markup(string $title,array $args, $icon = null)
     {
-        $icon_markup = $icon ? "<i class='".$icon."'></i>" : '';
-        return "\t\t".'<a '.$this->get_attribute_string($args).'>'.$icon_markup.strip_tags($title).'</a>'."\n";
+        // Auto-detect icon based on page title/slug if no icon provided
+        if (empty($icon)) {
+            $icon = $this->get_icon_for_page($title, $args['href'] ?? '');
+        }
+        
+        $icon_markup = $icon ? "<i class='".$icon."' style='margin-left: 8px; font-size: 16px;'></i>" : '';
+        return "\t\t".'<a '.$this->get_attribute_string($args).'>'.strip_tags($title).$icon_markup.'</a>'."\n";
+    }
+    
+    private function get_icon_for_page(string $title, string $url = '')
+    {
+        $title_lower = strtolower($title);
+        $url_lower = strtolower($url);
+        
+        // Arabic keywords
+        if (strpos($title, 'الرئيسية') !== false || strpos($title, 'المنزل') !== false || strpos($url, 'home') !== false || $url === '/' || $url === '') {
+            return 'las la-home';
+        }
+        if (strpos($title, 'من نحن') !== false || strpos($title, 'عن') !== false || strpos($url, 'about') !== false) {
+            return 'las la-info-circle';
+        }
+        if (strpos($title, 'خدمات') !== false || strpos($url, 'service') !== false) {
+            return 'las la-tools';
+        }
+        if (strpos($title, 'تواصل') !== false || strpos($title, 'اتصل') !== false || strpos($url, 'contact') !== false) {
+            return 'las la-envelope';
+        }
+        if (strpos($title, 'مدونة') !== false || strpos($title, 'مقالات') !== false || strpos($url, 'blog') !== false) {
+            return 'las la-blog';
+        }
+        if (strpos($title, 'فني') !== false || strpos($title, 'صيانة') !== false || strpos($url, 'qr') !== false) {
+            return 'las la-wrench';
+        }
+        if (strpos($title, 'تسجيل') !== false || strpos($title, 'دخول') !== false || strpos($url, 'login') !== false || strpos($url, 'register') !== false) {
+            return 'las la-user';
+        }
+        if (strpos($title, 'سياسة') !== false || strpos($url, 'privacy') !== false) {
+            return 'las la-shield-alt';
+        }
+        if (strpos($title, 'شروط') !== false || strpos($url, 'terms') !== false) {
+            return 'las la-file-contract';
+        }
+        
+        // Default icon
+        return 'las la-arrow-left';
     }
 }

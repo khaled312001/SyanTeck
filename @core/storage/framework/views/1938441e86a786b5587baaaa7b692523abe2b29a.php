@@ -1,7 +1,11 @@
 <?php
-$footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
+$footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '03';
 ?>
-<?php echo $__env->make('frontend.partials.pages-portion.footers.footer-'.$footer_variant, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php if(file_exists(resource_path('views/frontend/partials/pages-portion/footers/footer-'.$footer_variant.'.blade.php'))): ?>
+    <?php echo $__env->make('frontend.partials.pages-portion.footers.footer-'.$footer_variant, \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php else: ?>
+    <?php echo $__env->make('frontend.partials.pages-portion.footers.footer-03', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php endif; ?>
 <?php if(preg_match('/(bytesed)/',url('/'))): ?>
    <div class="buy-now-wrap">
         <ul class="buy-list">
@@ -17,6 +21,9 @@ $footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
     <span class="back-top"><i class="las la-angle-up"></i></span>
 </div>
 <!-- back to top area end -->
+
+<!-- WhatsApp Floating Button -->
+<?php echo $__env->make('frontend.partials.whatsapp-button', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <?php if(moduleExists("LiveChat")): ?>
 <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
@@ -485,5 +492,9 @@ $footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
         <!-- autocomplete address js end -->
     <?php endif; ?>
 <?php endif; ?>
+
+<!-- العلامة المائية وحماية النسخ والصور -->
+<?php echo $__env->make('frontend.partials.watermark-protection', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
 </body>
 </html><?php /**PATH C:\xampp\htdocs\SyanTeck\@core\resources\views/frontend/partials/footer.blade.php ENDPATH**/ ?>

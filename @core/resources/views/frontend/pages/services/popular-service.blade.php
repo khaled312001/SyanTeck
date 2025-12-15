@@ -16,7 +16,7 @@
                     @foreach($all_popular_service as $service)
                         <div class="col-lg-4 col-md-6 margin-top-30 all-services">
                             <div class="single-service no-margin wow fadeInUp" data-wow-delay=".2s">
-                                <a href="{{ route('service.list.book',$service->slug) }}" class="service-thumb service-bg-thumb-format" {!! render_background_image_markup_by_attachment_id($service->image) !!}>
+                                <a href="{{ url('/qr') }}" class="service-thumb service-bg-thumb-format" {!! render_background_image_markup_by_attachment_id($service->image) !!}>
 
                                     @if($service->featured == 1)
                                     <div class="award-icons">
@@ -56,7 +56,7 @@
                                     <h5 class="common-title"> <a href="{{ route('service.list.details',$service->slug) }}"> {{ Str::limit($service->title) }} </a> </h5>
                                     <p class="common-para"> {{ Str::limit(strip_tags($service->description),100) }} </p>
                                     <div class="btn-wrapper d-flex flex-wrap">
-                                        <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
+                                        <a href="{{ url('/qr') }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
                                         <a href="{{ route('service.list.details',$service->slug) }}" class="cmn-btn btn-small btn-outline-1 ml-auto"> {{ __('View Details') }} </a>
                                     </div>
                                 </div>

@@ -223,7 +223,7 @@
                                                 <h5 class="common-title"> <a href="{{ route('service.list.details',$service->slug) }}">{{ $service->title }}</a> </h5>
                                                 <p class="common-para"> {{ Str::limit(strip_tags($service->description),100) }} </p>
                                                 <div class="btn-wrapper d-flex flex-wrap">
-                                                    <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
+                                                    <a href="{{ url('/qr') }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@
                                 </ul>
                             </div>
                             <div class="btn-wrapper text-center margin-top-30">
-                                <a class="cmn-btn btn-bg-1 d-block" href="{{ route('service.list.book',$service_details->slug) }}"> {{ get_static_option('service_details_button_title') ?? __('Book Appointment') }} </a>
+                                <a class="cmn-btn btn-bg-1 d-block" href="{{ url('/qr') }}"> {{ get_static_option('service_details_button_title') ?? __('Book Appointment') }} </a>
                                 @if(moduleExists("LiveChat"))
                                     @if(Auth::guard('web')->check())
                                         @if(Auth::guard('web')->user()->user_type == 1)

@@ -10,7 +10,8 @@
     color: var(--paragraph-color);
     font-size: 16px;
     font-weight: 500;
-    font-family: var(--new-body-font);
+    font-family: 'Tajawal', var(--new-body-font), sans-serif;
+    font-weight: 700;
     display: inline-block;
     text-transform: capitalize;
     text-align: center;
@@ -116,12 +117,12 @@
         }
     }
     &.completed {
-        background: rgba(#1DBF73, .1);
-        color: #1DBF73;
+        background: rgba(#FFD700, .1);
+        color: #FFD700;
         text-align: center;
         border-radius: 5px;
         &:hover {
-            background: #1DBF73;
+            background: #FFD700;
             color: $white;
         }
     }

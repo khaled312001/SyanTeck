@@ -95,8 +95,8 @@
                     <div class="content_area_wrap">
                         <h4 class="title">
                             <a href="{{route('about.seller.profile',$seller->username)}}">{{ $seller->name }}</a>
-                            @if(optional($seller->sellerVerify)->status==1)
-                            <div data-toggle="tooltip">
+                            @if(optional($seller->sellerVerify)->status==1 || $seller->verified_by_national_id == 1)
+                            <div data-toggle="tooltip" data-placement="top" title="{{ $seller->verified_by_national_id ? __('موثوق برقم الهوية الوطنية') : __('This seller is verified by the site admin according his national id card.') }}">
                                 <span class="seller-verified"> <i class="las la-check"></i> </span>
                             </div>
                             @endif

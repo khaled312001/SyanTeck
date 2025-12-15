@@ -16,6 +16,7 @@ use App\SupportTicketMessage;
 use Illuminate\Http\Request;
 use App\Helpers\FlashMsg;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 use Modules\JobPost\Entities\JobRequest;
 use Yajra\DataTables\Facades\DataTables;
 use App\Helpers\DataTableHelpers\General;
@@ -65,24 +66,6 @@ class OrdersController extends Controller
                     return $row->address;
                 })
 
-                ->addColumn('amount',function ($row){
-                    return float_amount_with_currency_symbol($row->total);
-                })
-
-                ->addColumn('payment_status',function ($row){
-                    $payment_status = __('pending');
-                    $payment_complete = __('complete');
-                    $action = '';
-                    if ($row->payment_status == 'pending'){
-                        $action .= General::orderPaymentStatusChange(route('admin.order.change.status',$row->id),$row->payment_status);
-                        return  $payment_status . $action;
-                    }elseif($row->payment_status == 'complete'){
-                        return $payment_complete;
-                    }else{
-                        return $payment_status;
-                    }
-                })
-
                 ->addColumn('status',function ($row){
                     $action = '';
                     $admin = auth()->guard('admin')->user();
@@ -116,7 +99,7 @@ class OrdersController extends Controller
                     }
                     return $action;
                 })
-                ->rawColumns(['checkbox','status','action','is_order_online','payment_status'])
+                ->rawColumns(['checkbox','status','action','is_order_online'])
                 ->make(true);
         }
         return view('backend.pages.orders.index');
@@ -234,9 +217,8 @@ class OrdersController extends Controller
             'service_area',
             'service_country',
             'assignedBy',
-            'invoiceIssuedBy',
-            'warrantyIssuedBy',
-            'adminPricingBy'
+            'adminPricingBy',
+            'technicianReportConfirmedBy'
         ])->where('id',$id)->first();
         
         $order_includes = OrderInclude::where('order_id',$id)->get();
@@ -257,6 +239,34 @@ class OrdersController extends Controller
     {
         Order::where('id',$request->order_id)->update(['status'=>$request->status]);
         return redirect()->back()->with(FlashMsg::item_new('Status Update Success'));
+    }
+    
+    /**
+     * تأكيد تقرير الفني من قبل الأدمن - حوكمة البيانات
+     */
+    public function confirmTechnicianReport($id)
+    {
+        $order = Order::findOrFail($id);
+        
+        // التحقق من وجود تقرير
+        if (!$order->technician_report_submitted_at) {
+            return redirect()->back()->with(FlashMsg::item_delete('لا يوجد تقرير صيانة مرفوع من قبل الفني'));
+        }
+        
+        // التحقق من عدم التأكيد مسبقاً
+        if ($order->technician_report_confirmed_at) {
+            return redirect()->back()->with(FlashMsg::item_delete('التقرير مؤكد مسبقاً'));
+        }
+        
+        // تأكيد التقرير
+        $order->update([
+            'technician_report_confirmed_at' => now(),
+            'technician_report_confirmed_by' => Auth::guard('admin')->id(),
+        ]);
+        
+        // TODO: إرسال إشعار للفني بتأكيد التقرير
+        
+        return redirect()->back()->with(FlashMsg::item_new('تم تأكيد تقرير الفني بنجاح. التقرير الآن محمي ولا يمكن تعديله'));
     }
     
     public function order_success_settings()

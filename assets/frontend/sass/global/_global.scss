@@ -3,21 +3,21 @@
 --------------------------------------------------------------*/
 
 :root {
-    --main-color-one: #1DBF73;
-    --main-color-two: #47C8ED;
-    --main-color-three: #FF6B2C;
-    --heading-color: #333333;
+    --main-color-one: #FFD700;
+    --main-color-two: #FFD700;
+    --main-color-three: #FFD700;
+    --heading-color: #000000;
     --light-color: #666666;
     --extra-light-color: #999999;
-    --heading-font: 'Source Sans Pro', sans-serif;
-    --body-font: 'Roboto', sans-serif;
+    --heading-font: 'Tajawal', sans-serif;
+    --body-font: 'Tajawal', sans-serif;
 }
 
 html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     overflow-x: hidden;
-    font-family: var(--body-font);
+    font-family: 'Tajawal', var(--body-font), sans-serif;
 }
 
 * {
@@ -34,8 +34,9 @@ body {
     margin: 0;
     color: var(--extra-light-color);
     overflow-x: hidden;
-    font-family: var(--body-font);
+    font-family: 'Tajawal', var(--body-font), sans-serif;
     font-size: 14px;
+    font-weight: 400;
 }
 
 h1 {
@@ -75,7 +76,8 @@ h4,
 h5,
 h6 {
     color: var(--heading-color);
-    font-family: var(--heading-font);
+    font-family: 'Tajawal', var(--heading-font), sans-serif;
+    font-weight: 700;
 }
 
 p {
@@ -405,15 +407,15 @@ code {
 }
 
 .gradient-bg-1 {
-    background: linear-gradient(90deg, #fdf7f0 0%, #ffe9f7 50%, #efdff4 100%);
+    background: linear-gradient(90deg, #fafafa 0%, #f5f5f5 50%, #f0f0f0 100%);
 }
 
 .gradient-bg-2 {
-    background: radial-gradient(circle, #fcf4fe 0%, #ebfcfe 100%);
+    background: radial-gradient(circle, #fafafa 0%, #f5f5f5 100%);
 }
 
 .gradient-footer {
-    background: linear-gradient(135deg, #fefaf4 0%, #e3dbee 100%);
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
 }
 
 .bg-image {

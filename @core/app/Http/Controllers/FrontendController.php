@@ -103,7 +103,35 @@ class FrontendController extends Controller
                 'page_post' => $page_post,
             ]);
         } elseif (in_array($slug, $pages_id_slugs) && $slug === $pages_id_slugs[$static_option['service_list_page']]) {
-            $all_services = Service::with('reviews')->where(['status' => 1, 'is_service_on' => 1])->orderBy('id','desc')->paginate(6);
+            // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+            $serviceKeywords = [
+                'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+                'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+                'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+            ];
+            
+            $all_services = Service::with('reviews')
+                ->where(['status' => 1, 'is_service_on' => 1])
+                ->where(function($query) use ($serviceKeywords) {
+                    foreach ($serviceKeywords as $index => $keyword) {
+                        if ($index === 0) {
+                            $query->where('title', 'like', '%' . $keyword . '%');
+                        } else {
+                            $query->orWhere('title', 'like', '%' . $keyword . '%');
+                        }
+                    }
+                })
+                ->orderByRaw("
+                    CASE 
+                        WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                        WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                        WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                        ELSE 4
+                    END
+                ")
+                ->orderBy('title', 'asc')
+                ->paginate(6);
+            
             if($page_post->status === 'draft'){
                 abort(404);
             }
@@ -262,8 +290,20 @@ class FrontendController extends Controller
 
     public function lang_change(Request $request)
     {
-        session()->put('lang', $request->lang);
-        return redirect()->route('homepage');
+        $request->validate([
+            'lang' => 'required|string'
+        ]);
+        
+        $lang = \App\Language::where('slug', $request->lang)
+            ->where('status', 'publish')
+            ->first();
+            
+        if ($lang) {
+            session()->put('lang', $request->lang);
+            return redirect()->back();
+        }
+        
+        return redirect()->back()->with('error', __('Language not found'));
     }
 
 
@@ -467,6 +507,29 @@ class FrontendController extends Controller
             'areas' => $areas,
         ]);
     }
+    
+    public function checkNationalId(Request $request)
+    {
+        $nationalId = $request->national_id;
+        
+        // Validate format
+        if (!preg_match('/^[0-9]{10}$/', $nationalId)) {
+            return response()->json([
+                'exists' => false,
+                'valid' => false,
+                'message' => 'رقم الهوية الوطنية يجب أن يكون 10 أرقام'
+            ]);
+        }
+        
+        // Check if exists
+        $exists = User::where('national_id', $nationalId)->exists();
+        
+        return response()->json([
+            'exists' => $exists,
+            'valid' => true,
+            'message' => $exists ? 'رقم الهوية الوطنية مستخدم بالفعل' : 'رقم الهوية الوطنية متاح'
+        ]);
+    }
 
     public function howItWorks()
     {
@@ -475,16 +538,62 @@ class FrontendController extends Controller
 
     public function services(Request $request)
     {
-        $categories = Category::where('status', 1)->orderBy('id', 'asc')->get();
+        // تصفية الفئات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $categoryKeywords = ['كهرباء', 'سباكة', 'تكييف', 'electrical', 'plumbing', 'air conditioning', 'ac'];
+        $categories = Category::where('status', 1)
+            ->where(function($query) use ($categoryKeywords) {
+                foreach ($categoryKeywords as $index => $keyword) {
+                    if ($index === 0) {
+                        $query->where('name', 'like', '%' . $keyword . '%');
+                    } else {
+                        $query->orWhere('name', 'like', '%' . $keyword . '%');
+                    }
+                }
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%كهرباء%' OR name LIKE '%electrical%' OR name LIKE '%electricity%' THEN 1
+                    WHEN name LIKE '%سباكة%' OR name LIKE '%plumbing%' THEN 2
+                    WHEN name LIKE '%تكييف%' OR name LIKE '%air conditioning%' OR name LIKE '%ac%' THEN 3
+                    ELSE 4
+                END
+            ")
+            ->orderBy('name', 'asc')
+            ->get();
         
-        $services = Service::where(['status' => 1, 'is_service_on' => 1]);
+        // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $serviceKeywords = [
+            'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+            'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+            'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+        ];
+        
+        $services = Service::where(['status' => 1, 'is_service_on' => 1])
+            ->where(function($query) use ($serviceKeywords) {
+                foreach ($serviceKeywords as $index => $keyword) {
+                    if ($index === 0) {
+                        $query->where('title', 'like', '%' . $keyword . '%');
+                    } else {
+                        $query->orWhere('title', 'like', '%' . $keyword . '%');
+                    }
+                }
+            });
         
         // Filter by category if provided
         if($request->has('category') && !empty($request->category)) {
             $services->where('category_id', $request->category);
         }
         
-        $services = $services->orderBy('id', 'desc')->paginate(12);
+        $services = $services->orderByRaw("
+            CASE 
+                WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                ELSE 4
+            END
+        ")
+        ->orderBy('title', 'asc')
+        ->paginate(12);
         
         return view('frontend.pages.services', compact('categories', 'services'));
     }

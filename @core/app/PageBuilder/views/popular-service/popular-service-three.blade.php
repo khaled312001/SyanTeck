@@ -1,8 +1,8 @@
 <!-- Service area starts -->
-<section class="new_services_area padding-top-50 padding-bottom-50" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
+<section class="new_services_area section-padding section-wrapper" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
     <div class="container">
-        <div class="new_sectionTitle text-left title_flex">
-            <h2 class="title">{{ $section_title }}</h2>
+        <div class="section-title-wrapper text-left title_flex">
+            <h2 class="section-title title">{{ $section_title }}</h2>
             <form action="{{ get_static_option('select_home_page_search_service_page_url') ?? url('/service-list') }}" method="get">
                 <button class="new_exploreBtn bg-transparent border-0">{{ $explore_text }} <i class="fa-solid fa-angle-right"></i></button>
                 <input type="hidden" name="sortby" value="popular"/>
@@ -12,11 +12,10 @@
 
             @foreach($services as $index => $service)
             @php
-                $service_image_data = get_attachment_image_by_id($service->image, 'full', false);
-                $default_image = asset('assets/uploads/no-image.png');
-                $image_url = !empty($service_image_data) && is_array($service_image_data) && isset($service_image_data['img_url']) 
-                    ? $service_image_data['img_url'] 
-                    : $default_image;
+                // استخدام helper function لتحديد الأيقونة
+                $serviceIconData = get_service_icon($service->title);
+                $serviceIcon = $serviceIconData['icon'];
+                $iconColor = $serviceIconData['color'];
                 
                 // حساب التقييم
                 $total_review = optional($service->reviews);
@@ -25,10 +24,10 @@
             @endphp
             <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="new_service__single service-card-modern" style="animation-delay: {{ $index * 0.1 }}s;">
-                    <div class="service-card-image-wrapper">
-                        <a href="{{ route('service.list.details',$service->slug) }}" class="service-image-link">
-                            <div class="service-image-container">
-                                <img src="{{ $image_url }}" alt="{{ $service->title }}" class="service-image" loading="lazy">
+                    <div class="service-card-image-wrapper" style="background: #FFFFFF;">
+                        <a href="{{ route('service.list.details',$service->slug) }}" class="service-image-link" style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                            <div class="service-image-container" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                                <i class="{{$serviceIcon}}" style="color: #000000; font-size: 100px; transition: all 0.3s ease;"></i>
                                 <div class="service-image-overlay">
                                     <span class="view-service-btn">
                                         <i class="las la-eye"></i>
@@ -68,7 +67,7 @@
                         @endif
                         <div class="service-card-footer">
                             <a href="{{ route('service.list.book',$service->slug) }}" class="service-book-btn-modern"
-                               style="background:{{$btn_color}}; color:{{$button_text_color}}">
+                               style="background:#FFD700 !important; color:#000 !important;">
                                 <span>{{ $book_appoinment }}</span>
                                 <i class="las la-arrow-left"></i>
                             </a>
@@ -113,7 +112,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background: #FFD700;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -135,7 +134,7 @@
     width: 100%;
     height: 240px;
     overflow: hidden;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #FFD700;
 }
 
 .service-image-link {
@@ -170,7 +169,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -188,7 +187,7 @@
     gap: 8px;
     padding: 12px 24px;
     background: rgba(255, 255, 255, 0.95);
-    color: #667eea;
+    color: #FFD700;
     border-radius: 50px;
     font-weight: 600;
     font-size: 14px;
@@ -224,12 +223,12 @@
 
 .featured-badge {
     right: 16px;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    background: #FFD700;
 }
 
 .rating-badge {
     left: 16px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #FFD700;
 }
 
 @keyframes badgePulse {
@@ -269,7 +268,7 @@
 }
 
 .service-card-modern:hover .service-card-title a {
-    color: #667eea;
+    color: #FFD700;
 }
 
 /* Service Meta */
@@ -299,7 +298,7 @@
 }
 
 .rating-stars i.active {
-    color: #fbbf24;
+    color: #FFD700;
     animation: starTwinkle 0.5s ease;
 }
 
@@ -339,6 +338,8 @@
     overflow: hidden;
     border: none;
     cursor: pointer;
+    background: #FFD700 !important; /* لون أصفر */
+    color: #000 !important;
 }
 
 .service-book-btn-modern::before {
@@ -424,6 +425,12 @@
         padding: 10px 20px;
         font-size: 13px;
     }
+}
+
+/* إزالة أي لون أحمر افتراضي من الأزرار */
+.service-book-btn-modern[style*="background"] {
+    background: #FFD700 !important;
+    color: #000 !important;
 }
 </style>
 <!-- Service area end -->

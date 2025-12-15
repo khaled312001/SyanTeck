@@ -77,11 +77,97 @@
             width: 100%;
         }
 
+        /* GPS Location Button Styles */
+        .address-input-wrapper {
+            position: relative;
+        }
+
+        .btn-get-location-service {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            background: #FFD700;
+            color: #000000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-get-location-service:hover:not(:disabled) {
+            background: #FFD700;
+            transform: translateY(-50%) translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-get-location-service:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-get-location-service i {
+            font-size: 16px;
+        }
+
+        .address-input-wrapper input {
+            padding-right: 140px;
+        }
+
+        .location-status-service {
+            margin-top: 8px;
+            font-size: 13px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            background: #f8f9fa;
+        }
+
+        [dir="rtl"] .btn-get-location-service {
+            right: auto;
+            left: 10px;
+        }
+
+        [dir="rtl"] .address-input-wrapper input {
+            padding-right: 15px;
+            padding-left: 140px;
+        }
+
+        @media (max-width: 768px) {
+            .btn-get-location-service {
+                position: relative;
+                top: auto;
+                transform: none;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            
+            .address-input-wrapper input {
+                padding-right: 15px;
+            }
+            
+            [dir="rtl"] .address-input-wrapper input {
+                padding-left: 15px;
+            }
+        }
 
     </style>
 @endsection
 
 @section('content')
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
     @php
         $service_country =  optional(optional($service_details_for_book->serviceCity)->countryy)->id;
         $country_tax =  App\Tax::select('id','tax')->where('country_id',$service_country)->first();
@@ -305,20 +391,23 @@
                                         @endif
 
 
-                                        <div class="col-lg-4 col-sm-6">
-                                            <div class="single-input">
-                                                <label class="label-title">{{ __('Service Location') }}</label>
-                                                <div class="single-input-select radius-5">
-                                                    <select name="user_address" id="user_address" class="select2_activation get_service_location_area">
-                                                        <option value="">{{ __('Select Area') }}</option>
-                                                        @foreach($regions as $region)
-                                                            @php
-                                                                $regionName = (app()->getLocale() == 'ar' && !empty($region->name_ar)) ? $region->name_ar : $region->name;
-                                                            @endphp
-                                                            <option value="{{ $regionName }}">{{ $regionName }}</option>
-                                                        @endforeach
-                                                    </select>
+                                        <div class="col-12 margin-bottom-20">
+                                            <label class="label-title">{{__('حدد موقعك على الخريطة')}} <span class="text-danger">*</span></label>
+                                            <div id="location-map-container" style="width: 100%; height: 500px; border-radius: 12px; overflow: hidden; border: 2px solid rgba(0, 0, 0, 0.15); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); position: relative;">
+                                                <div id="location-map" style="width: 100%; height: 100%;"></div>
+                                                <div id="map-loading" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f5f5f5; display: flex; align-items: center; justify-content: center; z-index: 10;">
+                                                    <div style="text-align: center;">
+                                                        <i class="las la-spinner la-spin" style="font-size: 48px; color: #FFD700; margin-bottom: 15px;"></i>
+                                                        <p style="color: #666; font-size: 16px;">{{__('جاري تحميل الخريطة...')}}</p>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <input type="hidden" name="user_address" id="user_address" required>
+                                            <input type="hidden" name="latitude" id="latitude">
+                                            <input type="hidden" name="longitude" id="longitude">
+                                            <div id="location-status" style="margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px; font-size: 14px; color: #666;">
+                                                <i class="las la-info-circle" style="color: #FFD700;"></i>
+                                                <span>{{__('سيتم اكتشاف موقعك تلقائياً. يمكنك سحب العلامة لتعديل موقعك الدقيق.')}}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -557,12 +646,18 @@
                                         <div class="col-sm-12">
                                             <div class="single-input">
                                                 <label class="label-title">{{ __('Your Address') }}</label>
-                                                <div class="input-with-icon">
+                                                <div class="input-with-icon address-input-wrapper" style="position: relative;">
                                                     <input type="text" class="form--control radius-5" name="address"
                                                            @if($service_details_for_book->is_service_online == 1) id="user_address" @else id="address"  @endif
                                                            placeholder="{{ __('Type Your Address') }}"
                                                            @if(Auth::guard('web')->check()) value="{{ Auth::user()->address }}"
-                                                           @else value="" @endif>
+                                                           @else value="" @endif
+                                                           readonly>
+                                                    <button type="button" class="btn-get-location-service" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px; background: #FFD700; color: #000000; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 6px; z-index: 10; font-size: 13px;">
+                                                        <i class="las la-map-marker-alt"></i>
+                                                        <span>{{__('Get Location')}}</span>
+                                                    </button>
+                                                    <div class="location-status-service" style="margin-top: 8px; font-size: 13px; color: #666;"></div>
                                                 </div>
                                             </div>
                                         </div>

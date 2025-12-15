@@ -2018,10 +2018,65 @@ class ServiceListController extends Controller
         return view('frontend.pages.category.all-category',compact('all_category'));
     }
     
-    public function allSellers()
+    public function allSellers(Request $request)
     {
-        $seller_lists = User::with(['review','sellerVerify','order'])->where('user_type',0)->orderBy('id','desc')->paginate(12);
-        return view('frontend.pages.seller.all-seller',compact('seller_lists'));
+        $query = User::with(['review','sellerVerify','order','city','area','country'])
+            ->where('user_type',0)
+            ->where('user_status',1);
+        
+        // Filter by category/department
+        if($request->has('category_id') && !empty($request->category_id)) {
+            $query->whereJsonContains('specializations', (int)$request->category_id);
+        }
+        
+        // Filter by rating
+        if($request->has('min_rating') && !empty($request->min_rating)) {
+            $query->whereHas('review', function($q) use ($request) {
+                $q->selectRaw('seller_id, AVG(rating) as avg_rating')
+                  ->groupBy('seller_id')
+                  ->havingRaw('AVG(rating) >= ?', [$request->min_rating]);
+            });
+        }
+        
+        // Filter by city
+        if($request->has('city_id') && !empty($request->city_id)) {
+            $query->where('service_city', $request->city_id);
+        }
+        
+        // Filter by verified
+        if($request->has('verified') && $request->verified == '1') {
+            $query->where(function($q) {
+                $q->where('verified_by_national_id', 1)
+                  ->orWhereHas('sellerVerify', function($q2) {
+                      $q2->where('status', 1);
+                  });
+            });
+        }
+        
+        // Sorting
+        $sortBy = $request->get('sort_by', 'newest');
+        switch($sortBy) {
+            case 'rating':
+                $query->withAvg('review', 'rating')
+                      ->orderBy('review_avg_rating', 'desc');
+                break;
+            case 'orders':
+                $query->withCount('order')
+                      ->orderBy('order_count', 'desc');
+                break;
+            case 'newest':
+            default:
+                $query->orderBy('id', 'desc');
+                break;
+        }
+        
+        $seller_lists = $query->paginate(12)->withQueryString();
+        
+        // Get filter options
+        $categories = Category::where('status', 1)->get();
+        $cities = ServiceCity::where('status', 1)->get();
+        
+        return view('frontend.pages.seller.all-seller', compact('seller_lists', 'categories', 'cities'));
     }
     
     //category wise services

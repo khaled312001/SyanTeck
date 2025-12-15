@@ -49,17 +49,23 @@
             <div class="row">
                 @if(!empty($all_services) && $all_services->count() > 0)
                     @foreach($all_services as $service)
+                        @php
+                            $serviceIconData = get_service_icon($service->title);
+                            $serviceIcon = $serviceIconData['icon'];
+                            $iconColor = $serviceIconData['color'];
+                        @endphp
                         <div class="col-lg-4 col-md-6 margin-top-30 all-services">
                             <div class="single-service no-margin wow fadeInUp" data-wow-delay=".2s" style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column;">
-                                <a href="{{ route('service.list.details',$service->slug) }}" class="service-thumb service-bg-thumb-format" {!! render_background_image_markup_by_attachment_id($service->image) !!} style="position: relative; display: block; height: 220px; overflow: hidden;">
+                                <a href="{{ route('service.list.details',$service->slug) }}" class="service-icon-thumb" style="position: relative; display: flex; align-items: center; justify-content: center; height: 220px; background: #FFFFFF; transition: all 0.3s ease;">
+                                    <i class="{{$serviceIcon}}" style="color: #000000; font-size: 80px; transition: all 0.3s ease;"></i>
 
                                     @if($service->featured == 1)
-                                    <div class="award-icons" style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                    <div class="award-icons" style="position: absolute; top: 15px; right: 15px; background: #FFD700; color: #000000; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                                         <i class="las la-award" style="font-size: 20px;"></i>
                                     </div>
                                     @endif
                                     
-                                    <div class="country_city_location" style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); padding: 15px;">
+                                    <div class="country_city_location" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.7); padding: 15px;">
                                         <span class="single_location" style="color: #fff; font-size: 13px; display: flex; align-items: center; gap: 5px;"> 
                                             <i class="las la-map-marker-alt"></i>
                                             {{ sellerServiceLocation($service) }}
@@ -99,7 +105,7 @@
                                         {{ Str::limit(strip_tags($service->description), 120) }} 
                                     </p>
                                     <div class="btn-wrapper d-flex flex-wrap" style="gap: 10px; margin-top: auto;">
-                                        <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-small btn-bg-1" style="flex: 1; text-align: center; padding: 12px 20px; border-radius: 8px; font-weight: 500; transition: all 0.3s ease;"> 
+                                        <a href="{{ url('/qr') }}" class="cmn-btn btn-small btn-bg-1" style="flex: 1; text-align: center; padding: 12px 20px; border-radius: 8px; font-weight: 500; transition: all 0.3s ease;"> 
                                             {{ __('Book Now') }} 
                                         </a>
                                         <a href="{{ route('service.list.details',$service->slug) }}" class="cmn-btn btn-small btn-outline-1" style="flex: 1; text-align: center; padding: 12px 20px; border-radius: 8px; font-weight: 500; transition: all 0.3s ease;"> 
@@ -141,8 +147,12 @@
         .service-thumb {
             transition: transform 0.3s ease;
         }
-        .single-service:hover .service-thumb {
-            transform: scale(1.05);
+        .single-service:hover .service-icon-thumb {
+            background: linear-gradient(135deg, rgba(255, 107, 44, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%);
+        }
+        .single-service:hover .service-icon-thumb i {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
         }
         .cmn-btn.btn-bg-1:hover {
             transform: translateY(-2px);

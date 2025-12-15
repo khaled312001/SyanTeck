@@ -50,6 +50,7 @@ class Order extends Model
         'order_from_job',
         'job_post_id',
         // حقول جديدة للصيانة
+        'request_type',
         'tracking_code',
         'warranty_code',
         'warranty_days',
@@ -80,11 +81,18 @@ class Order extends Model
         'technician_images',
         'technician_videos',
         'technician_report_submitted_at',
+        'technician_report_confirmed_at',
+        'technician_report_confirmed_by',
         // حقول تسعير الإدمن/فريق الدعم
         'admin_pricing',
         'admin_pricing_notes',
         'admin_pricing_at',
         'admin_pricing_by',
+        // حقول GPS tracking للفني
+        'technician_latitude',
+        'technician_longitude',
+        'technician_last_location_update',
+        'technician_order_status',
     ];
     
     protected $casts = [
@@ -103,7 +111,9 @@ class Order extends Model
         'technician_images' => 'array',
         'technician_videos' => 'array',
         'technician_report_submitted_at' => 'datetime',
+        'technician_report_confirmed_at' => 'datetime',
         'admin_pricing_at' => 'datetime',
+        'technician_last_location_update' => 'datetime',
     ];
 
     public function service(){
@@ -205,6 +215,10 @@ class Order extends Model
     
     public function adminPricingBy(){
         return $this->belongsTo(Admin::class,'admin_pricing_by','id');
+    }
+    
+    public function technicianReportConfirmedBy(){
+        return $this->belongsTo(Admin::class,'technician_report_confirmed_by','id');
     }
     
     /**

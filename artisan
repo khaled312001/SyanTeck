@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Artisan Wrapper
+|--------------------------------------------------------------------------
+|
+| This file forwards all artisan commands to the @core/artisan file
+| so you can run php artisan commands from the root directory.
+|
+*/
+
+// Change to the @core directory
+$coreDir = __DIR__ . '/@core';
+
+if (!is_dir($coreDir)) {
+    echo "Error: @core directory not found!\n";
+    exit(1);
+}
+
+// Change directory to @core
+chdir($coreDir);
+
+// Include and execute the actual artisan file
+require $coreDir . '/artisan';
+

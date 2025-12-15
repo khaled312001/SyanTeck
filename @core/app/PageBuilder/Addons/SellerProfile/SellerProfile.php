@@ -127,8 +127,9 @@ class SellerProfile extends \App\PageBuilder\PageBuilderBase
             $seller_rating_text = __('Seller Rating');
             $profile_page = route('about.seller.profile',$seller_username);
             $seller_verify = '';
-            if(optional($seller->sellerVerify)->status==1){
-                $seller_verify = '<div data-toggle="tooltip" data-placement="top" title="'.$verify_text.'">
+            if(optional($seller->sellerVerify)->status==1 || $seller->verified_by_national_id == 1){
+                $verify_title = $seller->verified_by_national_id ? __('موثوق برقم الهوية الوطنية') : $verify_text;
+                $seller_verify = '<div data-toggle="tooltip" data-placement="top" title="'.$verify_title.'">
                         <span class="seller-verified"> <i class="las la-check"></i> </span>
                     </div>';
             }

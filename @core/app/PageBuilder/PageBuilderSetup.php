@@ -45,7 +45,9 @@ class PageBuilderSetup
             PageBuilder\Addons\SellerProfile\AllSellerList::class,
             PageBuilder\Addons\Service\OnlineServiceList::class,
             PageBuilder\Addons\CustomerReview\CustomerReviewOne::class,
-            PageBuilder\Addons\Banner\BannerOne::class
+            PageBuilder\Addons\Banner\BannerOne::class,
+            PageBuilder\Addons\MainSections\MainSections::class,
+            PageBuilder\Addons\Vision2030\Vision2030::class
         ];
         if (moduleExists("Subscription")){
             $addons = array_merge($addons,\Modules\Subscription\PageBuilder\PageBuilderSetup::register_widgets());

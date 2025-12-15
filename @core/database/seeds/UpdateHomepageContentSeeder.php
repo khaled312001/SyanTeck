@@ -16,8 +16,13 @@ class UpdateHomepageContentSeeder extends Seeder
      */
     private $contentMapping = [
         // Hero Banner
-        'Get any tasks done by professionals' => 'صيانة تك',
-        'Order service you need. We have professionals ready to help.' => 'منصة إلكترونية متكاملة لإدارة خدمات الصيانة المنزلية والتقنية. ربط العملاء بالفنيين المعتمدين مع تتبع مباشر للطلبات، أسعار شفافة، فواتير إلكترونية، وضمانات رقمية.',
+        'Get any tasks done by professionals' => 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين',
+        'Get any service from' => 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين',
+        'احصل على أي خدمة من' => 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين',
+        'احصل على أي خدمة' => 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين',
+        'Order service you need. We have professionals ready to help.' => '', // Empty to hide subtitle
+        'اطلب الخدمة التي تحتاجها. لدينا فنيون معتمدون جاهزون لخدمتك' => '', // Empty to hide subtitle
+        'لدينا فنيون معتمدون جاهزون لخدمتك' => '', // Empty to hide subtitle
         'Find Service' => 'ابحث عن خدمة',
         'Post Job' => 'طلب خدمة',
         'Good service, good price' => 'خدمة جيدة، سعر جيد',
@@ -32,7 +37,11 @@ class UpdateHomepageContentSeeder extends Seeder
         'Qixer is a best service-based marketplace out there to help you get any task done conveniently. Thanks to our well built mobile app and website for making it even convenient for the users.' => 'صيانة تك هي منصة إلكترونية متكاملة لإدارة خدمات الصيانة المنزلية والتقنية. توفر المنصة حلولاً شاملة لربط العملاء بالفنيين المعتمدين مع تتبع مباشر للطلبات، أسعار شفافة، فواتير إلكترونية، وضمانات رقمية.',
         
         // Services
-        'Popular Services' => 'الخدمات المتاحة',
+        'Popular Services' => 'الخدمات الأكثر طلباً',
+        'Popular Service' => 'الخدمات الأكثر طلباً',
+        'الخدمات الشائعة' => 'الخدمات الأكثر طلباً',
+        'الخدمات الأكثر' => 'الخدمات الأكثر طلباً',
+        'الخدمات المتاحة' => 'الخدمات الأكثر طلباً',
         'Featured Services' => 'الخدمات المميزة',
         'Book Now' => 'احجز الآن',
         'Explore More' => 'استكشف المزيد',
@@ -262,6 +271,51 @@ class UpdateHomepageContentSeeder extends Seeder
                 
                 if ($settings && is_array($settings)) {
                     $originalSettings = serialize($settings);
+                    
+                    // Special handling for PopularServiceThree and PopularService addons
+                    if (in_array($pageBuilder->addon_name, ['PopularServiceThree', 'PopularService', 'PopularServiceTwo'])) {
+                        // Update title field directly
+                        if (isset($settings['title'])) {
+                            $oldTitle = $settings['title'];
+                            // Check if title needs updating
+                            if (stripos($oldTitle, 'Popular Services') !== false || 
+                                stripos($oldTitle, 'Popular Service') !== false ||
+                                stripos($oldTitle, 'الخدمات الشائعة') !== false ||
+                                stripos($oldTitle, 'الخدمات الأكثر') !== false ||
+                                stripos($oldTitle, 'الخدمات المتاحة') !== false) {
+                                $settings['title'] = 'الخدمات الأكثر طلباً';
+                                $this->command->info("  → Title updated: '{$oldTitle}' → 'الخدمات الأكثر طلباً'");
+                            }
+                        }
+                    }
+                    
+                    // Special handling for HeaderStyleOne addon
+                    if ($pageBuilder->addon_name === 'HeaderStyleOne') {
+                        // Update title field
+                        if (isset($settings['title'])) {
+                            $oldTitle = $settings['title'];
+                            // Check if title needs updating
+                            if (stripos($oldTitle, 'Get any service') !== false || 
+                                stripos($oldTitle, 'Get any tasks') !== false ||
+                                stripos($oldTitle, 'احصل على أي خدمة') !== false) {
+                                $settings['title'] = 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين';
+                                $this->command->info("  → Title updated: '{$oldTitle}' → 'احصل على صيانتك عن طريق فنيين موثوقين'");
+                            }
+                        }
+                        // Remove subtitle (set to empty)
+                        if (isset($settings['subtitle'])) {
+                            $oldSubtitle = $settings['subtitle'];
+                            if (!empty($oldSubtitle) && (
+                                stripos($oldSubtitle, 'Order service you need') !== false ||
+                                stripos($oldSubtitle, 'اطلب الخدمة التي تحتاجها') !== false ||
+                                stripos($oldSubtitle, 'لدينا فنيون معتمدون') !== false
+                            )) {
+                                $settings['subtitle'] = '';
+                                $this->command->info("  → Subtitle removed: '{$oldSubtitle}'");
+                            }
+                        }
+                    }
+                    
                     $settings = $this->updateArrayValues($settings);
                     $newSettings = serialize($settings);
                     

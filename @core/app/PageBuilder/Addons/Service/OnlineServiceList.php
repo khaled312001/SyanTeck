@@ -309,13 +309,40 @@ class OnlineServiceList extends PageBuilderBase
         }
 
 
+        // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $serviceKeywords = [
+            'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+            'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+            'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+        ];
+        
+        $service_quyery->where(function($query) use ($serviceKeywords) {
+            foreach ($serviceKeywords as $index => $keyword) {
+                if ($index === 0) {
+                    $query->where('title', 'like', '%' . $keyword . '%');
+                } else {
+                    $query->orWhere('title', 'like', '%' . $keyword . '%');
+                }
+            }
+        });
+        
         // get only online all service
         $all_services = $service_quyery->where('status', 1)
             ->where('is_service_on', 1)
             ->where('is_service_online', 1)
             ->when(subscriptionModuleExistsAndEnable('Subscription'),function($q){
                 $q->whereHas('seller_subscription');
-            })->OrderBy($order_by,$IDorDate)->paginate($items);
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                    WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                    WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                    ELSE 4
+                END
+            ")
+            ->orderBy('title', 'asc')
+            ->OrderBy($order_by,$IDorDate)->paginate($items);
 
         $categories = Category::select("id", "name")
             ->where("status", 1)

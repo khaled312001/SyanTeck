@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\Service;
-use App\Category;
 use App\Region;
 use App\Mail\BasicMail;
 use Illuminate\Http\Request;
@@ -17,16 +16,81 @@ class QRController extends Controller
     /**
      * عرض صفحة طلب QR
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('status', 1)->orderBy('name', 'asc')->get();
+        // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $serviceKeywords = [
+            'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+            'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+            'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+        ];
+        
         $services = Service::where(['status' => 1, 'is_service_on' => 1])
             ->with('category')
+            ->where(function($query) use ($serviceKeywords) {
+                foreach ($serviceKeywords as $index => $keyword) {
+                    if ($index === 0) {
+                        $query->where('title', 'like', '%' . $keyword . '%');
+                    } else {
+                        $query->orWhere('title', 'like', '%' . $keyword . '%');
+                    }
+                }
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                    WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                    WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                    ELSE 4
+                END
+            ")
             ->orderBy('title', 'asc')
             ->get();
+        
+        // تحديد الخدمة المحددة مسبقاً من query parameter
+        $preselectedServiceId = null;
+        $preselectedServiceType = $request->get('service'); // يمكن أن يكون: electricity, plumbing, ac
+        
+        if ($preselectedServiceType) {
+            // البحث عن الخدمة بناءً على النوع
+            $typeKeywords = [
+                'electricity' => ['كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric'],
+                'plumbing' => ['سباكة', 'سباك', 'plumbing', 'plumber', 'plumb'],
+                'ac' => ['تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling']
+            ];
+            
+            if (isset($typeKeywords[$preselectedServiceType])) {
+                $keywords = $typeKeywords[$preselectedServiceType];
+                $preselectedService = $services->first(function($service) use ($keywords) {
+                    foreach ($keywords as $keyword) {
+                        if (stripos($service->title, $keyword) !== false) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+                
+                if ($preselectedService) {
+                    $preselectedServiceId = $preselectedService->id;
+                }
+            }
+        }
+        
+        // إذا تم تمرير service_id مباشرة
+        if ($request->has('service_id')) {
+            $preselectedServiceId = $request->get('service_id');
+        }
+        
         $regions = Region::where('is_active', true)->orderBy('name', 'asc')->get();
         
-        return view('qr.index', compact('categories', 'services', 'regions'));
+        // Create a dummy page_post object for the layout
+        $page_post = (object) [
+            'title' => __('Maintenance Emergency'),
+            'breadcrumb_status' => null,
+            'back_to_top' => '',
+        ];
+        
+        return view('qr.index', compact('services', 'regions', 'page_post', 'preselectedServiceId'));
     }
 
     /**
@@ -36,6 +100,7 @@ class QRController extends Controller
     {
         $request->validate([
             'service_id' => 'required|exists:services,id',
+            'request_type' => 'required|in:maintenance,consultation,chat',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string|max:255',
@@ -82,6 +147,7 @@ class QRController extends Controller
         
         $order = Order::create([
             'service_id' => $request->service_id,
+            'request_type' => $request->request_type,
             'seller_id' => null, // سيتم تعيينه من قبل الدعم
             'buyer_id' => null, // بدون تسجيل دخول
             'name' => $request->name,
@@ -102,6 +168,15 @@ class QRController extends Controller
             'date' => $request->preferred_date ?? now()->format('Y-m-d'),
             'issue_image' => $issueImageName,
         ]);
+        
+        // معالجة خاصة حسب نوع الطلب
+        if ($request->request_type === 'consultation') {
+            // استشارة تلفونية - إرسال إشعار فوري للدعم
+            // يمكن إضافة منطق خاص هنا
+        } elseif ($request->request_type === 'chat') {
+            // محادثة - فتح محادثة مباشرة
+            // يمكن إضافة منطق خاص هنا
+        }
         
         // إرسال إشعار للدعم والإدارة
         try {

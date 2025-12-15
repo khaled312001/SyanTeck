@@ -96,7 +96,16 @@ class PopularServiceThree extends \App\PageBuilder\PageBuilderBase
     {
         
         $settings = $this->get_settings();
-        $section_title =$settings['title'];
+        $section_title = $settings['title'] ?? __('Popular Services');
+        
+        // Ensure title is in Arabic if it's still in English or contains old Arabic text
+        if (stripos($section_title, 'Popular Services') !== false || 
+            stripos($section_title, 'Popular Service') !== false ||
+            stripos($section_title, 'الخدمات الشائعة') !== false ||
+            (stripos($section_title, 'الخدمات الأكثر') !== false && stripos($section_title, 'طلباً') === false)) {
+            $section_title = 'الخدمات الأكثر طلباً';
+        }
+        
         $explore_text =$settings['explore_all'];
         $items =$settings['items'];
         $padding_top = $settings['padding_top'] ?? '';
@@ -110,14 +119,38 @@ class PopularServiceThree extends \App\PageBuilder\PageBuilderBase
         //static text helpers
         $static_text = static_text();
 
+        // تصفية الخدمات للتركيز على الكهرباء والسباكة والتكييف فقط
+        $serviceKeywords = [
+            'كهرباء', 'كهربائي', 'electrical', 'electricity', 'electric',
+            'سباكة', 'سباك', 'plumbing', 'plumber', 'plumb',
+            'تكييف', 'مكيف', 'air conditioning', 'ac', 'air conditioner', 'cooling'
+        ];
+        
         $services = Service::select('id','title','image','description','price','slug','seller_id', 'service_city_id','is_service_online','category_id','featured')
         ->with(['category','reviews','seller'])
         ->where(['status'=>1,'is_service_on'=>1])
+        ->where(function($query) use ($serviceKeywords) {
+            foreach ($serviceKeywords as $index => $keyword) {
+                if ($index === 0) {
+                    $query->where('title', 'like', '%' . $keyword . '%');
+                } else {
+                    $query->orWhere('title', 'like', '%' . $keyword . '%');
+                }
+            }
+        })
+        ->orderByRaw("
+            CASE 
+                WHEN title LIKE '%كهرباء%' OR title LIKE '%كهربائي%' OR title LIKE '%electrical%' OR title LIKE '%electricity%' OR title LIKE '%electric%' THEN 1
+                WHEN title LIKE '%سباكة%' OR title LIKE '%سباك%' OR title LIKE '%plumbing%' OR title LIKE '%plumber%' THEN 2
+                WHEN title LIKE '%تكييف%' OR title LIKE '%مكيف%' OR title LIKE '%air conditioning%' OR title LIKE '%ac%' OR title LIKE '%cooling%' THEN 3
+                ELSE 4
+            END
+        ")
+        ->orderBy('title', 'asc')
         ->when(subscriptionModuleExistsAndEnable('Subscription'),function($q){
             $q->whereHas('seller_subscription');
         })
         ->take($items)
-        ->inRandomOrder()
         ->get();
 
      return $this->renderBlade('popular-service.popular-service-three',[

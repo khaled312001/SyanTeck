@@ -1,7 +1,11 @@
 @php
-$footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
+$footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '03';
 @endphp
-@include('frontend.partials.pages-portion.footers.footer-'.$footer_variant)
+@if(file_exists(resource_path('views/frontend/partials/pages-portion/footers/footer-'.$footer_variant.'.blade.php')))
+    @include('frontend.partials.pages-portion.footers.footer-'.$footer_variant)
+@else
+    @include('frontend.partials.pages-portion.footers.footer-03')
+@endif
 @if(preg_match('/(bytesed)/',url('/')))
    <div class="buy-now-wrap">
         <ul class="buy-list">
@@ -17,6 +21,9 @@ $footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
     <span class="back-top"><i class="las la-angle-up"></i></span>
 </div>
 <!-- back to top area end -->
+
+<!-- WhatsApp Floating Button -->
+@include('frontend.partials.whatsapp-button')
 
 @if(moduleExists("LiveChat"))
 <x-livechat.widget-markup />
@@ -455,5 +462,9 @@ $footer_variant = !is_null(get_footer_style()) ? get_footer_style() : '02';
         <!-- autocomplete address js end -->
     @endif
 @endif
+
+<!-- العلامة المائية وحماية النسخ والصور -->
+@include('frontend.partials.watermark-protection')
+
 </body>
 </html>

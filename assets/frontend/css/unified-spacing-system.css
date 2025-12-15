@@ -1,0 +1,425 @@
+/* ============================================
+   نظام موحد للأبعاد والمسافات - Unified Spacing System
+   ============================================ */
+
+/* ============================================
+   متغيرات الأبعاد - Spacing Variables
+   ============================================ */
+:root {
+    /* Section Padding - مسافات الأقسام */
+    --section-padding-xs: 40px;      /* Mobile صغير */
+    --section-padding-sm: 60px;      /* Tablet صغير */
+    --section-padding-md: 80px;      /* Desktop متوسط */
+    --section-padding-lg: 100px;     /* Desktop كبير */
+    --section-padding-xl: 120px;      /* Desktop كبير جداً */
+    
+    /* Container Max Width - عرض الحاوية */
+    --container-max-width: 1320px;
+    --container-padding: 20px;
+    
+    /* Section Gap - المسافة بين الأقسام */
+    --section-gap: 0px;
+    
+    /* Element Spacing - مسافات العناصر */
+    --element-spacing-xs: 16px;
+    --element-spacing-sm: 24px;
+    --element-spacing-md: 32px;
+    --element-spacing-lg: 48px;
+    --element-spacing-xl: 64px;
+    
+    /* Title Spacing - مسافات العناوين */
+    --title-margin-bottom: 24px;
+    --subtitle-margin-bottom: 16px;
+    
+    /* Card Spacing - مسافات البطاقات */
+    --card-padding: 24px;
+    --card-gap: 24px;
+    --card-border-radius: 16px;
+}
+
+/* ============================================
+   Container System - نظام الحاويات
+   ============================================ */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+@media (max-width: 1400px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 992px;
+    }
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 768px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+/* ============================================
+   Section Padding System - نظام مسافات الأقسام
+   ============================================ */
+
+/* Standard Section Padding - مسافات الأقسام القياسية */
+.section-padding {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-md);
+}
+
+@media (max-width: 992px) {
+    .section-padding {
+        padding-top: var(--section-padding-sm);
+        padding-bottom: var(--section-padding-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-padding {
+        padding-top: var(--section-padding-xs);
+        padding-bottom: var(--section-padding-xs);
+    }
+}
+
+/* Large Section Padding - مسافات الأقسام الكبيرة */
+.section-padding-large {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+}
+
+@media (max-width: 992px) {
+    .section-padding-large {
+        padding-top: var(--section-padding-md);
+        padding-bottom: var(--section-padding-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-padding-large {
+        padding-top: var(--section-padding-sm);
+        padding-bottom: var(--section-padding-sm);
+    }
+}
+
+/* Extra Large Section Padding - مسافات الأقسام الكبيرة جداً */
+.section-padding-xl {
+    padding-top: var(--section-padding-xl);
+    padding-bottom: var(--section-padding-xl);
+}
+
+@media (max-width: 992px) {
+    .section-padding-xl {
+        padding-top: var(--section-padding-lg);
+        padding-bottom: var(--section-padding-lg);
+    }
+}
+
+@media (max-width: 768px) {
+    .section-padding-xl {
+        padding-top: var(--section-padding-md);
+        padding-bottom: var(--section-padding-md);
+    }
+}
+
+/* Small Section Padding - مسافات الأقسام الصغيرة */
+.section-padding-small {
+    padding-top: var(--section-padding-sm);
+    padding-bottom: var(--section-padding-sm);
+}
+
+@media (max-width: 768px) {
+    .section-padding-small {
+        padding-top: var(--section-padding-xs);
+        padding-bottom: var(--section-padding-xs);
+    }
+}
+
+/* ============================================
+   Section Title System - نظام عناوين الأقسام
+   ============================================ */
+.section-title-wrapper {
+    margin-bottom: var(--element-spacing-lg);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .section-title-wrapper {
+        margin-bottom: var(--element-spacing-md);
+    }
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: var(--title-margin-bottom);
+    color: #000;
+}
+
+@media (max-width: 1200px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: var(--subtitle-margin-bottom);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+}
+
+/* ============================================
+   Grid System Spacing - مسافات نظام الشبكة
+   ============================================ */
+.section-grid {
+    display: grid;
+    gap: var(--card-gap);
+}
+
+@media (max-width: 768px) {
+    .section-grid {
+        gap: var(--element-spacing-sm);
+    }
+}
+
+/* ============================================
+   Card System - نظام البطاقات
+   ============================================ */
+.card-modern {
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 768px) {
+    .card-modern {
+        padding: 20px;
+        border-radius: 12px;
+    }
+}
+
+/* ============================================
+   Element Spacing Utilities - أدوات المسافات
+   ============================================ */
+
+/* Margin Top */
+.mt-xs { margin-top: var(--element-spacing-xs) !important; }
+.mt-sm { margin-top: var(--element-spacing-sm) !important; }
+.mt-md { margin-top: var(--element-spacing-md) !important; }
+.mt-lg { margin-top: var(--element-spacing-lg) !important; }
+.mt-xl { margin-top: var(--element-spacing-xl) !important; }
+
+/* Margin Bottom */
+.mb-xs { margin-bottom: var(--element-spacing-xs) !important; }
+.mb-sm { margin-bottom: var(--element-spacing-sm) !important; }
+.mb-md { margin-bottom: var(--element-spacing-md) !important; }
+.mb-lg { margin-bottom: var(--element-spacing-lg) !important; }
+.mb-xl { margin-bottom: var(--element-spacing-xl) !important; }
+
+/* Padding */
+.p-xs { padding: var(--element-spacing-xs) !important; }
+.p-sm { padding: var(--element-spacing-sm) !important; }
+.p-md { padding: var(--element-spacing-md) !important; }
+.p-lg { padding: var(--element-spacing-lg) !important; }
+.p-xl { padding: var(--element-spacing-xl) !important; }
+
+/* ============================================
+   Override Existing Classes - تجاوز الفئات الموجودة
+   ============================================ */
+
+/* Standardize padding classes */
+.padding-top-50,
+.padding-bottom-50 {
+    padding-top: var(--section-padding-sm) !important;
+    padding-bottom: var(--section-padding-sm) !important;
+}
+
+@media (max-width: 992px) {
+    .padding-top-50,
+    .padding-bottom-50 {
+        padding-top: var(--section-padding-xs) !important;
+        padding-bottom: var(--section-padding-xs) !important;
+    }
+}
+
+.padding-top-100,
+.padding-bottom-100 {
+    padding-top: var(--section-padding-lg) !important;
+    padding-bottom: var(--section-padding-lg) !important;
+}
+
+@media (max-width: 992px) {
+    .padding-top-100,
+    .padding-bottom-100 {
+        padding-top: var(--section-padding-md) !important;
+        padding-bottom: var(--section-padding-md) !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .padding-top-100,
+    .padding-bottom-100 {
+        padding-top: var(--section-padding-sm) !important;
+        padding-bottom: var(--section-padding-sm) !important;
+    }
+}
+
+/* ============================================
+   Section Wrapper - غلاف الأقسام
+   ============================================ */
+.section-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-wrapper .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================
+   Responsive Breakpoints - نقاط التوقف المتجاوبة
+   ============================================ */
+@media (max-width: 1400px) {
+    :root {
+        --section-padding-lg: 90px;
+        --section-padding-xl: 110px;
+    }
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --section-padding-md: 70px;
+        --section-padding-lg: 80px;
+        --section-padding-xl: 100px;
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --section-padding-xs: 40px;
+        --section-padding-sm: 50px;
+        --section-padding-md: 60px;
+        --section-padding-lg: 70px;
+        --section-padding-xl: 80px;
+        --container-padding: 20px;
+        --card-padding: 20px;
+        --card-gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-padding-xs: 40px;
+        --section-padding-sm: 50px;
+        --section-padding-md: 60px;
+        --section-padding-lg: 60px;
+        --section-padding-xl: 70px;
+        --container-padding: 16px;
+        --card-padding: 20px;
+        --card-gap: 16px;
+        --element-spacing-lg: 32px;
+        --element-spacing-xl: 48px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --section-padding-xs: 40px;
+        --section-padding-sm: 40px;
+        --section-padding-md: 50px;
+        --section-padding-lg: 50px;
+        --section-padding-xl: 60px;
+        --container-padding: 16px;
+        --card-padding: 16px;
+        --card-gap: 16px;
+        --title-margin-bottom: 16px;
+        --subtitle-margin-bottom: 12px;
+    }
+}
+
+/* ============================================
+   Apply to All Sections - تطبيق على جميع الأقسام
+   ============================================ */
+section[class*="area"],
+section[class*="section"],
+.new_services_area,
+.new_choose_area,
+.new_banner_area,
+.customer-review-area,
+.feature-area,
+.popular-service-area,
+.marketplace-area {
+    position: relative;
+}
+
+/* Ensure consistent spacing */
+section[class*="area"]:not(.section-padding):not(.section-padding-large):not(.section-padding-xl):not(.section-padding-small) {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-md);
+}
+
+@media (max-width: 992px) {
+    section[class*="area"]:not(.section-padding):not(.section-padding-large):not(.section-padding-xl):not(.section-padding-small) {
+        padding-top: var(--section-padding-sm);
+        padding-bottom: var(--section-padding-sm);
+    }
+}
+
+@media (max-width: 768px) {
+    section[class*="area"]:not(.section-padding):not(.section-padding-large):not(.section-padding-xl):not(.section-padding-small) {
+        padding-top: var(--section-padding-xs);
+        padding-bottom: var(--section-padding-xs);
+    }
+}
+

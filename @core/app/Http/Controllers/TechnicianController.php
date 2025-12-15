@@ -62,7 +62,7 @@ class TechnicianController extends Controller
     /**
      * قبول الطلب
      */
-    public function acceptOrder($id)
+    public function acceptOrder(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         $user = Auth::user();
@@ -79,9 +79,19 @@ class TechnicianController extends Controller
         
         $order->status = 1; // Active
         $order->accepted_at = Carbon::now();
+        $order->technician_order_status = 'accepted';
+        
+        // حفظ موقع GPS الأولي إذا تم إرساله
+        if ($request->has('latitude') && $request->has('longitude')) {
+            $order->technician_latitude = $request->latitude;
+            $order->technician_longitude = $request->longitude;
+            $order->technician_last_location_update = Carbon::now();
+        }
+        
         $order->save();
         
-        // TODO: إرسال إشعار للعميل
+        // إرسال إشعارات
+        $this->sendStatusUpdateNotifications($order, 'accepted');
         
         return redirect()->back()->with('success', __('Order accepted successfully'));
     }
@@ -89,7 +99,7 @@ class TechnicianController extends Controller
     /**
      * رفض الطلب
      */
-    public function rejectOrder($id)
+    public function rejectOrder(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         $user = Auth::user();
@@ -99,13 +109,29 @@ class TechnicianController extends Controller
             return redirect()->back()->with('error', __('Unauthorized access'));
         }
         
+        $request->validate([
+            'rejection_reason' => 'nullable|string|max:500',
+        ]);
+        
+        // تحديث حالة الطلب
+        $order->technician_order_status = 'rejected';
+        
         // إلغاء تعيين الفني
         $order->seller_id = null;
         $order->assigned_at = null;
         $order->accepted_at = null;
+        $order->status = 0; // Back to pending
+        
+        // حفظ سبب الرفض في الملاحظات
+        if ($request->has('rejection_reason')) {
+            $rejectionNote = "\n[رفض الفني] " . Carbon::now()->format('Y-m-d H:i:s') . ": " . $request->rejection_reason;
+            $order->notes = ($order->notes ?? '') . $rejectionNote;
+        }
+        
         $order->save();
         
-        // TODO: إرسال إشعار للدعم لإعادة التعيين
+        // إرسال إشعارات
+        $this->sendStatusUpdateNotifications($order, 'rejected');
         
         return redirect()->back()->with('success', __('Order rejected. Support will reassign it.'));
     }
@@ -125,6 +151,8 @@ class TechnicianController extends Controller
         
         $request->validate([
             'status' => 'required|string|in:en_route,arrived,started,completed',
+            'latitude' => 'nullable|numeric|between:-90,90',
+            'longitude' => 'nullable|numeric|between:-180,180',
         ]);
         
         $status = $request->status;
@@ -133,6 +161,16 @@ class TechnicianController extends Controller
         // تحديث timestamp المناسب
         if (!$order->$timestampField) {
             $order->$timestampField = Carbon::now();
+        }
+        
+        // تحديث حالة الطلب من الفني
+        $order->technician_order_status = $status;
+        
+        // تحديث موقع GPS إذا تم إرساله
+        if ($request->has('latitude') && $request->has('longitude')) {
+            $order->technician_latitude = $request->latitude;
+            $order->technician_longitude = $request->longitude;
+            $order->technician_last_location_update = Carbon::now();
         }
         
         // تحديث حالة الطلب حسب الحالة
@@ -145,13 +183,66 @@ class TechnicianController extends Controller
                 $user->completed_orders_count = ($user->completed_orders_count ?? 0) + 1;
                 $user->save();
             }
+        } elseif ($status == 'en_route') {
+            $order->status = 1; // Active
         }
         
         $order->save();
         
-        // TODO: إرسال إشعارات
+        // إرسال إشعارات للعميل والدعم والأدمن
+        $this->sendStatusUpdateNotifications($order, $status);
         
         return redirect()->back()->with('success', __('Order status updated successfully'));
+    }
+    
+    /**
+     * تحديث موقع GPS للفني
+     */
+    public function updateLocation(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $user = Auth::user();
+        
+        // التحقق من أن الطلب مخصص لهذا الفني
+        if ($order->seller_id != $user->id) {
+            return response()->json(['error' => __('Unauthorized access')], 403);
+        }
+        
+        $request->validate([
+            'latitude' => 'required|numeric|between:-90,90',
+            'longitude' => 'required|numeric|between:-180,180',
+        ]);
+        
+        $order->technician_latitude = $request->latitude;
+        $order->technician_longitude = $request->longitude;
+        $order->technician_last_location_update = Carbon::now();
+        $order->save();
+        
+        // إرسال إشعارات للمتابعين
+        $this->broadcastLocationUpdate($order);
+        
+        return response()->json([
+            'success' => true,
+            'message' => __('Location updated successfully'),
+            'timestamp' => $order->technician_last_location_update->toIso8601String()
+        ]);
+    }
+    
+    /**
+     * إرسال إشعارات تحديث الحالة
+     */
+    private function sendStatusUpdateNotifications($order, $status)
+    {
+        // TODO: إرسال إشعارات للعميل والدعم والأدمن
+        // يمكن استخدام Laravel Notifications أو Events
+    }
+    
+    /**
+     * بث تحديث الموقع
+     */
+    private function broadcastLocationUpdate($order)
+    {
+        // TODO: بث تحديث الموقع للمتابعين (WebSocket أو Polling)
     }
 
     /**

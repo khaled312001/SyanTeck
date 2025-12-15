@@ -39,6 +39,16 @@
             background-color: var(--main-color-one);
             color: #fff;
             border-radius: 50%;
+            animation: pulse-verified 2s infinite;
+        }
+        
+        @keyframes pulse-verified {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(var(--main-color-one-rgb, 255, 215, 0), 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 4px rgba(var(--main-color-one-rgb, 255, 215, 0), 0);
+            }
         }
         .profile-flex-content .profile-contents .title {
             display: flex;
@@ -144,6 +154,37 @@
             }
         }
     </style>
+    @if(moduleExists('LiveChat') && Auth::guard('web')->check() && Auth::guard('web')->user()->user_type == 1)
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const openChatButtons = document.querySelectorAll('.open-chat-with-seller');
+            openChatButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sellerId = this.getAttribute('data-seller-id');
+                    // Open LiveChat widget and start conversation with this seller
+                    if (typeof window.openChatWidget !== 'undefined') {
+                        window.openChatWidget(sellerId);
+                    } else {
+                        // Fallback: open chat widget if available
+                        const chatButton = document.querySelector('.open-button');
+                        if (chatButton) {
+                            chatButton.click();
+                            // Try to select the seller in chat list after a delay
+                            setTimeout(function() {
+                                const sellerChatItem = document.querySelector(`[data-seller-id="${sellerId}"]`);
+                                if (sellerChatItem) {
+                                    sellerChatItem.click();
+                                }
+                            }, 500);
+                        } else {
+                            alert('{{ __("يرجى فتح نافذة المحادثة من زر Chat في الصفحة") }}');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    @endif
 @endsection
 @section('content')
     <!-- Banner Inner area Starts -->
@@ -160,8 +201,8 @@
                                 <div class="profile-contents">
                                     <h4 class="title">
                                         <a href="{{ route('about.seller.profile',$seller->username) }}"> {{ $seller->name }} </a>
-                                        @if(optional($seller->sellerVerify)->status==1)
-                                            <div data-toggle="tooltip" data-placement="top" title="{{__('This seller is verified by the site admin according his national id card.')}}">
+                                        @if(optional($seller->sellerVerify)->status==1 || $seller->verified_by_national_id == 1)
+                                            <div data-toggle="tooltip" data-placement="top" title="{{ $seller->verified_by_national_id ? __('موثوق برقم الهوية الوطنية') : __('This seller is verified by the site admin according his national id card.') }}">
                                                 <span class="seller-verified"> <i class="las la-check"></i> </span>
                                             </div>
                                         @endif
@@ -181,6 +222,21 @@
                                         <b>{!! ratting_star(round($service_rating,1) ) !!} </b>
                                         ({{ $service_reviews->count() }})
                                     </span>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(!empty($seller->job_type))
+                                        <div class="seller-job-type mt-2">
+                                            <span class="badge badge-primary" style="background: #FFD700; color: #000; padding: 5px 12px; border-radius: 6px; font-weight: 600;">
+                                                <i class="las la-briefcase"></i> {{ $seller->job_type }}
+                                            </span>
+                                        </div>
+                                    @endif
+                                    
+                                    @if(!empty($seller->experience))
+                                        <div class="seller-experience mt-3">
+                                            <h6 style="font-weight: 600; margin-bottom: 8px;">{{ __('الخبرة والمهارات:') }}</h6>
+                                            <p style="color: #666; line-height: 1.6; font-size: 14px;">{{ Str::limit($seller->experience, 150) }}</p>
                                         </div>
                                     @endif
 
@@ -204,8 +260,31 @@
                         <div class="profile-author-contents">
                             <ul class="profile-about">
                                 <li> {{ __('From:') }} <span> {{ optional($seller->country)->country }} </span> </li>
+                                <li> {{ __('City:') }} <span> {{ optional($seller->city)->service_city ?? 'غير محدد' }} </span> </li>
+                                <li> {{ __('Area:') }} <span> {{ optional($seller->area)->service_area ?? 'غير محدد' }} </span> </li>
                                 <li> {{ __('Seller Since:') }} <span> {{ Carbon\Carbon::parse($seller_since->created_at)->year }}  </span> </li>
                             </ul>
+                            @auth('web')
+                                @if(Auth::guard('web')->user()->user_type == 1 && Auth::guard('web')->user()->id != $seller->id)
+                                    <div class="mt-3">
+                                        @if(moduleExists('LiveChat'))
+                                            <button type="button" class="cmn-btn btn-bg-1 open-chat-with-seller" data-seller-id="{{ $seller->id }}" style="width: 100%; text-align: center;">
+                                                <i class="las la-comments"></i> {{ __('تواصل مع الفني') }}
+                                            </button>
+                                        @else
+                                            <a href="mailto:{{ $seller->email }}" class="cmn-btn btn-bg-1" style="width: 100%; text-align: center;">
+                                                <i class="las la-envelope"></i> {{ __('تواصل مع الفني') }}
+                                            </a>
+                                        @endif
+                                    </div>
+                                @endif
+                            @else
+                                <div class="mt-3">
+                                    <a href="{{ route('user.login') }}" class="cmn-btn btn-bg-1" style="width: 100%; text-align: center;">
+                                        <i class="las la-sign-in-alt"></i> {{ __('سجل الدخول للتواصل') }}
+                                    </a>
+                                </div>
+                            @endauth
                         </div>
                     </div>
                     <div class="col-lg-5 margin-top-30">
@@ -345,7 +424,7 @@
                                                 <span class="prices"> {{ amount_with_currency_symbol( $service->price) }} </span>
                                             </div>
                                             <div class="btn-wrapper">
-                                                <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-appoinment btn-bg-1">{{ __('Book Appointment') }} </a>
+                                                <a href="{{ url('/qr') }}" class="cmn-btn btn-appoinment btn-bg-1">{{ __('Book Appointment') }} </a>
                                             </div>
                                         </div>
                                     </div>
@@ -360,6 +439,29 @@
         </section>
     @endif
     <!-- Featured Service area ends -->
+
+    <!-- Experience Section Starts -->
+    @if(!empty($seller->experience))
+    <section class="seller-experience-section padding-top-100 padding-bottom-100" style="background: #f8f9fa;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title-two">
+                        <h3 class="title">{{ __('الخبرة والمهارات') }}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="experience-content" style="background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <p style="line-height: 1.8; color: #333; font-size: 16px; white-space: pre-wrap;">{{ $seller->experience }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    <!-- Experience Section Ends -->
 
     <!-- Review seller area Starts -->
     @if($service_reviews-> count() >= 1)

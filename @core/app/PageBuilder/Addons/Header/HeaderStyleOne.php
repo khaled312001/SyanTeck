@@ -179,6 +179,16 @@ class HeaderStyleOne extends \App\PageBuilder\PageBuilderBase
 
         $title = $settings['title'] ?? '';
         $subtitle = $settings['subtitle'] ?? '';
+        
+        // Remove subtitle if it contains old text
+        if (!empty($subtitle) && (
+            stripos($subtitle, 'Order service you need') !== false ||
+            stripos($subtitle, 'اطلب الخدمة التي تحتاجها') !== false ||
+            stripos($subtitle, 'لدينا فنيون معتمدون') !== false ||
+            stripos($subtitle, 'We have professionals ready') !== false
+        )) {
+            $subtitle = '';
+        }
         $satisfied_customer_title = $settings['satisfied_customer_title'] ?? '';
         $header_background_color = $settings['header_background_color'] ?? '';
         $review_icon = $settings['service_icon'] ?? '';
@@ -202,14 +212,66 @@ class HeaderStyleOne extends \App\PageBuilder\PageBuilderBase
        $padding_top = $settings['padding_top'] ?? '100';
        $padding_bottom = $settings['padding_bottom'] ?? '100';
 
-        $explode = explode(" ",$title);
-        $title_end = end($explode);
-        $last_space_position = strrpos($title, ' ');
-        $title_start = substr($title, 0, $last_space_position);
+        // Check if title needs to be updated to the new format
+        $title_clean = strip_tags($title);
+        if (stripos($title_clean, 'احصل على أي خدمة') !== false || 
+            stripos($title_clean, 'Get any service') !== false ||
+            stripos($title_clean, 'Get any tasks') !== false) {
+            // Update to new title format with highlighted word
+            $title = 'احصل على <span style="color: #FFD700; font-weight: 900;">صيانتك</span> عن طريق فنيين موثوقين';
+        }
+        
+        // Check if title contains "صيانتك" with HTML span tags
+        if (strpos($title, 'صيانتك') !== false && strpos($title, '<span') !== false) {
+            // Extract the parts: before "صيانتك", "صيانتك" with span, and after "صيانتك"
+            preg_match('/(.*?)(<span[^>]*>صيانتك<\/span>)(.*)/', $title, $matches);
+            if (!empty($matches)) {
+                // Found the pattern with span tags
+                $title_start = trim($matches[1]); // "احصل على"
+                $highlighted_word = $matches[2]; // "<span>صيانتك</span>"
+                $title_end = trim($matches[3]); // "عن طريق فنيين موثوقين"
+            } else {
+                // Try to find "صيانتك" and wrap it if not already wrapped
+                $parts = preg_split('/(صيانتك)/', $title, -1, PREG_SPLIT_DELIM_CAPTURE);
+                if (count($parts) >= 3) {
+                    $title_start = trim($parts[0]); // "احصل على"
+                    $highlighted_word = '<span style="color: #FFD700; font-weight: 900;">صيانتك</span>';
+                    $title_end = trim($parts[2]); // "عن طريق فنيين موثوقين"
+                } else {
+                    // Fallback: use the title as is
+                    $title_start = '';
+                    $highlighted_word = $title;
+                    $title_end = '';
+                }
+            }
+        } else {
+            // Check if title contains "صيانتك" without HTML
+            if (strpos($title, 'صيانتك') !== false) {
+                $parts = preg_split('/(صيانتك)/', $title, -1, PREG_SPLIT_DELIM_CAPTURE);
+                if (count($parts) >= 3) {
+                    $title_start = trim($parts[0]); // "احصل على"
+                    $highlighted_word = '<span style="color: #FFD700; font-weight: 900;">صيانتك</span>';
+                    $title_end = trim($parts[2]); // "عن طريق فنيين موثوقين"
+                } else {
+                    // Fallback
+                    $title_start = '';
+                    $highlighted_word = $title;
+                    $title_end = '';
+                }
+            } else {
+                // No "صيانتك" found, use default splitting
+                $explode = explode(" ",$title);
+                $title_end = end($explode);
+                $last_space_position = strrpos($title, ' ');
+                $title_start = substr($title, 0, $last_space_position);
+                $highlighted_word = '';
+            }
+        }
         $popular = __('Popular:');
 
 return $this->renderBlade('headers.header-five',[
      'title_start' => $title_start,
+     'highlighted_word' => $highlighted_word ?? '',
      'header_background_color' => $header_background_color,
      'title_end' => $title_end,
      'subtitle' => $subtitle,

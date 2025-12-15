@@ -1,19 +1,19 @@
 <style>
     :root {
-        --main-color-one: {{get_static_option('site_main_color_one','#1DBF73')}};
-        --main-color-two: {{get_static_option('site_main_color_two','#47C8ED')}};
-        --main-color-three: {{get_static_option('site_main_color_three','#FF6B2C')}};
-        --heading-color: {{get_static_option('heading_color','#333333')}};
-        --light-color: {{get_static_option('light_color','#666666')}};
-        --extra-light-color: {{get_static_option('extra_light_color','#999999')}};
+        --main-color-one: #FFD700;
+        --main-color-two: #FFD700;
+        --main-color-three: #FFD700;
+        --heading-color: #000000;
+        --light-color: #666666;
+        --extra-light-color: #999999;
 
-        --heading-font: {{get_static_option('heading_font_family')}},sans-serif;
-        --body-font: {{get_static_option('body_font_family')}},sans-serif;
+        --heading-font: 'Almarai', {{get_static_option('heading_font_family') ? get_static_option('heading_font_family') . ',' : ''}}sans-serif;
+        --body-font: 'Almarai', {{get_static_option('body_font_family') ? get_static_option('body_font_family') . ',' : ''}}sans-serif;
 
           @if(!empty(Auth::guard('web')->user()->user_typ) == 0)
               @if(request()->is('seller/*'))
-                --main-color-one: #2163b3;
-                --main-color-one-rgb: 33, 99, 179;
+                --main-color-one: #FFD700;
+                --main-color-one-rgb: 255, 215, 0;
               @endif
            @endif
         }

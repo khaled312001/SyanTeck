@@ -46,6 +46,7 @@ Route::group(['middleware' => ['globalVariable', 'maintains_mode','setlang']], f
     Route::post('/get-city-by-country', 'FrontendController@getCity')->name('user.country.city');
     Route::get('/get-city-by-country-ajax-search', 'FrontendController@getCityAjaxSearch')->name('user.country.city.ajax.search');
     Route::post('/get-area-by-city', 'FrontendController@getAarea')->name('user.city.area');
+    Route::post('/check-national-id', 'FrontendController@checkNationalId')->name('user.check.national.id');
     
     Route::match(['get', 'post'], '/login', 'Auth\LoginController@userLogin')->name('user.login');
 
@@ -64,6 +65,8 @@ Route::group(['middleware' => ['globalVariable', 'maintains_mode','setlang']], f
     Route::group(['prefix' => 'google'], function () {
         Route::get('callback', 'Frontend\SocialLoginController@google_callback')->name('google.callback');
         Route::get('redirect', 'Frontend\SocialLoginController@google_redirect')->name('login.google.redirect');
+        Route::get('register-redirect', 'Frontend\SocialLoginController@google_register_redirect')->name('register.google.redirect');
+        Route::get('register-callback', 'Frontend\SocialLoginController@google_register_callback')->name('register.google.callback');
     });
 
 
@@ -148,6 +151,14 @@ Route::group(['middleware' => ['globalVariable', 'maintains_mode','setlang']], f
 // frontend custom form builders
 Route::post('submit-custom-form', 'FrontendFormController@custom_form_builder_message')->name('frontend.form.builder.custom.submit');
 
+// Redirect common admin login paths to the correct route (must be before dynamic routes)
+Route::get('/admin/login', function () {
+    return redirect()->route('admin.login');
+});
+Route::get('/admin/lgoin', function () {
+    return redirect()->route('admin.login');
+});
+
 // admin login
 Route::middleware(['setlang'])->group(function () {
     Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm')->name('admin.login');
@@ -155,6 +166,7 @@ Route::middleware(['setlang'])->group(function () {
     Route::get('/login/admin/reset-password/{user}/{token}', 'FrontendController@showAdminResetPasswordForm')->name('admin.reset.password');
     Route::post('/login/admin/reset-password', 'FrontendController@AdminResetPassword')->name('admin.reset.password.change');
     Route::post('/login/admin/forget-password', 'FrontendController@sendAdminForgetPasswordMail');
+    Route::post('/change-language', 'FrontendController@lang_change')->name('frontend.lang.change');
     Route::get('/logout/admin', 'AdminDashboardController@adminLogout')->name('admin.logout')->middleware('auth:admin');
     Route::post('/login/admin', 'Auth\LoginController@adminLogin');
     

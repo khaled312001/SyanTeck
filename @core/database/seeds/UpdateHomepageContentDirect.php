@@ -24,7 +24,7 @@ $replacements = [
     'Why Our Marketplace' => 'لماذا صيانة تك؟',
     'Why Choose Us' => 'لماذا صيانة تك؟',
     'Get any tasks done by professionals' => 'صيانة تك - منصة خدمات الصيانة المنزلية والتقنية',
-    'Order service you need. We have professionals ready to help.' => 'اطلب الخدمة التي تحتاجها. لدينا فنيون معتمدون جاهزون لخدمتك مع تتبع مباشر للطلبات، أسعار شفافة، فواتير إلكترونية، وضمانات رقمية.',
+    'Order service you need. We have professionals ready to help.' => 'لدينا فريق فني متخصص لخدمتكم علي مدار اليوم مع تتبع مباشر للطلبات، أسعار شفافة، فواتير إلكترونية، وضمانات رقمية.',
 ];
 
 // Get homepage ID

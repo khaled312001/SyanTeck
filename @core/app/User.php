@@ -21,6 +21,8 @@ class User extends Authenticatable
         'username',
         'password',
         'phone',
+        'national_id',
+        'verified_by_national_id',
         'otp_code',
         'otp_expire_at',
         'image',
@@ -61,7 +63,13 @@ class User extends Authenticatable
         'is_available',
         'technician_code',
         'rating',
-        'completed_orders_count'
+        'completed_orders_count',
+        // حقول طلب التوظيف
+        'job_type',
+        'experience',
+        'resume_file',
+        // الرقم الوظيفي
+        'employee_number'
     ];
 
     protected $hidden = [
@@ -76,6 +84,7 @@ class User extends Authenticatable
         'assigned_regions' => 'array',
         'is_available' => 'boolean',
         'rating' => 'decimal:2',
+        'verified_by_national_id' => 'boolean',
     ];
     
 

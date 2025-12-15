@@ -253,68 +253,13 @@
                     <?php endif; ?>
 
                     
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['category-list', 'category-create'])): ?>
-                        <li class="<?php echo e(active_menu('admin-home/category')); ?>
-
-                    <?php if(request()->is('admin-home/category/*')): ?> active <?php endif; ?>">
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-view-list"></i>
-                                <span><?php echo e(__('Categories')); ?></span></a>
-                            <ul class="collapse">
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('category-list')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/category')); ?> <?php if(request()->is('admin-home/category/edit/*')): ?> active <?php endif; ?>"><a
-                                            href="<?php echo e(route('admin.category')); ?>"><?php echo e(__('All Categories')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('category-create')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/category/new')); ?>"><a
-                                            href="<?php echo e(route('admin.category.new')); ?>"><?php echo e(__('Add New Category')); ?></a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    
 
                     
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['subcategory-list', 'subcategory-create'])): ?>
-                        <li
-                            class="<?php echo e(active_menu('admin-home/subcategory')); ?>
-
-                    <?php if(request()->is('admin-home/subcategory/*')): ?> active <?php endif; ?>">
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-cta-right"></i>
-                                <span><?php echo e(__('Sub Category')); ?></span></a>
-                            <ul class="collapse">
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subcategory-list')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/subcategory')); ?> <?php if(request()->is('admin-home/location/edit/*')): ?> active <?php endif; ?>"><a
-                                            href="<?php echo e(route('admin.subcategory')); ?>"><?php echo e(__('All Sub Category')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('subcategory-create')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/subcategory/new')); ?>"><a
-                                            href="<?php echo e(route('admin.subcategory.new')); ?>"><?php echo e(__('Add New Subcategory')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    
 
                     
-                    <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['child-category-list', 'child-category-create'])): ?>
-                        <li
-                            class="<?php echo e(active_menu('admin-home/child-category')); ?>
-
-                    <?php if(request()->is('admin-home/child-category/*')): ?> active <?php endif; ?>">
-                            <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-cta-right"></i>
-                                <span><?php echo e(__('Child Categories')); ?></span></a>
-                            <ul class="collapse">
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('child-category-list')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/child-category')); ?> <?php if(request()->is('admin-home/location/edit/*')): ?> active <?php endif; ?>"><a
-                                            href="<?php echo e(route('admin.child.category')); ?>"><?php echo e(__('All Child Category')); ?></a></li>
-                                <?php endif; ?>
-                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('child-category-create')): ?>
-                                    <li class="<?php echo e(active_menu('admin-home/subcategory/new')); ?>"><a
-                                            href="<?php echo e(route('admin.child.category.new')); ?>"><?php echo e(__('Add New Child Category')); ?></a>
-                                    </li>
-                                <?php endif; ?>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
+                    
 
                     
                     <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->any(['brand-list', 'brand-create'])): ?>

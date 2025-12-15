@@ -17,19 +17,12 @@
 
                 <form class="signup-forms" method="post">
                     @csrf
-                    <div class="single-signup margin-top-30 user_name_email_hide">
+                    <div class="single-signup margin-top-30">
                         <label class="signup-label"> {{__('Username or Email *')}} </label>
                         <input class="form--control" type="text" name="username" id="username" placeholder="{{__('Username Or Email')}}">
                     </div>
 
-
-                    @if(empty(get_static_option('disable_user_otp_verify')))
-                    <div class="text-success mt-2">
-                      <a href="{{ route('user.login.set.phone.number') }}"><strong id="loginWithOtp">{{ __('Login with OTP') }}</strong> </a>
-                    </div>
-                    @endif
-
-                    <div class="single-signup margin-top-30 password_otp_hide">
+                    <div class="single-signup margin-top-30">
                         <label class="signup-label"> {{ __('Password*') }} </label>
                         <input class="form--control" type="password" name="password" id="password" placeholder="{{__('Password')}}">
                     </div>
@@ -70,27 +63,17 @@
                 @endif
 
                 <div class="social-login-wrapper">
-                    @if(get_static_option('enable_google_login') || get_static_option('enable_facebook_login'))
                     <div class="bar-wrap">
                         <span class="bar"></span>
-                        <p class="or">{{ __('or') }}</p>
+                        <p class="or">{{ __('أو') }}</p>
                         <span class="bar"></span>
                     </div>
-                    @endif
 
                     <div class="sin-in-with">
-                        @if(get_static_option('enable_google_login'))
-                        <a href="{{ route('login.google.redirect') }}" class="sign-in-btn">
-                            <img src="{{ asset('assets/frontend/img/static/google.png') }}" alt="icon">
-                            {{ __('Sign in with Google') }}
+                        <a href="{{ route('login.google.redirect') }}" class="sign-in-btn" style="display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px; background: #fff; border: 1px solid #ddd; border-radius: 8px; color: #333; text-decoration: none; transition: all 0.3s; width: 100%; margin-bottom: 10px;">
+                            <img src="{{ asset('assets/frontend/img/static/google.png') }}" alt="Google" style="width: 20px; height: 20px;">
+                            {{ __('تسجيل الدخول بجوجل') }}
                         </a>
-                        @endif
-                        @if(get_static_option('enable_facebook_login'))
-                        <a href="{{ route('login.facebook.redirect') }}" class="sign-in-btn">
-                            <img src="{{ asset('assets/frontend/img/static/facebook.png') }}" alt="icon">
-                            {{ __('Sign in with Facebook') }}
-                        </a>
-                        @endif
                     </div>
                 </div>
             </div>

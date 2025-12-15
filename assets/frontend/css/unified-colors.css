@@ -1,0 +1,172 @@
+/* 
+ * Unified Colors CSS - توحيد الألوان في الموقع
+ * الألوان الموحدة: #FFFFFF (أبيض), #000000 (أسود), #FFD700 (أصفر)
+ * بدون تدرجات - لون واحد لكل لون
+ */
+
+:root {
+    --unified-white: #FFFFFF;
+    --unified-black: #000000;
+    --unified-yellow: #FFD700;
+}
+
+/* استبدال جميع التدرجات بالألوان الموحدة */
+* {
+    /* إزالة التدرجات من الخلفيات */
+    background-image: none !important;
+}
+
+/* استبدال التدرجات في الأزرار */
+button,
+.btn,
+.cmn-btn,
+.action-button,
+.stepForm_btn,
+.btn-next,
+.btn-submit,
+.btn-get-location,
+.btn-get-location-service {
+    background: var(--unified-yellow) !important;
+    background-image: none !important;
+    color: var(--unified-black) !important;
+}
+
+button:hover,
+.btn:hover,
+.cmn-btn:hover,
+.action-button:hover,
+.stepForm_btn:hover,
+.btn-next:hover,
+.btn-submit:hover,
+.btn-get-location:hover,
+.btn-get-location-service:hover {
+    background: var(--unified-yellow) !important;
+    background-image: none !important;
+    color: var(--unified-black) !important;
+}
+
+/* استبدال التدرجات في الخلفيات */
+.enhanced-qr-section,
+.qr-icon-circle,
+.service-card-icon-wrapper,
+.form-section,
+.section-title::before,
+.step-number,
+.step-connector::before,
+.order-summary {
+    background: var(--unified-white) !important;
+    background-image: none !important;
+}
+
+.enhanced-qr-section {
+    background: var(--unified-yellow) !important;
+}
+
+.step-item.active .step-number,
+.btn-next,
+.btn-submit {
+    background: var(--unified-yellow) !important;
+}
+
+.step-item.completed .step-number,
+.btn-submit {
+    background: var(--unified-black) !important;
+    color: var(--unified-white) !important;
+}
+
+/* استبدال الألوان في النصوص */
+.request-title,
+.section-title,
+.summary-section-title,
+.step-item.active .step-label {
+    color: var(--unified-black) !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--unified-black) !important;
+    background-clip: unset !important;
+}
+
+/* استبدال الألوان في الحدود */
+.form-control:focus,
+.service-card.selected,
+.step-item.active .step-number {
+    border-color: var(--unified-black) !important;
+}
+
+/* استبدال الألوان في الظلال */
+* {
+    box-shadow: none !important;
+}
+
+button,
+.btn,
+.form-control:focus,
+.service-card:hover,
+.step-item.active .step-number {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* استبدال الألوان في الأيقونات */
+.section-title i,
+.issue-image-upload-section .form-label i,
+.upload-hint-text i {
+    color: var(--unified-black) !important;
+}
+
+.camera-icon-container i {
+    color: var(--unified-black) !important;
+}
+
+.camera-icon-container:hover i,
+.camera-upload-label.drag-over .camera-icon-container i,
+.camera-upload-label.has-file .camera-icon-container i {
+    color: var(--unified-yellow) !important;
+}
+
+/* استبدال الألوان في الخلفيات الشفافة */
+.badge-item,
+.form-section,
+.selected-service-info .alert {
+    background: var(--unified-white) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* استبدال الألوان في service-card */
+.service-card.selected {
+    border-color: var(--unified-black) !important;
+    background: var(--unified-white) !important;
+}
+
+.service-card.selected .service-card-title {
+    color: var(--unified-black) !important;
+}
+
+/* استبدال الألوان في service-card-overlay */
+.service-card-overlay {
+    background: var(--unified-yellow) !important;
+    background-image: none !important;
+}
+
+/* إزالة التدرجات من جميع العناصر */
+*[style*="linear-gradient"],
+*[style*="gradient"] {
+    background: var(--unified-yellow) !important;
+    background-image: none !important;
+}
+
+/* استبدال rgba بألوان موحدة */
+* {
+    /* استبدال rgba(255, 107, 44, ...) بـ rgba(0, 0, 0, ...) */
+}
+
+/* استبدال الألوان في service-book */
+.btn-get-location-service {
+    background: var(--unified-yellow) !important;
+    color: var(--unified-black) !important;
+}
+
+.btn-get-location-service:hover {
+    background: var(--unified-yellow) !important;
+    color: var(--unified-black) !important;
+}
+

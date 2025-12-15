@@ -171,7 +171,7 @@
 
 
         .new_service__single__thumb {
-            height: 133px;
+            min-height: 200px;
           }
 
         .new_service__single__price {
@@ -783,16 +783,23 @@
                                     <div class="{{$columns ?? 'col-lg-4'}} mt-3 service-card-animated">
                                         <div class="new_service__single {{ $google_map_style_class }}">
                                             <div class="new_service__single__thumb">
-                                                <a href="{{route("service.list.details", $service->slug)}}">
-                                                    {!! render_image_markup_by_attachment_id($service->image, '','','thumb'); !!}
-                                                </a>
-                                                @if ($service->featured == 1)
-                                                    <div class="award_icons">
-                                                        <a href="javascript:void(0)" class="award_icons__item">
-                                                            <i class="las la-award"></i>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                @php
+                                                    $serviceIconData = get_service_icon($service->title);
+                                                    $serviceIcon = $serviceIconData['icon'];
+                                                    $iconColor = $serviceIconData['color'];
+                                                @endphp
+                                                <div style="background: #FFFFFF; display: flex; align-items: center; justify-content: center; min-height: 200px; position: relative;">
+                                                    <a href="{{route("service.list.details", $service->slug)}}" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                                                        <i class="{{$serviceIcon}}" style="color: #000000; font-size: 80px; transition: all 0.3s ease;"></i>
+                                                    </a>
+                                                    @if ($service->featured == 1)
+                                                        <div class="award_icons" style="position: absolute; top: 10px; right: 10px;">
+                                                            <a href="javascript:void(0)" class="award_icons__item">
+                                                                <i class="las la-award"></i>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
 
                                             <div class="new_service__single__contents">
@@ -800,7 +807,7 @@
                                                 <h5 class="new_service__single__contents__title">
                                                     <a href="{{ route('service.list.details',$service->slug) }}">{{ $service->title }}</a></h5>
                                                 <div class="btn-wrapper border_top">
-                                                    <a href="{{ route("service.list.book", $service->slug) }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ $book_now_text }} </a>
+                                                    <a href="{{ url('/qr') }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ $book_now_text }} </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -838,17 +845,24 @@
                                     <div class="{{ $columns ?? 'col-lg-4' }} service-card-animated">
                                         <div class="new_service__single {{ $google_map_style_class }}">
                                             <div class="new_service__single__thumb">
-                                                <a href="{{route("service.list.details", $service->slug)}}">
-                                                    {!! render_image_markup_by_attachment_id($service->image, '','','thumb'); !!}
-                                                </a>
+                                                @php
+                                                    $serviceIconData = get_service_icon($service->title);
+                                                    $serviceIcon = $serviceIconData['icon'];
+                                                    $iconColor = $serviceIconData['color'];
+                                                @endphp
+                                                <div style="background: #FFFFFF; display: flex; align-items: center; justify-content: center; min-height: 200px; position: relative;">
+                                                    <a href="{{route("service.list.details", $service->slug)}}" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                                                        <i class="{{$serviceIcon}}" style="color: #000000; font-size: 80px; transition: all 0.3s ease;"></i>
+                                                    </a>
 
-                                                @if ($service->featured == 1)
-                                                    <div class="award_icons">
-                                                        <a href="javascript:void(0)" class="award_icons__item">
-                                                            <i class="las la-award"></i>
-                                                        </a>
-                                                    </div>
-                                                @endif
+                                                    @if ($service->featured == 1)
+                                                        <div class="award_icons" style="position: absolute; top: 10px; right: 10px;">
+                                                            <a href="javascript:void(0)" class="award_icons__item">
+                                                                <i class="las la-award"></i>
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="new_service__single__contents">
 
@@ -866,7 +880,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="btn-wrapper border_top">
-                                                    <a href="{{ route("service.list.book", $service->slug) }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ $book_now_text }} </a>
+                                                    <a href="{{ url('/qr') }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ $book_now_text }} </a>
                                                 </div>
                                             </div>
                                         </div>

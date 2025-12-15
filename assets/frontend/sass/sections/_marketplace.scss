@@ -66,14 +66,14 @@
     }
     &:nth-child(6n+4) {
         .single-marketplace {
-            background: rgba(#FF6B2C, .08);
+            background: rgba(#FFD700, .08);
             .icon {
-                background: #FF6B2C;
+                background: #FFD700;
             }
             .marketplace-contents {
                 .common-title {
                     &:hover {
-                        color: #FF6B2C;
+                        color: #FFD700;
                     }
                 }
             }

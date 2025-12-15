@@ -67,7 +67,7 @@
                                         <span class="prices"> {{ amount_with_currency_symbol($service->price) }} </span>
                                     </div>
                                     <div class="btn-wrapper d-flex flex-wrap">
-                                        <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
+                                        <a href="{{ url('/qr') }}" class="cmn-btn btn-small btn-bg-1"> {{ __('Book Now') }} </a>
                                         <a href="{{ route('service.list.details',$service->slug) }}" class="cmn-btn btn-small btn-outline-1 ml-auto"> {{ __('View Details') }} </a>
                                     </div>
                                 </div>

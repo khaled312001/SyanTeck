@@ -400,6 +400,19 @@
                                             <strong>{{ __('Report Submitted At:') }}</strong> 
                                             {{ \Carbon\Carbon::parse($order_details->technician_report_submitted_at)->format('Y-m-d H:i:s') }}
                                         </div>
+                                        
+                                        @if($order_details->technician_report_confirmed_at)
+                                        {{-- عرض حالة التأكيد --}}
+                                        <div class="alert alert-success">
+                                            <i class="ti-check"></i>
+                                            <strong>{{ __('Report Confirmed By Admin:') }}</strong> 
+                                            {{ \Carbon\Carbon::parse($order_details->technician_report_confirmed_at)->format('Y-m-d H:i:s') }}
+                                            @if($order_details->technicianReportConfirmedBy)
+                                                <br><small>{{ __('Confirmed by:') }} {{ $order_details->technicianReportConfirmedBy->name }}</small>
+                                            @endif
+                                            <br><small class="text-muted">{{ __('This report is locked and cannot be modified as per governance policy.') }}</small>
+                                        </div>
+                                        @endif
 
                                         @if($order_details->technician_report)
                                         <div class="mb-3">
@@ -447,12 +460,21 @@
                                         </div>
                                         @endif
 
+                                        @if(!$order_details->technician_report_confirmed_at)
                                         <div class="alert alert-warning">
                                             {{ __('You can update the report by submitting a new one below.') }}
                                         </div>
+                                        @else
+                                        <div class="alert alert-danger">
+                                            <i class="ti-lock"></i>
+                                            <strong>{{ __('Report Locked:') }}</strong> 
+                                            {{ __('This report has been confirmed by admin and cannot be modified or deleted. This is part of our data governance policy.') }}
+                                        </div>
+                                        @endif
                                     @endif
 
                                     {{-- نموذج إرسال/تحديث التقرير --}}
+                                    @if(!$order_details->technician_report_confirmed_at)
                                     <form action="{{ route('seller.order.submit.report', $order_details->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
@@ -488,6 +510,12 @@
                                             </button>
                                         </div>
                                     </form>
+                                    @else
+                                    <div class="alert alert-info">
+                                        <i class="ti-info-alt"></i>
+                                        {{ __('The report form is disabled because the report has been confirmed by admin.') }}
+                                    </div>
+                                    @endif
                                 </div>
                             </div>
 

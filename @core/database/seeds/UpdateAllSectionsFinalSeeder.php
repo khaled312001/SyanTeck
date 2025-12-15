@@ -18,7 +18,7 @@ class UpdateAllSectionsFinalSeeder extends Seeder
         'Top Technicians' => 'أفضل الفنيين',
         
         // Become Seller/Technician
-        'Join with us as a service provider and earn a good remuneration' => 'انضم إلينا كمقدم خدمة واكسب راتباً جيداً',
+        'Join with us as a service provider and earn a good remuneration' => 'انضم إلي فريق عمل صيانة تك',
         'Get regular works' => 'احصل على أعمال منتظمة',
         'Generous service buyers' => 'عملاء كرماء',
         'Start As Seller' => 'انضم كفني',

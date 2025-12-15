@@ -3,22 +3,22 @@
 --------------------------------------------------------------*/
 
 :root {
-  --main-color-one: #F13B3A;
-  --main-color-two: #FBAF5D;
-  --main-color-three: #EFA48D;
-  --main-color-four: #7C4DFF;
-  --secondary-color: #FEEBE4;
-  --heading-color-one: #333333;
-  --heading-color-two: #666666;
-  --heading-color-three: #333333;
-  --hover-color-one: #FF6280;
-  --hover-color-two: #FF695C;
-  --paragraph-color: #666666;
-  --heading-font-one: 'Playfair Display', serif;
-  --body-font: 'Roboto', sans-serif;
-  --extra-font: 'Noto Sans JP', sans-serif;
-  --extra-font-two: 'Source Serif Pro', serif;
-  --extra-font-three: 'Oswald', sans-serif;
+  --main-color-one: #FFD700;
+  --main-color-two: #FFD700;
+  --main-color-three: #FFD700;
+  --main-color-four: #FFD700;
+  --secondary-color: #FFFFFF;
+  --heading-color-one: #000000;
+  --heading-color-two: #000000;
+  --heading-color-three: #000000;
+  --hover-color-one: #FFD700;
+  --hover-color-two: #FFD700;
+  --paragraph-color: #000000;
+  --heading-font-one: 'Tajawal', sans-serif;
+  --body-font: 'Tajawal', sans-serif;
+  --extra-font: 'Tajawal', sans-serif;
+  --extra-font-two: 'Tajawal', sans-serif;
+  --extra-font-three: 'Tajawal', sans-serif;
 }
 
 html {
@@ -118,8 +118,8 @@ pre {
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNmNWY1ZjUiLz48c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2U2ZTZlNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==);
   background-size: 100%;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #f5f5f5), color-stop(50%, #e6e6e6));
-  background-image: -webkit-linear-gradient(#f5f5f5 50%, #e6e6e6 50%);
-  background-image: linear-gradient(#f5f5f5 50%, #e6e6e6 50%);
+  background-image: none;
+  background: #FFFFFF;
   background-size: 38px 38px;
   border: 1px solid #d4d4d4;
   display: block;
@@ -1303,26 +1303,26 @@ object {
   }
 }
 
-// custom color
+// custom color - الهوية البصرية: أسود، أصفر، أبيض فقط
 
 .bg-color-a {
-  background-color: #18C96E !important;
+  background-color: #FFD700 !important;
 }
 
 .bg-color-b {
-  background-color: #FF9900 !important;
+  background-color: #FFD700 !important;
 }
 
 .bg-color-c {
-  background-color: #7C4DFF !important;
+  background-color: #FFD700 !important;
 }
 
 .bg-color-d {
-  background-color: #00BCD4 !important;
+  background-color: #FFD700 !important;
 }
 
 .derk-vertion {
-  background-color: #070224 !important;
+  background-color: #000000 !important;
 }
 
 .border-bottom-none {

@@ -329,6 +329,7 @@ Route::group(['prefix'=>'orders'],function(){
     Route::post('/cancel/order-delete/{id}','OrdersController@cancelOrderDelete')->name('admin.order.cancel.delete');
     Route::match(['get','post'],'/order-request-complete/{id?}','OrdersController@orderCompleteRequest')->name('admin.order.complete.request');
     Route::get('/order-details/{id}','OrdersController@orderDetails')->name('admin.orders.details');
+    Route::post('/order-details/{id}/confirm-report','OrdersController@confirmTechnicianReport')->name('admin.orders.confirm.report');
     Route::post('/order-details/{id}/set-pricing','OrdersController@setAdminPricing')->name('admin.orders.set.pricing');
     
     // الفواتير والشهادات

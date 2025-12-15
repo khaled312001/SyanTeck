@@ -1,18 +1,20 @@
-//== Template Main Color
-$white: #fff;
-$danger: #dc3545;
-$border: #726c94;
-$Prussian: #002359;
-$black: #000;
-$Pampas: #F3F0EB;
-$Violet: #9238A4;
-$SUGAR-MILK: #FFF9F3;
-$Gray: #F2F3F5;
-$Zircon: #F1F6FF;
-$steam-color: #ddd;
-$main-color-one: #1DBF73;
-$main-color-two: #47C8ED;
-$main-color-three: #FF6B2C;
+//== Template Main Color - الهوية البصرية: أسود، أصفر، أبيض فقط - ألوان موحدة بدون تدرجات
+$white: #FFFFFF;
+$black: #000000;
+$yellow: #FFD700;
+// ألوان محايدة من الأسود والأبيض
+$danger: #000000;
+$border: #000000;
+$Prussian: #000000;
+$Pampas: #FFFFFF;
+$Violet: #000000;
+$SUGAR-MILK: #FFFFFF;
+$Gray: #FFFFFF;
+$Zircon: #FFFFFF;
+$steam-color: #000000;
+$main-color-one: #FFD700;
+$main-color-two: #FFD700;
+$main-color-three: #FFD700;
 //== social media colors
 $facebook: #3b5999;
 $twitter: #55acee;
@@ -22,7 +24,7 @@ $dribbble: #ea4c89;
 $behance: #131418;
 $google-plus: #dd4b39;
 $linkedin: #326DE4;
-$instagram: linear-gradient(to top, #fea038, #ff8841, #ff704e, #ff575f, #ff3e71, #fa3080, #f12690, #e523a0, #d12dac, #bb37b7, #a140bf, #8347c5);
+$instagram: #FFD700;
 
 //  transition
 $transition: all 0.3s ease-in;

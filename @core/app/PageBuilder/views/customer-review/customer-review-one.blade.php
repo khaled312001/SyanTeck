@@ -1,8 +1,8 @@
 <!-- Testimonial area start -->
-<section class="new_testimonial_area padding-top-50 padding-bottom-100" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
+<section class="new_testimonial_area section-padding-large section-wrapper" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
     <div class="container">
-        <div class="new_sectionTitle">
-            <h2 class="title">{{ $section_title }}</h2>
+        <div class="section-title-wrapper">
+            <h2 class="section-title title">{{ $section_title }}</h2>
         </div>
         <div class="row mt-5">
             <div class="col-lg-12">

@@ -12,6 +12,7 @@ Route::group(['prefix'=>'technician','middleware'=>['auth','technician','setlang
     Route::post('/orders/{id}/accept', 'TechnicianController@acceptOrder')->name('technician.orders.accept');
     Route::post('/orders/{id}/reject', 'TechnicianController@rejectOrder')->name('technician.orders.reject');
     Route::post('/orders/{id}/status', 'TechnicianController@updateStatus')->name('technician.orders.update.status');
+    Route::post('/orders/{id}/location', 'TechnicianController@updateLocation')->name('technician.orders.update.location');
     
     // رفع صور العطل
     Route::post('/orders/{id}/upload-images', 'TechnicianController@uploadIssueImages')->name('technician.orders.upload.images');

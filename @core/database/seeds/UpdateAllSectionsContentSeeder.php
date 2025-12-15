@@ -19,7 +19,7 @@ class UpdateAllSectionsContentSeeder extends Seeder
         'Seller Profile List Two' => 'أفضل الفنيين لهذا الشهر',
         
         // Become Seller/Technician Section
-        'Join with us as a service provider and earn a good remuneration' => 'انضم إلينا كمقدم خدمة واكسب راتباً جيداً',
+        'Join with us as a service provider and earn a good remuneration' => 'انضم إلي فريق عمل صيانة تك',
         'Get regular works' => 'احصل على أعمال منتظمة',
         'Generous service buyers' => 'عملاء كرماء',
         'Start As Seller' => 'انضم كفني',

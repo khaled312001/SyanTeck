@@ -1,8 +1,8 @@
 <!-- Service area starts -->
-<section class="new_services_area padding-top-50 padding-bottom-50" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
+<section class="new_services_area section-padding section-wrapper" data-padding-top="{{$padding_top}}" data-padding-bottom="{{$padding_bottom}}" style="background-color:{{$section_bg}}">
     <div class="container">
-        <div class="new_sectionTitle text-left title_flex">
-            <h2 class="title">{{ $section_title }}</h2>
+        <div class="section-title-wrapper text-left title_flex">
+            <h2 class="section-title title">{{ $section_title }}</h2>
             <form action="{{ get_static_option('select_home_page_search_service_page_url') ?? url('/service-list') }}" method="get">
                <button class="new_exploreBtn bg-transparent border-0">{{ $explore_text }} <i class="fa-solid fa-angle-right"></i></button>
                 <input type="hidden" name="sortby" value="featured"/>
@@ -10,11 +10,17 @@
         </div>
         <div class="row g-4 mt-4">
             @foreach($services as $service)
+            @php
+                // استخدام helper function لتحديد الأيقونة
+                $serviceIconData = get_service_icon($service->title);
+                $serviceIcon = $serviceIconData['icon'];
+                $iconColor = $serviceIconData['color'];
+            @endphp
             <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="new_service__single">
-                    <div class="new_service__single__thumb">
-                        <a href="{{ route('service.list.details',$service->slug) }}">
-                            {!! render_image_markup_by_attachment_id($service->image, '','','thumb'); !!}
+                    <div class="new_service__single__thumb" style="background: #FFFFFF; display: flex; align-items: center; justify-content: center; min-height: 200px;">
+                        <a href="{{ route('service.list.details',$service->slug) }}" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                            <i class="{{$serviceIcon}}" style="color: #000000; font-size: 80px; transition: all 0.3s ease;"></i>
                         </a>
                         <div class="award_icons">
                             <a href="javascript:void(0)" class="award_icons__item">
@@ -52,7 +58,7 @@
 
                         <div class="btn-wrapper border_top">
                             <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-outline-border w-100 radius-5"
-                               style="background:{{$btn_color}}; color:{{$button_text_color}}">{{ $book_appoinment }} </a>
+                               style="background:#FFD700 !important; color:#000 !important;">{{ $book_appoinment }} </a>
                         </div>
                     </div>
                 </div>
@@ -63,3 +69,15 @@
     </div>
 </section>
 <!-- Service area end -->
+<style>
+.cmn-btn.btn-outline-border {
+    background: #FFD700 !important;
+    color: #000 !important;
+    border: none !important;
+}
+.cmn-btn.btn-outline-border:hover {
+    background: #FFD700 !important;
+    color: #000 !important;
+    opacity: 0.9;
+}
+</style>

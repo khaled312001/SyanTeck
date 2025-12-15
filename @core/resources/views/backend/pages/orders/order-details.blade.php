@@ -183,28 +183,127 @@
                                @endif
                                
                                @if($order_details->technician)
-                               <div class="border-bottom mb-3 mt-4">
-                                   <h5>{{ __('Assigned Technician') }}</h5>
+                               <!-- Premium Technician Card -->
+                               <div class="technician-card-wrapper mt-4 mb-4">
+                                   <div class="technician-premium-card">
+                                       <!-- Card Header with Logo -->
+                                       <div class="technician-card-header">
+                                           <div class="technician-card-logo">
+                                               {!! render_image_markup_by_attachment_id(get_static_option('site_logo'), 'logo') !!}
+                                           </div>
+                                           <div class="technician-card-title">
+                                               <h4 class="mb-0">{{ __('Assigned Technician') }}</h4>
+                                               <p class="text-muted mb-0" style="font-size: 12px;">{{ __('Technician Information') }}</p>
+                                           </div>
+                                       </div>
+                                       
+                                       <!-- Verification Badge -->
+                                       @if($order_details->technician->verified_by_national_id)
+                                       <div class="technician-verified-badge">
+                                           <i class="las la-check-circle"></i>
+                                           <span>{{ __('Verified by National ID') }}</span>
+                                       </div>
+                                       @endif
+                                       
+                                       <!-- Card Body -->
+                                       <div class="technician-card-body">
+                                           <div class="technician-info-grid">
+                                               <!-- Name -->
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-user"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Name') }}</label>
+                                                       <p>{{ $order_details->technician->name }}</p>
+                                                   </div>
+                                               </div>
+                                               
+                                               <!-- Employee Number -->
+                                               @if($order_details->technician->employee_number)
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-id-card"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Employee Number') }}</label>
+                                                       <p>{{ $order_details->technician->employee_number }}</p>
+                                                   </div>
+                                               </div>
+                                               @endif
+                                               
+                                               <!-- Job Type -->
+                                               @if($order_details->technician->job_type)
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-briefcase"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Job Type') }}</label>
+                                                       <p>{{ $order_details->technician->job_type }}</p>
+                                                   </div>
+                                               </div>
+                                               @endif
+                                               
+                                               <!-- Phone -->
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-phone"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Phone') }}</label>
+                                                       <p>
+                                                           <a href="tel:{{ $order_details->technician->phone }}" style="color: inherit; text-decoration: none;">
+                                                               {{ $order_details->technician->phone ?? __('N/A') }}
+                                                           </a>
+                                                       </p>
+                                                   </div>
+                                               </div>
+                                               
+                                               <!-- Email -->
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-envelope"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Email') }}</label>
+                                                       <p>
+                                                           <a href="mailto:{{ $order_details->technician->email }}" style="color: inherit; text-decoration: none;">
+                                                               {{ $order_details->technician->email ?? __('N/A') }}
+                                                           </a>
+                                                       </p>
+                                                   </div>
+                                               </div>
+                                               
+                                               <!-- Assigned At -->
+                                               @if($order_details->assigned_at)
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-calendar-check"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Assigned At') }}</label>
+                                                       <p>{{ $order_details->assigned_at->format('Y-m-d H:i:s') }}</p>
+                                                   </div>
+                                               </div>
+                                               @endif
+                                               
+                                               <!-- Assigned By -->
+                                               @if($order_details->assignedBy)
+                                               <div class="technician-info-item">
+                                                   <div class="technician-info-icon">
+                                                       <i class="las la-user-tie"></i>
+                                                   </div>
+                                                   <div class="technician-info-content">
+                                                       <label>{{ __('Assigned By') }}</label>
+                                                       <p>{{ $order_details->assignedBy->name }}</p>
+                                                   </div>
+                                               </div>
+                                               @endif
+                                           </div>
+                                       </div>
+                                   </div>
                                </div>
-                               <div class="checkbox-inlines">
-                                   <label><strong>{{ __('Technician Name:') }} </strong>{{ $order_details->technician->name }}</label>
-                               </div>
-                               <div class="checkbox-inlines">
-                                   <label><strong>{{ __('Technician Phone:') }} </strong>{{ $order_details->technician->phone ?? 'N/A' }}</label>
-                               </div>
-                               <div class="checkbox-inlines">
-                                   <label><strong>{{ __('Technician Email:') }} </strong>{{ $order_details->technician->email ?? 'N/A' }}</label>
-                               </div>
-                               @if($order_details->assigned_at)
-                               <div class="checkbox-inlines">
-                                   <label><strong>{{ __('Assigned At:') }} </strong>{{ $order_details->assigned_at->format('Y-m-d H:i:s') }}</label>
-                               </div>
-                               @endif
-                               @if($order_details->assignedBy)
-                               <div class="checkbox-inlines">
-                                   <label><strong>{{ __('Assigned By:') }} </strong>{{ $order_details->assignedBy->name }}</label>
-                               </div>
-                               @endif
                                @endif
                                
                                @if($order_details->urgency_level)
@@ -589,6 +688,36 @@
                                 </div>
                                 @endif
 
+                                {{-- قسم تأكيد التقرير من الأدمن --}}
+                                @if($order_details->technician_report_submitted_at && !$order_details->technician_report_confirmed_at)
+                                <div class="border-top pt-4 mt-4">
+                                    <h5 class="mb-3">{{ __('Confirm Technician Report') }}</h5>
+                                    <div class="alert alert-warning">
+                                        <i class="ti-info-alt"></i>
+                                        <strong>{{ __('Report Pending Confirmation:') }}</strong> 
+                                        {{ __('The technician has submitted a report. Please review and confirm it. Once confirmed, the technician will not be able to modify or delete it.') }}
+                                    </div>
+                                    <form action="{{ route('admin.orders.confirm.report', $order_details->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to confirm this report? Once confirmed, the technician will not be able to modify it.') }}');">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="ti-check"></i> {{ __('Confirm Report') }}
+                                        </button>
+                                    </form>
+                                </div>
+                                @elseif($order_details->technician_report_confirmed_at)
+                                <div class="border-top pt-4 mt-4">
+                                    <div class="alert alert-success">
+                                        <i class="ti-check"></i>
+                                        <strong>{{ __('Report Confirmed:') }}</strong> 
+                                        {{ \Carbon\Carbon::parse($order_details->technician_report_confirmed_at)->format('Y-m-d H:i:s') }}
+                                        @if($order_details->technicianReportConfirmedBy)
+                                            <br><small>{{ __('Confirmed by:') }} {{ $order_details->technicianReportConfirmedBy->name }}</small>
+                                        @endif
+                                        <br><small class="text-muted">{{ __('This report is locked and cannot be modified by the technician as per governance policy.') }}</small>
+                                    </div>
+                                </div>
+                                @endif
+
                                 {{-- قسم التسعير --}}
                                 <div class="border-top pt-4 mt-4">
                                     <h5 class="mb-3">{{ __('Admin Pricing') }}</h5>
@@ -695,4 +824,210 @@
         })(jQuery);
     </script>
 @endsection
+
+@push('style')
+<style>
+/* Premium Technician Card Styles for Admin Panel */
+.technician-card-wrapper {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.technician-premium-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.technician-premium-card:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.technician-card-header {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.technician-card-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.technician-card-logo {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+}
+
+.technician-card-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.technician-card-title {
+    flex: 1;
+    color: #1a1a1a;
+    z-index: 1;
+}
+
+.technician-card-title h4 {
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.technician-verified-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(40, 167, 69, 0.95);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    z-index: 10;
+    animation: pulse 2s infinite;
+}
+
+.technician-verified-badge i {
+    font-size: 16px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(40, 167, 69, 0.5);
+    }
+}
+
+.technician-card-body {
+    padding: 30px;
+}
+
+.technician-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.technician-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.technician-info-item:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateX(5px);
+}
+
+.technician-info-icon {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1a1a1a;
+    font-size: 20px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3);
+}
+
+.technician-info-content {
+    flex: 1;
+}
+
+.technician-info-content label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.technician-info-content p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    word-break: break-word;
+}
+
+.technician-info-content a {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.technician-info-content a:hover {
+    color: #FFD700;
+}
+
+@media (max-width: 768px) {
+    .technician-card-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .technician-card-logo {
+        margin: 0 auto;
+    }
+    
+    .technician-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .technician-verified-badge {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-bottom: 15px;
+        display: inline-flex;
+    }
+}
+</style>
+@endpush
 

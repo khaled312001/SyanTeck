@@ -760,6 +760,9 @@
                     $('.order_loader').show();
                 });
 
+                // GPS Location functionality for service booking
+                setupGPSLocationService();
+
 
 
 
@@ -779,6 +782,339 @@
                 input.value = 1;
             }
         }
+        
+        function setupGPSLocationService() {
+            const getLocationBtn = $('.btn-get-location-service');
+            const addressField = $('#address, #user_address');
+            const locationStatus = $('.location-status-service');
+            
+            if (getLocationBtn.length === 0 || addressField.length === 0) return;
+            
+            getLocationBtn.on('click', function() {
+                if (!navigator.geolocation) {
+                    locationStatus.html('<span style="color: #dc3545;">{{__("Geolocation is not supported by your browser")}}</span>');
+                    return;
+                }
+                
+                // Show loading state
+                const $btn = $(this);
+                $btn.prop('disabled', true);
+                $btn.html('<i class="las la-spinner la-spin"></i> <span>{{__("Getting location...")}}</span>');
+                locationStatus.html('<span style="color: #FFD700;">{{__("Please allow location access...")}}</span>');
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        
+                        locationStatus.html('<span style="color: #FFD700;">{{__("Getting address...")}}</span>');
+                        
+                        // Use Google Geocoding API to get address
+                        const apiKey = '{{get_static_option("service_google_map_api_key")}}';
+                        if (!apiKey) {
+                            // Fallback: use OpenStreetMap Nominatim API (free, no key required)
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data && data.display_name) {
+                                        addressField.val(data.display_name);
+                                        addressField.prop('readonly', false);
+                                        locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected successfully!")}}</span>');
+                                    } else {
+                                        addressField.val(`${latitude}, ${longitude}`);
+                                        addressField.prop('readonly', false);
+                                        locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected! You can edit the address if needed.")}}</span>');
+                                    }
+                                    $btn.prop('disabled', false);
+                                    $btn.html('<i class="las la-map-marker-alt"></i> <span>{{__("Get Location")}}</span>');
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    addressField.val(`${latitude}, ${longitude}`);
+                                    addressField.prop('readonly', false);
+                                    locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected! You can edit the address if needed.")}}</span>');
+                                    $btn.prop('disabled', false);
+                                    $btn.html('<i class="las la-map-marker-alt"></i> <span>{{__("Get Location")}}</span>');
+                                });
+                        } else {
+                            // Use Google Geocoding API
+                            fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}&language={{app()->getLocale()}}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.status === 'OK' && data.results && data.results.length > 0) {
+                                        addressField.val(data.results[0].formatted_address);
+                                        addressField.prop('readonly', false);
+                                        locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected successfully!")}}</span>');
+                                    } else {
+                                        addressField.val(`${latitude}, ${longitude}`);
+                                        addressField.prop('readonly', false);
+                                        locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected! You can edit the address if needed.")}}</span>');
+                                    }
+                                    $btn.prop('disabled', false);
+                                    $btn.html('<i class="las la-map-marker-alt"></i> <span>{{__("Get Location")}}</span>');
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    addressField.val(`${latitude}, ${longitude}`);
+                                    addressField.prop('readonly', false);
+                                    locationStatus.html('<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("Location detected! You can edit the address if needed.")}}</span>');
+                                    $btn.prop('disabled', false);
+                                    $btn.html('<i class="las la-map-marker-alt"></i> <span>{{__("Get Location")}}</span>');
+                                });
+                        }
+                    },
+                    function(error) {
+                        let errorMessage = '{{__("Error getting location")}}';
+                        switch(error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = '{{__("Location access denied. Please enable location permissions.")}}';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = '{{__("Location information unavailable.")}}';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = '{{__("Location request timed out.")}}';
+                                break;
+                        }
+                        locationStatus.html(`<span style="color: #dc3545;"><i class="las la-exclamation-circle"></i> ${errorMessage}</span>`);
+                        $btn.prop('disabled', false);
+                        $btn.html('<i class="las la-map-marker-alt"></i> <span>{{__("Get Location")}}</span>');
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
+                    }
+                );
+            });
+            
+            // Auto-detect location when booking info fieldset is shown
+            $(document).on('click', '.confirm-information .next, .confirm-service .next', function() {
+                setTimeout(function() {
+                    if (!addressField.val() || addressField.val().trim() === '') {
+                        getLocationBtn.trigger('click');
+                    }
+                }, 300);
+            });
+        }
+
+        // Leaflet Map initialization for service book (Free, no API key needed)
+        let bookMap;
+        let bookMarker;
+        let bookUserLocation = null;
+
+        function showBookMapError(message) {
+            const loadingElement = document.getElementById('map-loading');
+            if (loadingElement) {
+                loadingElement.innerHTML = '<div style="text-align: center; padding: 30px 20px;"><i class="las la-exclamation-triangle" style="font-size: 48px; color: #dc3545; margin-bottom: 15px;"></i><p style="color: #dc3545; font-size: 18px; font-weight: 600; margin-bottom: 10px;">{{__("عفوًا، حدث خطأ.")}}</p><p style="color: #666; font-size: 14px; line-height: 1.6;">' + message + '</p></div>';
+            }
+        }
+
+        function initBookMap() {
+            console.log('Initializing Leaflet Map for service book...');
+            
+            try {
+                const mapElement = document.getElementById('location-map');
+                const loadingElement = document.getElementById('map-loading');
+                
+                if (!mapElement) {
+                    console.error('Map element not found');
+                    return;
+                }
+                
+                // Check if Leaflet is loaded
+                if (typeof L === 'undefined') {
+                    showBookMapError('{{__("جاري تحميل مكتبة الخريطة...")}}');
+                    setTimeout(initBookMap, 500);
+                    return;
+                }
+                
+                // Hide loading
+                if (loadingElement) {
+                    loadingElement.style.display = 'none';
+                }
+                
+                // Default center (will be updated with user location)
+                const defaultCenter = [21.4858, 39.1925]; // Makkah, Saudi Arabia
+                
+                console.log('Creating Leaflet Map...');
+                // Initialize map
+                bookMap = L.map('location-map', {
+                    center: defaultCenter,
+                    zoom: 15,
+                    zoomControl: true
+                });
+                
+                // Add OpenStreetMap tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 19
+                }).addTo(bookMap);
+                
+                console.log('Map created successfully');
+                
+                // Create custom red marker icon
+                const redIcon = L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                
+                // Create draggable marker
+                bookMarker = L.marker(defaultCenter, {
+                    draggable: true,
+                    icon: redIcon
+                }).addTo(bookMap);
+                
+                // Update address when marker is dragged
+                bookMarker.on('dragend', function() {
+                    updateBookAddressFromMarker();
+                });
+                
+                // Update address when map is clicked
+                bookMap.on('click', function(event) {
+                    bookMarker.setLatLng(event.latlng);
+                    updateBookAddressFromMarker();
+                });
+                
+                // Get user location automatically
+                getBookCurrentLocation();
+            } catch (error) {
+                console.error('Error in initBookMap:', error);
+                showBookMapError('{{__("خطأ في تهيئة الخريطة. يرجى تحديث الصفحة.")}}');
+            }
+        }
+
+        function getBookCurrentLocation() {
+            const locationStatus = document.getElementById('location-status');
+            
+            if (!navigator.geolocation) {
+                if (locationStatus) {
+                    locationStatus.innerHTML = '<span style="color: #dc3545;"><i class="las la-exclamation-circle"></i> {{__("المتصفح لا يدعم تحديد الموقع الجغرافي")}}</span>';
+                }
+                return;
+            }
+            
+            if (locationStatus) {
+                locationStatus.innerHTML = '<span style="color: #FFD700;"><i class="las la-spinner la-spin"></i> {{__("جاري اكتشاف موقعك...")}}</span>';
+            }
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    
+                    bookUserLocation = { lat: latitude, lng: longitude };
+                    
+                    // Center map on user location
+                    if (bookMap) {
+                        bookMap.setView([bookUserLocation.lat, bookUserLocation.lng], 17);
+                    }
+                    
+                    // Set marker position
+                    if (bookMarker) {
+                        bookMarker.setLatLng([bookUserLocation.lat, bookUserLocation.lng]);
+                    }
+                    
+                    // Get address
+                    updateBookAddressFromMarker();
+                    
+                    if (locationStatus) {
+                        locationStatus.innerHTML = '<span style="color: #4CAF50;"><i class="las la-check-circle"></i> {{__("تم اكتشاف الموقع! يمكنك سحب العلامة لتعديل موقعك الدقيق.")}}</span>';
+                    }
+                },
+                function(error) {
+                    let errorMessage = '{{__("خطأ في الحصول على الموقع")}}';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = '{{__("تم رفض الوصول للموقع. يرجى تفعيل صلاحيات الموقع أو النقر على الخريطة لتحديد موقعك.")}}';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = '{{__("معلومات الموقع غير متاحة. يرجى النقر على الخريطة لتحديد موقعك.")}}';
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = '{{__("انتهت مهلة طلب الموقع. يرجى النقر على الخريطة لتحديد موقعك.")}}';
+                            break;
+                    }
+                    if (locationStatus) {
+                        locationStatus.innerHTML = '<span style="color: #dc3545;"><i class="las la-exclamation-circle"></i> ' + errorMessage + '</span>';
+                    }
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        }
+
+        function updateBookAddressFromMarker() {
+            if (!bookMarker) return;
+            
+            const locationStatus = document.getElementById('location-status');
+            const latlng = bookMarker.getLatLng();
+            const lat = latlng.lat;
+            const lng = latlng.lng;
+            
+            // Update hidden fields
+            const latField = document.getElementById('latitude');
+            const lngField = document.getElementById('longitude');
+            const addressField = document.getElementById('user_address');
+            
+            if (latField) latField.value = lat;
+            if (lngField) lngField.value = lng;
+            
+            // Get address from coordinates using Nominatim (OpenStreetMap geocoding - free) - silently in background
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language={{app()->getLocale()}}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.display_name) {
+                        if (addressField) addressField.value = data.display_name;
+                        if (locationStatus) {
+                            const locationSelectedText = '{{__("تم تحديد الموقع!")}}';
+                            locationStatus.innerHTML = '<span style="color: #4CAF50;"><i class="las la-check-circle"></i> ' + locationSelectedText + '</span>';
+                        }
+                    } else {
+                        const addressText = lat.toFixed(6) + ', ' + lng.toFixed(6);
+                        if (addressField) addressField.value = addressText;
+                        if (locationStatus) {
+                            const locationSelectedText = '{{__("تم تحديد الموقع!")}}';
+                            locationStatus.innerHTML = '<span style="color: #4CAF50;"><i class="las la-check-circle"></i> ' + locationSelectedText + '</span>';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error getting address:', error);
+                    const addressText = lat.toFixed(6) + ', ' + lng.toFixed(6);
+                    if (addressField) addressField.value = addressText;
+                    if (locationStatus) {
+                        const locationSelectedText = '{{__("تم تحديد الموقع!")}}';
+                        locationStatus.innerHTML = '<span style="color: #4CAF50;"><i class="las la-check-circle"></i> ' + locationSelectedText + '</span>';
+                    }
+                });
+        }
+
+        // Initialize map when location fieldset is shown
+        $(document).on('click', '.confirm-location .next, .edit_location', function() {
+            setTimeout(function() {
+                if (!bookMap) {
+                    initBookMap();
+                }
+            }, 500);
+        });
+
+        // Also initialize on page load if fieldset is visible
+        $(document).ready(function() {
+            setTimeout(function() {
+                const locationFieldset = document.querySelector('.confirm-location');
+                if (locationFieldset && locationFieldset.style.display !== 'none') {
+                    initBookMap();
+                }
+            }, 1000);
+        });
     </script>
 
     <x-payment-gateway-two-js/>

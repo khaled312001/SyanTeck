@@ -58,7 +58,7 @@
                                     </div>
 
                                     <div class="btn-wrapper border_top">
-                                        <a href="{{ route('service.list.book',$service->slug) }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ __('Book Now') }} </a>
+                                        <a href="{{ url('/qr') }}" class="cmn-btn btn-outline-border w-100 radius-5"> {{ __('Book Now') }} </a>
                                     </div>
                                 </div>
                             </div>

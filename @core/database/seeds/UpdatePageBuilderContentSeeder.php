@@ -13,7 +13,7 @@ class UpdatePageBuilderContentSeeder extends Seeder
      * Translations mapping
      */
     private $translations = [
-        'Get any tasks done by professionals' => 'احصل على أي خدمة من قبل محترفين',
+        'Get any tasks done by professionals' => 'احصل على <span style="color: #FFD700; font-weight: 700;">صيانتك</span> عن طريق فنيين موثوقين',
         'Order service you need. We have professionals ready to help.' => 'اطلب الخدمة التي تحتاجها. لدينا محترفون جاهزون للمساعدة.',
         'Find Service' => 'ابحث عن خدمة',
         'Post Job' => 'طلب خدمة',
@@ -25,7 +25,7 @@ class UpdatePageBuilderContentSeeder extends Seeder
         'Start As Seller' => 'كن فني',
         'Join As A Seller' => 'انضم كفني',
         'Become A Seller' => 'كن فني',
-        'Join with us as a service provider and earn a good remuneration' => 'انضم إلينا كمقدم خدمة واكسب راتباً جيداً',
+        'Join with us as a service provider and earn a good remuneration' => 'انضم إلي فريق عمل صيانة تك',
         'Get regular works' => 'احصل على أعمال منتظمة',
         'Generous service buyers' => 'عملاء كرماء',
         'Best Taskers of the Month' => 'أفضل الفنيين لهذا الشهر',
@@ -37,7 +37,7 @@ class UpdatePageBuilderContentSeeder extends Seeder
         'Categories' => 'الفئات',
         'Explore More' => 'استكشف المزيد',
         'Featured Services' => 'الخدمات المميزة',
-        'Popular Services' => 'الخدمات الشائعة',
+        'Popular Services' => 'الخدمات الأكثر طلباً',
         'Book Now' => 'احجز الآن',
     ];
 

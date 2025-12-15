@@ -32,8 +32,6 @@
                                 <th>{{__('Buyer Email')}}</th>
                                 <th>{{__('Buyer Phone')}}</th>
                                 <th>{{__('Buyer Address')}}</th>
-                                <th>{{__('Total Amount')}}</th>
-                                <th>{{__('Payment Status')}}</th>
                                 <th>{{__('Order Status')}}</th>
                                 <th>{{__('Order Type')}}</th>
                                 <th>{{__('Action')}}</th>
@@ -107,14 +105,33 @@
                     processing: true,
                     serverSide: true,
                     ajax: "{{ route('admin.orders') }}",
+                    language: {
+                        processing: "{{ __('Processing...') }}",
+                        search: "{{ __('Search:') }}",
+                        lengthMenu: "{{ __('Show _MENU_ entries') }}",
+                        info: "{{ __('Showing _START_ to _END_ of _TOTAL_ entries') }}",
+                        infoEmpty: "{{ __('Showing 0 to 0 of 0 entries') }}",
+                        infoFiltered: "{{ __('(filtered from _MAX_ total entries)') }}",
+                        loadingRecords: "{{ __('Loading...') }}",
+                        zeroRecords: "{{ __('No matching records found') }}",
+                        emptyTable: "{{ __('No data available in table') }}",
+                        paginate: {
+                            first: "{{ __('First') }}",
+                            previous: "{{ __('Previous') }}",
+                            next: "{{ __('Next') }}",
+                            last: "{{ __('Last') }}"
+                        },
+                        aria: {
+                            sortAscending: "{{ __(': activate to sort column ascending') }}",
+                            sortDescending: "{{ __(': activate to sort column descending') }}"
+                        }
+                    },
                     columns: [
                         {data: 'id', name: 'id'},
                         {data: 'name', name: '', orderable: true, searchable: true},
                         {data: 'email', name: '', orderable: true, searchable: true},
                         {data: 'phone', name: '', orderable: true, searchable: true},
                         {data: 'address', name: '', orderable: true, searchable: true},
-                        {data: 'amount', name: '', orderable: true, searchable: true},
-                        {data: 'payment_status', name: '',orderable: true, searchable: true},
                         {data: 'status', name: ''},
                         {data: 'is_order_online', name: '',orderable: true, searchable: true},
                         {data: 'action', name: '', orderable: false, searchable: true},
@@ -130,7 +147,7 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, change it!'
+                        confirmButtonText: '{{__("Yes, change it!")}}'
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $(this).next().find('.swal_form_cancel_order_submit_btn').trigger('click');

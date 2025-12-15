@@ -49,11 +49,16 @@
         <div class="row">
             @if(!empty($services) && $services->count() > 0)
                 @foreach($services as $service)
+                @php
+                    $serviceIconData = get_service_icon($service->title);
+                    $serviceIcon = $serviceIconData['icon'];
+                    $iconColor = $serviceIconData['color'];
+                @endphp
                 <div class="col-lg-4 col-md-6 margin-bottom-30">
                     <div class="single-service-item">
-                        <div class="service-image">
+                        <div class="service-icon-wrapper" style="background: #FFFFFF;">
                             <a href="{{route('frontend.service.single', $service->slug)}}">
-                                {!! render_image_markup_by_attachment_id($service->image, 'service-thumb') !!}
+                                <i class="{{$serviceIcon}}" style="color: #000000; font-size: 80px;"></i>
                             </a>
                         </div>
                         <div class="service-content padding-20">
@@ -125,18 +130,23 @@
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
-.service-image {
+.service-icon-wrapper {
     overflow: hidden;
     height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
-.service-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+.service-icon-wrapper i {
+    transition: all 0.3s ease;
 }
-.single-service-item:hover .service-image img {
-    transform: scale(1.1);
+.single-service-item:hover .service-icon-wrapper {
+    background: linear-gradient(135deg, rgba(255, 107, 44, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%);
+}
+.single-service-item:hover .service-icon-wrapper i {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
 }
 .service-content {
     flex: 1;

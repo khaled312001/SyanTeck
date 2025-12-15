@@ -68,7 +68,7 @@
 
 <?php else: ?>
     <div class="login-account">
-        <a class="accounts" href="javascript:void(0)"> <span class="account"><?php echo e(__('Account')); ?></span> <i class="las la-user"></i> </a>
+        <a class="accounts" href="javascript:void(0)"> <span class="account"><?php echo e(__('تسجيل الدخول')); ?></span> <i class="las la-user"></i> </a>
         <ul class="account-list-item mt-2">
             <li class="list"> <a href="<?php echo e(route('user.register')); ?>"> <?php echo e(__('Sign Up')); ?> </a> </li>
             <li class="list"> <a href="<?php echo e(route('user.login')); ?>"><?php echo e(__('Sign In')); ?> </a> </li>

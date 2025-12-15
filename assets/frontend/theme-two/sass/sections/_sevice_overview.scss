@@ -688,14 +688,14 @@
     }
     .single-confirm {
         width: 100%;
-        background: rgba(#1DBF73, .1);
+        background: rgba(#FFD700, .1);
         padding: 30px;
         border-radius: 20px;
         @include responsive(xs) {
             text-align: center;
         }
         &:nth-child(2n+2) {
-            background: rgba(#FF6B2C, .1);
+            background: rgba(#FFD700, .1);
         }
         .titles {
             font-size: 32px;

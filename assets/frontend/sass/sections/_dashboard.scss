@@ -162,7 +162,7 @@
 }
 
 .single-orders {
-    background: #FF6B2C;
+    background: #FFD700;
     padding: 35px 30px;
     border-radius: 10px;
     position: relative;
@@ -409,16 +409,16 @@
     }
     .single-chart-summery {
         text-align: center;
-        background: rgba(#FF6B2C, .2);
+        background: rgba(#FFD700, .2);
         display: inline-block;
         width: 46%;
         padding: 15px;
         margin: 10px 0;
         border-radius: 10px;
         &:nth-child(4n+2) {
-            background: rgba(#1DBF73, .2);
+            background: rgba(#FFD700, .2);
             .icon {
-                background: #1DBF73;
+                background: #FFD700;
             }
         }
         &:nth-child(4n+3) {
@@ -443,7 +443,7 @@
             margin-left: 10px;
         }
         .icon {
-            background: #FF6B2C;
+            background: #FFD700;
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
@@ -522,8 +522,8 @@
             margin: 18px 0;
             border-radius: 5px;
             &.completed {
-                background: rgba(#1DBF73, .1);
-                color: #1DBF73;
+                background: rgba(#FFD700, .1);
+                color: #FFD700;
                 text-align: center;
             }
             &.canceled {
@@ -914,8 +914,8 @@
         tr {
             td {
                 &.completed {
-                    background: rgba(#1DBF73, .1);
-                    color: #1DBF73;
+                    background: rgba(#FFD700, .1);
+                    color: #FFD700;
                     text-align: center;
                     border-radius: 5px;
                     @include responsive(allPhone) {

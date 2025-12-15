@@ -1,19 +1,19 @@
 <style>
     :root {
-        --main-color-one: <?php echo e(get_static_option('site_main_color_one','#1DBF73')); ?>;
-        --main-color-two: <?php echo e(get_static_option('site_main_color_two','#47C8ED')); ?>;
-        --main-color-three: <?php echo e(get_static_option('site_main_color_three','#FF6B2C')); ?>;
-        --heading-color: <?php echo e(get_static_option('heading_color','#333333')); ?>;
-        --light-color: <?php echo e(get_static_option('light_color','#666666')); ?>;
-        --extra-light-color: <?php echo e(get_static_option('extra_light_color','#999999')); ?>;
+        --main-color-one: #FFD700;
+        --main-color-two: #FFD700;
+        --main-color-three: #FFD700;
+        --heading-color: #000000;
+        --light-color: #666666;
+        --extra-light-color: #999999;
 
-        --heading-font: <?php echo e(get_static_option('heading_font_family')); ?>,sans-serif;
-        --body-font: <?php echo e(get_static_option('body_font_family')); ?>,sans-serif;
+        --heading-font: 'Almarai', <?php echo e(get_static_option('heading_font_family') ? get_static_option('heading_font_family') . ',' : ''); ?>sans-serif;
+        --body-font: 'Almarai', <?php echo e(get_static_option('body_font_family') ? get_static_option('body_font_family') . ',' : ''); ?>sans-serif;
 
           <?php if(!empty(Auth::guard('web')->user()->user_typ) == 0): ?>
               <?php if(request()->is('seller/*')): ?>
-                --main-color-one: #2163b3;
-                --main-color-one-rgb: 33, 99, 179;
+                --main-color-one: #FFD700;
+                --main-color-one-rgb: 255, 215, 0;
               <?php endif; ?>
            <?php endif; ?>
         }

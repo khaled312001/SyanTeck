@@ -61,23 +61,80 @@ class Category extends WidgetBase
     public function frontend_render()
     {
         $settings = $this->get_settings();
-        $title_text = purify_html($settings['title'] ?? '');
-        $order_by = purify_html($settings['order_by'] ?? 'id');
-        $IDorDate = purify_html($settings['order'] ?? 'asc');
-        $items = purify_html($settings['items'] ?? '');
-        $categories = CategoryModel::whereHas('services')->where('status',1)->select('id','name','slug')->orderBy($order_by,$IDorDate)->take($items)->get();
+        $title_text = purify_html($settings['title'] ?? __('Categories'));
         $route = route('service.list.category');
         
+        // Get only 3 categories: Electricity, Plumbing, Air Conditioning
+        $electricityCategory = CategoryModel::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%كهرباء%')
+                      ->orWhere('name', 'like', '%electrical%')
+                      ->orWhere('name', 'like', '%electricity%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%كهرباء%' THEN 1
+                    WHEN name LIKE '%electrical%' OR name LIKE '%electricity%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
+        $plumbingCategory = CategoryModel::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%سباكة%')
+                      ->orWhere('name', 'like', '%plumbing%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%سباكة%' THEN 1
+                    WHEN name LIKE '%plumbing%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
+        $acCategory = CategoryModel::where('status', 1)
+            ->where(function($query) {
+                $query->where('name', 'like', '%تكييف%')
+                      ->orWhere('name', 'like', '%air conditioning%')
+                      ->orWhere('name', 'like', '%ac%')
+                      ->orWhere('name', 'like', '%hvac%');
+            })
+            ->orderByRaw("
+                CASE 
+                    WHEN name LIKE '%تكييف%' THEN 1
+                    WHEN name LIKE '%air conditioning%' OR name LIKE '%ac%' OR name LIKE '%hvac%' THEN 2
+                    ELSE 3
+                END
+            ")
+            ->first();
+        
         $category_markup = '';
-
-       foreach ($categories as $cat){
-       $category_name = $cat->name;
-       $category_slug = $cat->slug;
-       $category_markup.= <<<CATEGORY
+        
+        if ($electricityCategory) {
+            $category_name = $electricityCategory->name;
+            $category_slug = $electricityCategory->slug;
+            $category_markup.= <<<CATEGORY
     <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
 CATEGORY;
-
-}
+        }
+        
+        if ($plumbingCategory) {
+            $category_name = $plumbingCategory->name;
+            $category_slug = $plumbingCategory->slug;
+            $category_markup.= <<<CATEGORY
+    <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
+CATEGORY;
+        }
+        
+        if ($acCategory) {
+            $category_name = $acCategory->name;
+            $category_slug = $acCategory->slug;
+            $category_markup.= <<<CATEGORY
+    <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
+CATEGORY;
+        }
    
    return <<<HTML
    <div class="col-lg-3 col-md-6 col-sm-6">

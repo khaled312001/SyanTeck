@@ -12,8 +12,8 @@ class UpdateHeroSectionSeeder extends Seeder
      * Content replacements for Hero Section
      */
     private $replacements = [
-        'Order service you need. We have professionals ready to help.' => 'اطلب الخدمة التي تحتاجها. لدينا فنيون معتمدون جاهزون لخدمتك',
-        'Order service you need, We have professionals ready to help' => 'اطلب الخدمة التي تحتاجها. لدينا فنيون معتمدون جاهزون لخدمتك',
+        'Order service you need. We have professionals ready to help.' => 'لدينا فريق فني متخصص لخدمتكم علي مدار اليوم',
+        'Order service you need, We have professionals ready to help' => 'لدينا فريق فني متخصص لخدمتكم علي مدار اليوم',
         'Order service you need' => 'اطلب الخدمة التي تحتاجها',
         'We have professionals ready to help' => 'لدينا فنيون معتمدون جاهزون لخدمتك',
         '2k+ Satisficed Customer' => 'أكثر من 2000 عميل راضٍ',
