@@ -972,6 +972,13 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
+    /* إخفاء زر الإغلاق على الديسكتوب */
+    @media (min-width: 992px) {
+        .mobile-sidebar-close-btn {
+            display: none !important;
+        }
+    }
+    
     .mobile-sidebar-close-btn:hover {
         background: rgba(255, 215, 0, 0.25);
         border-color: rgba(255, 215, 0, 0.5);

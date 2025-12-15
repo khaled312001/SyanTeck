@@ -697,6 +697,13 @@
         transform: rotate(90deg);
     }
     
+    /* إخفاء زر الإغلاق على الديسكتوب */
+    @media (min-width: 992px) {
+        .enhanced-navbar.white .enhanced-navbar-collapse::before {
+            display: none !important;
+        }
+    }
+    
     /* Mobile Navigation Items */
     .enhanced-navbar.white .enhanced-navbar-nav {
         flex-direction: column;

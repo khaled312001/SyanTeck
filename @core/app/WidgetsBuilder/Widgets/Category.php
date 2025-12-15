@@ -62,7 +62,7 @@ class Category extends WidgetBase
     {
         $settings = $this->get_settings();
         $title_text = purify_html($settings['title'] ?? __('Categories'));
-        $route = route('service.list.category');
+        $route = route('qr.index');
         
         // Get only 3 categories: Electricity, Plumbing, Air Conditioning
         $electricityCategory = CategoryModel::where('status', 1)
@@ -114,25 +114,22 @@ class Category extends WidgetBase
         
         if ($electricityCategory) {
             $category_name = $electricityCategory->name;
-            $category_slug = $electricityCategory->slug;
             $category_markup.= <<<CATEGORY
-    <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
+    <li class="list"><a href="{$route}">{$category_name}</a></li>
 CATEGORY;
         }
         
         if ($plumbingCategory) {
             $category_name = $plumbingCategory->name;
-            $category_slug = $plumbingCategory->slug;
             $category_markup.= <<<CATEGORY
-    <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
+    <li class="list"><a href="{$route}">{$category_name}</a></li>
 CATEGORY;
         }
         
         if ($acCategory) {
             $category_name = $acCategory->name;
-            $category_slug = $acCategory->slug;
             $category_markup.= <<<CATEGORY
-    <li class="list"><a href="{$route}/{$category_slug}">{$category_name}</a></li>
+    <li class="list"><a href="{$route}">{$category_name}</a></li>
 CATEGORY;
         }
    
