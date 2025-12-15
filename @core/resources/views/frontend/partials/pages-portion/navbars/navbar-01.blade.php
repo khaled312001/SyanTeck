@@ -496,6 +496,20 @@
     gap: 18px;
 }
 
+/* إخفاء زر الإغلاق على الديسكتوب */
+@media (min-width: 992px) {
+    .enhanced-navbar.white .enhanced-navbar-collapse::before,
+    .enhanced-navbar .enhanced-navbar-collapse::before {
+        display: none !important;
+        content: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
+
 /* Account button improvements for white navbar */
 .enhanced-navbar.white .login-account .accounts {
     display: inline-flex;
@@ -695,13 +709,6 @@
     .enhanced-navbar.white .enhanced-navbar-collapse::before:hover {
         background: rgba(255, 255, 255, 0.2);
         transform: rotate(90deg);
-    }
-    
-    /* إخفاء زر الإغلاق على الديسكتوب */
-    @media (min-width: 992px) {
-        .enhanced-navbar.white .enhanced-navbar-collapse::before {
-            display: none !important;
-        }
     }
     
     /* Mobile Navigation Items */

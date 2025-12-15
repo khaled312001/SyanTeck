@@ -411,8 +411,8 @@
         </div>
 
         <div class="collapse navbar-collapse enhanced-navbar-collapse" id="bizcoxx_main_menu_navabar_two">
-            {{-- Close Button (X) for Mobile Sidebar --}}
-            <button type="button" class="mobile-sidebar-close-btn" id="mobileSidebarCloseBtn" aria-label="إغلاق القائمة">
+            {{-- Close Button (X) for Mobile Sidebar - مخفي على الديسكتوب --}}
+            <button type="button" class="mobile-sidebar-close-btn d-lg-none" id="mobileSidebarCloseBtn" aria-label="إغلاق القائمة">
                 <i class="las la-times"></i>
             </button>
             
@@ -826,6 +826,21 @@
     .nav-right-content .lang-dropdown {
         display: none !important;
     }
+    
+    /* إخفاء زر الإغلاق (X) على الديسكتوب */
+    .mobile-sidebar-close-btn,
+    #mobileSidebarCloseBtn {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+    }
 }
 
 /* ============================================
@@ -970,13 +985,6 @@
         padding: 0;
         margin: 0;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* إخفاء زر الإغلاق على الديسكتوب */
-    @media (min-width: 992px) {
-        .mobile-sidebar-close-btn {
-            display: none !important;
-        }
     }
     
     .mobile-sidebar-close-btn:hover {
