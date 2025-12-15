@@ -188,7 +188,7 @@
                                             </div>
                                             
                                             <!-- Record Tab -->
-                                            <div class="upload-tab-content" id="record-tab" style="display: none;">
+                                            <div class="upload-tab-content" id="record-tab">
                                                 <div class="audio-recorder-wrapper">
                                                     <div class="audio-recorder-container">
                                                         <div class="recorder-status" id="recorder-status">
@@ -2470,15 +2470,27 @@ function switchUploadTab(tab) {
     const recordBtn = document.querySelector('.upload-tab-btn[data-tab="record"]');
     
     if (tab === 'upload') {
-        uploadTab.classList.add('active');
-        recordTab.classList.remove('active');
-        uploadBtn.classList.add('active');
-        recordBtn.classList.remove('active');
+        if (uploadTab) {
+            uploadTab.classList.add('active');
+            uploadTab.style.display = 'block';
+        }
+        if (recordTab) {
+            recordTab.classList.remove('active');
+            recordTab.style.display = 'none';
+        }
+        if (uploadBtn) uploadBtn.classList.add('active');
+        if (recordBtn) recordBtn.classList.remove('active');
     } else {
-        uploadTab.classList.remove('active');
-        recordTab.classList.add('active');
-        uploadBtn.classList.remove('active');
-        recordBtn.classList.add('active');
+        if (uploadTab) {
+            uploadTab.classList.remove('active');
+            uploadTab.style.display = 'none';
+        }
+        if (recordTab) {
+            recordTab.classList.add('active');
+            recordTab.style.display = 'block';
+        }
+        if (uploadBtn) uploadBtn.classList.remove('active');
+        if (recordBtn) recordBtn.classList.add('active');
     }
 }
 
