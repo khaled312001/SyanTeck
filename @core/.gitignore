@@ -16,4 +16,30 @@ public_html/hot
 
 bootstrap/cache
 
+# Environment files (secrets)
+.env
+.env.*
+!.env.example
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug/test scripts (should not be in production)
+add_technician_orders.php
+check_about_image.php
+fix_about_image_path.php
+force_update_about_image.php
+test_about_image_display.php
+test_asset_url.php
+update_about_image.php
+update_about_page.php
+update_popular_services_title.php
+
 # End of https://www.toptal.com/developers/gitignore/api/laravel

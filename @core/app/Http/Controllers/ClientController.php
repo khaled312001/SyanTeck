@@ -6,6 +6,8 @@ use App\Order;
 use App\Service;
 use App\Category;
 use App\Region;
+use App\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +15,11 @@ use Illuminate\Support\Str;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * لوحة تحكم العميل
      */
@@ -115,8 +122,21 @@ class ClientController extends Controller
             'payment_status' => 'pending',
         ]);
         
-        // TODO: إرسال إشعار للدعم
-        
+        // إرسال إشعار لفريق الدعم
+        $supportAgents = User::whereHas('roles', function($q) {
+            $q->where('name', 'Support Agent');
+        })->get();
+
+        foreach ($supportAgents as $agent) {
+            $agent->notify(new OrderNotification(
+                $order->id,
+                $order->service_id,
+                0,
+                $user->id,
+                __('New order #:id created by client :name', ['id' => $order->id, 'name' => $user->name])
+            ));
+        }
+
         return redirect()->route('client.orders')->with('success', __('Order created successfully. Tracking code: :code', ['code' => $trackingCode]));
     }
 

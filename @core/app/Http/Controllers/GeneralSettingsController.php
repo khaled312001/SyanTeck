@@ -921,7 +921,16 @@ class GeneralSettingsController extends Controller
 
     public function update_custom_css_settings(Request $request)
     {
-        file_put_contents('assets/frontend/css/dynamic-style.css', $request->custom_css_area);
+        $css = $request->custom_css_area ?? '';
+        // إزالة أي محاولة لحقن JavaScript عبر CSS
+        $css = preg_replace('/expression\s*\(/i', '/* blocked */(', $css);
+        $css = preg_replace('/javascript\s*:/i', '/* blocked */', $css);
+        $css = preg_replace('/@import\s+url\s*\(\s*["\']?\s*javascript/i', '/* blocked */', $css);
+        // إزالة behavior و -moz-binding (يمكن استخدامها لتنفيذ كود)
+        $css = preg_replace('/behavior\s*:/i', '/* blocked */', $css);
+        $css = preg_replace('/-moz-binding\s*:/i', '/* blocked */', $css);
+
+        file_put_contents('assets/frontend/css/dynamic-style.css', $css);
 
         return redirect()->back()->with(['msg' => __('Custom Style Successfully Added...'), 'type' => 'success']);
     }
@@ -952,7 +961,13 @@ class GeneralSettingsController extends Controller
 
     public function update_custom_js_settings(Request $request)
     {
-        file_put_contents('assets/frontend/js/dynamic-script.js', $request->custom_js_area);
+        $js = $request->custom_js_area ?? '';
+        // حماية أساسية: منع eval وتنفيذ كود خطير
+        $js = preg_replace('/\beval\s*\(/i', '/* blocked */(', $js);
+        $js = preg_replace('/\bdocument\.cookie\b/i', '/* blocked */', $js);
+        $js = preg_replace('/\bwindow\.location\s*=/i', '/* blocked */ =', $js);
+
+        file_put_contents('assets/frontend/js/dynamic-script.js', $js);
 
         return redirect()->back()->with(['msg' => __('Custom Script Successfully Added...'), 'type' => 'success']);
     }

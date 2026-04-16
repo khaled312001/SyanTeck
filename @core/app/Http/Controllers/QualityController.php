@@ -10,6 +10,11 @@ use Carbon\Carbon;
 
 class QualityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * لوحة تحكم الجودة
      */

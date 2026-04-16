@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -233,16 +235,55 @@ class TechnicianController extends Controller
      */
     private function sendStatusUpdateNotifications($order, $status)
     {
-        // TODO: إرسال إشعارات للعميل والدعم والأدمن
-        // يمكن استخدام Laravel Notifications أو Events
+        $statusMessages = [
+            'accepted' => __('Technician has accepted order #:id', ['id' => $order->id]),
+            'rejected' => __('Technician has rejected order #:id. Awaiting reassignment.', ['id' => $order->id]),
+            'en_route' => __('Technician is on the way for order #:id', ['id' => $order->id]),
+            'arrived' => __('Technician has arrived for order #:id', ['id' => $order->id]),
+            'started' => __('Work has started on order #:id', ['id' => $order->id]),
+            'completed' => __('Order #:id has been completed', ['id' => $order->id]),
+        ];
+
+        $message = $statusMessages[$status] ?? __('Order #:id status updated to :status', ['id' => $order->id, 'status' => $status]);
+
+        // إشعار العميل (إذا كان مسجلاً)
+        if ($order->buyer_id) {
+            $buyer = User::find($order->buyer_id);
+            if ($buyer) {
+                $buyer->notify(new OrderNotification(
+                    $order->id,
+                    $order->service_id ?? 0,
+                    $order->seller_id ?? 0,
+                    $order->buyer_id,
+                    $message
+                ));
+            }
+        }
+
+        // إشعار فريق الدعم
+        $supportAgents = User::whereHas('roles', function($q) {
+            $q->where('name', 'Support Agent');
+        })->get();
+
+        foreach ($supportAgents as $agent) {
+            $agent->notify(new OrderNotification(
+                $order->id,
+                $order->service_id ?? 0,
+                $order->seller_id ?? 0,
+                $order->buyer_id ?? 0,
+                $message
+            ));
+        }
     }
-    
+
     /**
-     * بث تحديث الموقع
+     * بث تحديث الموقع - يحفظ في قاعدة البيانات للسحب بالـ polling
      */
     private function broadcastLocationUpdate($order)
     {
-        // TODO: بث تحديث الموقع للمتابعين (WebSocket أو Polling)
+        // تحديث الموقع محفوظ بالفعل في Order model
+        // العميل والدعم يمكنهم سحب الموقع المحدث عبر AJAX polling
+        // في المستقبل يمكن استخدام Pusher/WebSocket للبث الفوري
     }
 
     /**
@@ -324,7 +365,7 @@ class TechnicianController extends Controller
         }
         
         $request->validate([
-            'issue_images.*' => 'required|file|mimes:jpeg,jpg,png,gif,bmp,webp,svg,mp4,avi,mov,wmv,flv,webm,3gp,mkv,pdf,doc,docx,xls,xlsx,ppt,pptx,txt,zip,rar|max:512000', // 500MB max لكل ملف
+            'issue_images.*' => 'required|file|mimes:jpeg,jpg,png,gif,webp,mp4,mov,webm,pdf,doc,docx|max:51200', // 50MB max لكل ملف
         ], [
             'issue_images.*.required' => __('Please select at least one file'),
             'issue_images.*.file' => __('The uploaded file is invalid'),

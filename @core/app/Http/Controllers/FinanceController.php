@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class FinanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * لوحة تحكم المالية
      */
@@ -61,9 +67,9 @@ class FinanceController extends Controller
         }
         
         $invoices = $query->orderBy('created_at', 'desc')->paginate(20);
-        
+
         $stats = [
-            'total' => $invoices->sum('total'),
+            'total' => $invoices->getCollection()->sum('total'),
             'paid' => Order::where('payment_status', 'complete')->sum('total'),
             'pending' => Order::where('payment_status', 'pending')->sum('total'),
             'this_month' => Order::whereMonth('created_at', Carbon::now()->month)
@@ -79,17 +85,34 @@ class FinanceController extends Controller
      */
     public function updatePaymentStatus(Request $request, $id)
     {
+        $user = Auth::user();
+        if (!$user->hasRole(['Finance', 'Admin', 'Super Admin'])) {
+            abort(403, 'Unauthorized action');
+        }
+
         $order = Order::findOrFail($id);
-        
+
         $request->validate([
             'payment_status' => 'required|in:pending,complete,failed,refunded',
         ]);
         
         $order->payment_status = $request->payment_status;
         $order->save();
-        
-        // TODO: إرسال إشعار للعميل
-        
+
+        // إرسال إشعار للعميل
+        if ($order->buyer_id) {
+            $buyer = User::find($order->buyer_id);
+            if ($buyer) {
+                $buyer->notify(new OrderNotification(
+                    $order->id,
+                    $order->service_id ?? 0,
+                    $order->seller_id ?? 0,
+                    $order->buyer_id,
+                    __('Payment status for order #:id updated to :status', ['id' => $order->id, 'status' => $request->payment_status])
+                ));
+            }
+        }
+
         return redirect()->back()->with('success', __('Payment status updated successfully'));
     }
 

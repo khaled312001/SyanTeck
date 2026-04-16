@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Accountdeactive;
 use App\Country;
+use App\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -138,6 +139,8 @@ class LoginController extends Controller
                         ]);
                     }
                 }else{
+                    // ربط الطلبات المجهولة بالمستخدم (QR orders)
+                    $this->linkAnonymousOrders(Auth::user());
 
                     if(Auth::user()->user_type==0){
                         return response()->json([
@@ -516,6 +519,9 @@ class LoginController extends Controller
             $user = Auth::guard('web')->user();
             
             if ($user->hasRole(['Client', 'Admin', 'Super Admin'])) {
+                // ربط الطلبات المجهولة بالعميل (QR orders)
+                $this->linkAnonymousOrders($user);
+
                 return response()->json([
                     'msg' => __('Login Success Redirecting'),
                     'type' => 'success',
@@ -595,6 +601,24 @@ class LoginController extends Controller
     public function showFinanceLoginForm()
     {
         return view('auth.finance.login');
+    }
+
+    /**
+     * ربط الطلبات المجهولة بالعميل بعد تسجيل الدخول
+     * يبحث عن طلبات بدون buyer_id تتطابق مع بريد أو هاتف المستخدم
+     */
+    private function linkAnonymousOrders($user)
+    {
+        if (!$user) return;
+
+        Order::whereNull('buyer_id')
+            ->where(function($query) use ($user) {
+                $query->where('email', $user->email);
+                if ($user->phone) {
+                    $query->orWhere('phone', $user->phone);
+                }
+            })
+            ->update(['buyer_id' => $user->id]);
     }
 
     /**

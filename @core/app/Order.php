@@ -12,7 +12,41 @@ class Order extends Model
 {
     use HasFactory;
 
+    // ثوابت حالات الطلب
+    const STATUS_PENDING = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_COMPLETED = 2;
+    const STATUS_DELIVERED = 3;
+    const STATUS_CANCELLED = 4;
+
+    const STATUS_LABELS = [
+        self::STATUS_PENDING => 'Pending',
+        self::STATUS_ACTIVE => 'Active',
+        self::STATUS_COMPLETED => 'Completed',
+        self::STATUS_DELIVERED => 'Delivered',
+        self::STATUS_CANCELLED => 'Cancelled',
+    ];
+
+    // ثوابت حالات الدفع
+    const PAYMENT_PENDING = 'pending';
+    const PAYMENT_COMPLETE = 'complete';
+    const PAYMENT_FAILED = 'failed';
+    const PAYMENT_REFUNDED = 'refunded';
+
+    // ثوابت مستوى الأولوية
+    const URGENCY_NORMAL = 'normal';
+    const URGENCY_URGENT = 'urgent';
+    const URGENCY_EMERGENCY = 'emergency';
+
     protected $table = 'orders';
+
+    // الحقول المحمية التي لا يجب تعديلها عبر mass assignment
+    protected $guarded = [
+        'commission_type',
+        'commission_charge',
+        'commission_amount',
+    ];
+
     protected $fillable = [
         'invoice',
         'service_id',
@@ -257,5 +291,29 @@ class Order extends Model
         } else {
             $this->attributes['issue_images'] = $value;
         }
+    }
+
+    /**
+     * الحصول على اسم الحالة
+     */
+    public function getStatusLabelAttribute()
+    {
+        return self::STATUS_LABELS[$this->status] ?? 'Unknown';
+    }
+
+    /**
+     * التحقق من إمكانية إنشاء فاتورة
+     */
+    public function canGenerateInvoice()
+    {
+        return $this->status >= self::STATUS_COMPLETED;
+    }
+
+    /**
+     * التحقق من إمكانية إنشاء ضمان
+     */
+    public function canGenerateWarranty()
+    {
+        return $this->status >= self::STATUS_COMPLETED && !$this->hasWarranty();
     }
 }

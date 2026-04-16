@@ -45,7 +45,12 @@ class InvoiceController extends Controller
         if (!$canGenerate) {
             abort(403, 'Unauthorized');
         }
-        
+
+        // التحقق من أن الطلب مكتمل أو مُسلَّم قبل إنشاء الفاتورة
+        if ($order->status < Order::STATUS_COMPLETED) {
+            return redirect()->back()->with('error', __('Cannot generate invoice. Order must be completed first.'));
+        }
+
         // إنشاء رقم فاتورة إذا لم يكن موجوداً
         if (empty($order->invoice_number)) {
             $order->invoice_number = 'INV-' . date('Y') . '-' . str_pad($order->id, 6, '0', STR_PAD_LEFT);

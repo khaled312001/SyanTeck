@@ -1,0 +1,228 @@
+/*============================================
+  SyanaTech Frontend Enhancements
+  Public Pages UI/UX Improvements
+  Version: 2.0
+============================================*/
+
+:root {
+    --st-primary: #667eea;
+    --st-secondary: #764ba2;
+    --st-radius: 12px;
+    --st-radius-sm: 8px;
+    --st-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --st-shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+    --st-transition: all 0.3s ease;
+}
+
+/* ============ Navbar Improvements ============ */
+.navbar-area,
+.nav-area {
+    backdrop-filter: blur(10px);
+    transition: var(--st-transition);
+}
+
+.navbar-area.sticky,
+.nav-area.fixed {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+/* ============ Banner/Hero Section ============ */
+.banner-inner-area {
+    background: linear-gradient(135deg, var(--st-primary), var(--st-secondary));
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-inner-area::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0V0h2v14h4v2H2v2h4v4H2v2h18v-2z'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.banner-inner-contents {
+    position: relative;
+    z-index: 1;
+}
+
+.banner-inner-title {
+    color: #fff !important;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.inner-menu .list a {
+    color: rgba(255,255,255,0.8) !important;
+    transition: var(--st-transition);
+}
+
+.inner-menu .list a:hover {
+    color: #fff !important;
+}
+
+.inner-menu .list {
+    color: rgba(255,255,255,0.6) !important;
+}
+
+/* ============ Service Cards ============ */
+.single-service,
+.service-card,
+.service-item {
+    border-radius: var(--st-radius);
+    overflow: hidden;
+    transition: var(--st-transition);
+    border: 1px solid #e2e8f0;
+}
+
+.single-service:hover,
+.service-card:hover,
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--st-shadow-md);
+}
+
+/* ============ Category Cards ============ */
+.single-category,
+.category-item {
+    border-radius: var(--st-radius);
+    transition: var(--st-transition);
+    overflow: hidden;
+}
+
+.single-category:hover,
+.category-item:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--st-shadow-md);
+}
+
+/* ============ Buttons ============ */
+.cmn-btn,
+.btn-primary,
+.submit-btn {
+    border-radius: var(--st-radius-sm);
+    font-weight: 600;
+    transition: var(--st-transition);
+    letter-spacing: 0.3px;
+}
+
+.cmn-btn:hover,
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* ============ Footer ============ */
+.footer-area {
+    background: linear-gradient(180deg, #1a1f36 0%, #0f1222 100%);
+}
+
+/* ============ Forms ============ */
+.contact-form input,
+.contact-form textarea,
+.contact-form select,
+.booking-form input,
+.booking-form textarea,
+.booking-form select {
+    border-radius: var(--st-radius-sm);
+    border: 2px solid #e2e8f0;
+    transition: var(--st-transition);
+    padding: 12px 16px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus,
+.booking-form input:focus,
+.booking-form textarea:focus,
+.booking-form select:focus {
+    border-color: var(--st-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+/* ============ Pagination ============ */
+.blog-pagination .page-link,
+.pagination .page-link {
+    border-radius: var(--st-radius-sm) !important;
+    margin: 0 3px;
+    border: 1px solid #e2e8f0;
+    transition: var(--st-transition);
+}
+
+.blog-pagination .page-item.active .page-link,
+.pagination .page-item.active .page-link {
+    background: linear-gradient(135deg, var(--st-primary), var(--st-secondary));
+    border-color: transparent;
+}
+
+/* ============ Scrollbar ============ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+/* ============ Mobile Responsive ============ */
+@media (max-width: 768px) {
+    .padding-top-100 {
+        padding-top: 50px !important;
+    }
+
+    .padding-bottom-100 {
+        padding-bottom: 50px !important;
+    }
+
+    .section-title {
+        font-size: 24px !important;
+    }
+
+    .banner-inner-title {
+        font-size: 22px !important;
+    }
+
+    .container-fluid {
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .padding-top-100 {
+        padding-top: 30px !important;
+    }
+
+    .padding-bottom-100 {
+        padding-bottom: 30px !important;
+    }
+
+    .section-title {
+        font-size: 20px !important;
+    }
+
+    .banner-inner-title {
+        font-size: 18px !important;
+    }
+}
+
+/* ============ Smooth Scroll ============ */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============ Selection Color ============ */
+::selection {
+    background: rgba(102, 126, 234, 0.2);
+    color: var(--st-primary);
+}
+
+/* ============ Focus Styles ============ */
+*:focus-visible {
+    outline: 2px solid var(--st-primary);
+    outline-offset: 2px;
+}

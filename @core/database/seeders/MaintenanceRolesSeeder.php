@@ -131,15 +131,34 @@ class MaintenanceRolesSeeder extends Seeder
         }
 
         // Super Admin و Admin لديهم جميع الصلاحيات
-        $superAdminRole = Role::where('name', 'Super Admin')->where('guard_name', 'admin')->first();
-        $adminRole = Role::where('name', 'Admin')->where('guard_name', 'admin')->first();
-        
-        if ($superAdminRole) {
-            $superAdminRole->givePermissionTo(Permission::where('guard_name', 'web')->get());
+        // نبحث أولاً بالـ admin guard، وإن لم نجد نبحث بالـ web guard
+        $superAdminRole = Role::where('name', 'Super Admin')->first();
+        $adminRole = Role::where('name', 'Admin')->first();
+
+        // إنشاء الأدوار إن لم تكن موجودة
+        if (!$superAdminRole) {
+            $superAdminRole = Role::firstOrCreate([
+                'name' => 'Super Admin',
+                'guard_name' => 'web'
+            ]);
         }
-        
-        if ($adminRole) {
-            $adminRole->givePermissionTo(Permission::where('guard_name', 'web')->get());
+
+        if (!$adminRole) {
+            $adminRole = Role::firstOrCreate([
+                'name' => 'Admin',
+                'guard_name' => 'web'
+            ]);
+        }
+
+        // تعيين الصلاحيات فقط إذا كان الـ guard متوافقاً
+        $allWebPermissions = Permission::where('guard_name', 'web')->get();
+
+        if ($superAdminRole && $superAdminRole->guard_name === 'web') {
+            $superAdminRole->syncPermissions($allWebPermissions);
+        }
+
+        if ($adminRole && $adminRole->guard_name === 'web') {
+            $adminRole->syncPermissions($allWebPermissions);
         }
     }
 }

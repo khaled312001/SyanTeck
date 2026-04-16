@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="{{asset('assets/common/css/toastr.min.css')}}">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/backend/css/syanatech-enhancements.css')}}">
     @yield('style')
     @if(get_static_option('site_admin_dark_mode') == 'on')
     <link rel="stylesheet" href="{{asset('assets/backend/css/dark-mode.css')}}">

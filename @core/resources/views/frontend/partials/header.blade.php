@@ -318,6 +318,7 @@
     $page_type = isset($page_type) ? $page_post : [];
     @endphp
     @include('frontend.partials.root-style')
+    <link rel="stylesheet" href="{{asset('assets/frontend/css/syanatech-frontend.css')}}">
     @yield('style')
     @if(request()->routeIs('homepage'))
            {!! render_site_meta() !!}

@@ -48,7 +48,7 @@ function active_menu_frontend($url)
 function check_image_extension($file)
 {
     $extension = strtolower($file->getClientOriginalExtension());
-    if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png' && $extension = 'gif') {
+    if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png' && $extension != 'gif') {
         return false;
     }
     return true;

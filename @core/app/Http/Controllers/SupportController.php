@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\User;
 use App\Region;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -98,21 +99,27 @@ class SupportController extends Controller
      */
     public function updateStatus(Request $request, $id)
     {
+        $user = Auth::user();
+        if (!$user->hasRole(['Support Agent', 'Admin', 'Super Admin'])) {
+            abort(403, 'Unauthorized action');
+        }
+
         $order = Order::findOrFail($id);
-        
+
         $request->validate([
             'status' => 'required|integer|in:0,1,2,3,4',
         ]);
-        
+
+        $previousStatus = $order->status;
         $order->status = $request->status;
-        $order->save();
-        
+
         // تحديث timestamps حسب الحالة
         if ($request->status == 2 && !$order->completed_at) {
             $order->completed_at = Carbon::now();
-            $order->save();
         }
-        
+
+        $order->save();
+
         return redirect()->back()->with('success', __('Order status updated successfully'));
     }
 
@@ -121,8 +128,13 @@ class SupportController extends Controller
      */
     public function assignTechnician(Request $request, $id)
     {
+        $user = Auth::user();
+        if (!$user->hasRole(['Support Agent', 'Admin', 'Super Admin'])) {
+            abort(403, 'Unauthorized action');
+        }
+
         $order = Order::findOrFail($id);
-        
+
         $request->validate([
             'technician_id' => 'required|exists:users,id',
         ]);
@@ -138,9 +150,16 @@ class SupportController extends Controller
         $order->assigned_by = Auth::id();
         $order->assigned_at = Carbon::now();
         $order->save();
-        
-        // TODO: إرسال إشعار للفني
-        
+
+        // إرسال إشعار للفني
+        $technician->notify(new OrderNotification(
+            $order->id,
+            $order->service_id ?? 0,
+            $technician->id,
+            $order->buyer_id ?? 0,
+            __('You have been assigned to order #:id', ['id' => $order->id])
+        ));
+
         return redirect()->back()->with('success', __('Technician assigned successfully'));
     }
 
@@ -200,8 +219,13 @@ class SupportController extends Controller
      */
     public function updateRegion(Request $request, $id)
     {
+        $user = Auth::user();
+        if (!$user->hasRole(['Support Agent', 'Admin', 'Super Admin'])) {
+            abort(403, 'Unauthorized action');
+        }
+
         $order = Order::findOrFail($id);
-        
+
         $request->validate([
             'region_id' => 'nullable|exists:regions,id',
         ]);
